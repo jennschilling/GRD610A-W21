@@ -1,0 +1,41 @@
+---
+title: "Week 1 - Installing R and RStudio"
+subtitle: "DGR610A - Data Visualization II"
+author: "Jenn Schilling"
+output: pdf_document
+#output: rmdformats::html_clean
+---
+
+```{r setup, include = FALSE}
+
+
+```
+
+## Step 1: Install R  
+To install R, visit the [Comprehensive R Network (CRAN)](https://cran.r-project.org/), and follow the links to download R for your operating system. For Windows, click "base" or "install R for the first time". For Mac OS, download the latest .pkg file; you will also need to download and install XQuartz. Run the downloaded executable and follow the prompts to install R.  
+
+## Step 2: Install RStudio  
+To install RStudio, visit the [downloads section of the RStudio website](https://rstudio.com/products/rstudio/download/#download), and click on the download button. The website  should automatically detect your operating system and show the correct version on the button. If that is not the case, then scroll down to the table on the page and find the correct version for your operating system. Run the downloaded executable and follow the prompts.  
+
+**You have now installed R and RStudio!!**  
+
+
+## Step 3: Install Packages  
+R packages are collections of functions and data sets that have been developed by members of the R community. They are useful for improving and expanding the functionality of R. We will use several packages in this course related to data visualization. Open RStudio, and copy the code below into the Console to install the packages from *Data Visualization: A Practical Introduction* by Kieran Healy. Press Enter to run the lines of code that you copied. If you are prompted with the question "Do you want to install from sources the package which needs compilation?", select "No".
+
+```{r install-packages, echo=TRUE, results='hide', eval=FALSE}
+
+my_packages <- c("tidyverse", "broom", "coefplot", "cowplot", "gapminder",
+                 "GGally", "ggrepel", "ggridges", "gridExtra", "here",
+                 "interplot", "margins", "maps", "mapproj", "mapdata",
+                 "MASS", "quantreg", "rlang", "scales", "survey", "srvyr",
+                 "viridis", "viridisLite", "devtools")
+
+install.packages(my_packages, repos = "http://cran.rstudio.com")
+
+devtools::install_github("kjhealy/socviz")
+
+```
+
+
+
