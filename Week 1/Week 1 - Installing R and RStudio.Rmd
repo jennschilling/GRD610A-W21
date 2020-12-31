@@ -12,10 +12,10 @@ output: pdf_document
 ```
 
 ## Step 1: Install R  
-To install R, visit the [Comprehensive R Network (CRAN)](https://cran.r-project.org/), and follow the links to download R for your operating system. For Windows, click "base" or "install R for the first time". For Mac OS, download the latest .pkg file; you will also need to download and install XQuartz. Run the downloaded executable and follow the prompts to install R.  
+To install R, visit the Comprehensive R Network (CRAN) (https://cran.r-project.org/), and follow the links to download R for your operating system. For Windows, click "base" or "install R for the first time". For Mac OS, download the latest .pkg file; you will also need to download and install XQuartz. Run the downloaded executable and follow the prompts to install R.  
 
 ## Step 2: Install RStudio  
-To install RStudio, visit the [downloads section of the RStudio website](https://rstudio.com/products/rstudio/download/#download), and click on the download button. The website  should automatically detect your operating system and show the correct version on the button. If that is not the case, then scroll down to the table on the page and find the correct version for your operating system. Run the downloaded executable and follow the prompts.  
+To install RStudio, visit the  downloads section of the RStudio website (https://rstudio.com/products/rstudio/download/#download), and click on the download button. The website  should automatically detect your operating system and show the correct version on the button. If that is not the case, then scroll down to the table on the page and find the correct version for your operating system. Run the downloaded executable and follow the prompts.  
 
 **You have now installed R and RStudio!!**  
 
