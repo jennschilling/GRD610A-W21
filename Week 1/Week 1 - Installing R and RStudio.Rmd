@@ -1,8 +1,9 @@
 ---
 title: "Week 1 - Installing R and RStudio"
 subtitle: "DGR610A - Data Visualization II"
-author: "Jenn Schilling"
+#author: "Jenn Schilling"
 output: pdf_document
+urlcolor: blue
 #output: rmdformats::html_clean
 ---
 
@@ -12,12 +13,14 @@ output: pdf_document
 ```
 
 ## Step 1: Install R  
-To install R, visit the Comprehensive R Network (CRAN) (https://cran.r-project.org/), and follow the links to download R for your operating system. For Windows, click "base" or "install R for the first time". For Mac OS, download the latest .pkg file; you will also need to download and install XQuartz. Run the downloaded executable and follow the prompts to install R.  
+To install R, visit the [Comprehensive R Network (CRAN)](https://cran.r-project.org/), and follow the links to download R for your operating system. For Windows, click "base" or "install R for the first time". For Mac OS, download the latest .pkg file; you will also need to download and install XQuartz. Run the downloaded executable and follow the prompts to install R.  
 
 ## Step 2: Install RStudio  
-To install RStudio, visit the  downloads section of the RStudio website (https://rstudio.com/products/rstudio/download/#download), and click on the download button. The website  should automatically detect your operating system and show the correct version on the button. If that is not the case, then scroll down to the table on the page and find the correct version for your operating system. Run the downloaded executable and follow the prompts.  
+To install RStudio, visit the [downloads section of the RStudio website](https://rstudio.com/products/rstudio/download/#download), and click on the download button. The website  should automatically detect your operating system and show the correct version on the button. If that is not the case, then scroll down to the table on the page and find the correct version for your operating system. Run the downloaded executable and follow the prompts.  
 
 **You have now installed R and RStudio!!**  
+
+If you have difficulty with Step 1 or 2, see page 2 of this document for additional resources.  
 
 
 ## Step 3: Install Packages  
@@ -37,5 +40,12 @@ devtools::install_github("kjhealy/socviz")
 
 ```
 
+\newpage
 
+## Additional Resources
 
+If you have difficulty installing R or RStudio (or just want some extra guidance), here are two videos for installing R from Roger Peng at Johns Hopkins University and a step-by-step guide for installing R and RStudio (with screenshots) from Marcus Beck:  
+
++ [Video: Installing R on Mac](https://www.youtube.com/watch?v=Icawuhf0Yqo&feature=youtu.be)  
++ [Video: Installing R on Windows](https://www.youtube.com/watch?v=mfGFv-iB724&feature=youtu.be)  
++ [Document: Installing R and RStudio](https://beckmw.files.wordpress.com/2014/09/r_install_guide.pdf)  
