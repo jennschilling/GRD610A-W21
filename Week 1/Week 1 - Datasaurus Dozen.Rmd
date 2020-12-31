@@ -1,0 +1,56 @@
+---
+title: "Week 1 - Datasaurus Dozen"
+author: "Jenn Schilling"
+date: "12/31/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(datasauRus)
+library(tidyverse)
+
+```
+
+## Datasaurus Dozen (created by Alberto Cairo)
+
+```{r dataset}
+
+head(datasaurus_dozen, 10)
+
+```
+
+
+```{r summary-stats}
+
+datasaurus_dozen %>%
+  group_by(dataset) %>%
+  summarise(mean_x = mean(x),
+            mean_y = mean(y),
+            sd_x = sd(x),
+            sd_y = sd(y),
+            corr = cor(x, y)) %>%
+  write.table(., "clipboard", sep = "\t", row.names = FALSE)
+
+
+
+```
+
+
+
+```{r graph}
+
+ggplot(datasaurus_dozen) +
+  geom_point(aes(x, y)) +
+  facet_wrap(~ dataset) +
+  labs(title = "The Datasaurus Dozen",
+       subtitle = "Never trust summary statistics alone; always visualize your data - Alberto Cairo",
+       x = "",
+       y = "") +
+  theme(strip.background = element_blank(),
+        strip.text = element_blank(),
+        plot.title = element_text(hjust = -0.04),
+        plot.subtitle = element_text(hjust = -0.07))
+
+```
