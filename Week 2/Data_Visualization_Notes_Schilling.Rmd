@@ -37,7 +37,7 @@ library(tidyverse)
 ```
 
 
-## Look at Data
+## Get Started
 
 ### Everything has a name
 Objects in R are created and referred to by their names. Certain names are not allowed because they are reserved words such as ``TRUE``, ``if``, ``mean()``, and ``NA``. Names also cannot start with a number or contain spaces. There are different naming conventions.  
@@ -170,14 +170,6 @@ p <- ggplot(data = gapminder,
 
 # Create a scatterplot
 p + geom_point()
-
-```
-
-
-
-## Get Started
-
-```{r}
 
 ```
 
