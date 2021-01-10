@@ -32,6 +32,8 @@ library(tidyverse)
 
 ## Libraries: Install once per machine, load once per R session
 
+## Week 2 / Chapter 2 Notes published here: https://rpubs.com/jennschilling/dgr610a_w21_w2_notes
+
 ```
 
 
