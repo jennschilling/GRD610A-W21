@@ -1,0 +1,40 @@
+---
+title: "DRG610A Data Visualization II"
+subtitle: "Basic Charts in ggplot"
+author: "Jenn Schilling"
+date: "February 3, 2021"
+output:
+  xaringan::moon_reader:
+    css: [default, default-fonts]
+---
+
+```{r setup, include=FALSE}
+
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+
+library(gapminder)
+library(here)
+library(socviz)
+library(tidyverse)
+ 
+```
+
+# Today
+
+- Visualization of the Week
+- Discussion of Introduction and Chapter 1 of *The Truthful Art* (Cairo)
+- Basic Charts in ggplot - Chapter 3 of *Data Visualization* (Healy)
+
+---
+
+# Discussion
+
+
+
+
+
+
+
+
+
