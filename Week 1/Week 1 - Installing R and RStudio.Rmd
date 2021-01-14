@@ -1,6 +1,6 @@
 ---
 title: "Week 1 - Installing R and RStudio"
-subtitle: "DGR610A - Data Visualization II"
+subtitle: "GRD 610A - Data Visualization II"
 #author: "Jenn Schilling"
 output: pdf_document
 urlcolor: blue

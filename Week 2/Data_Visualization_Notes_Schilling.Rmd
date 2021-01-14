@@ -12,7 +12,7 @@ output:
    
 ## Data Visualization Notes
 
-These are my notes for **DGR610A: Data Visualization II** in Winter 2021 at the College for Creative Studies. These notes are for my work in the book *Data Visualization* by Kieran Healy (Princeton University Press, 2019). 
+These are my notes for **GRD 610A: Data Visualization II** in Winter 2021 at the College for Creative Studies. These notes are for my work in the book *Data Visualization* by Kieran Healy (Princeton University Press, 2019). 
 
 ```{r setup, include=FALSE}
 

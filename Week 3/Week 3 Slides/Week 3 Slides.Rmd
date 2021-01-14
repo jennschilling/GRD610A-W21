@@ -1,5 +1,5 @@
 ---
-title: "DRG610A Data Visualization II"
+title: "GRD 610A Data Visualization II"
 subtitle: "Basic Charts in ggplot"
 author: "Jenn Schilling"
 date: "February 3, 2021"
