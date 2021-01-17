@@ -5,7 +5,7 @@ author: "Jenn Schilling"
 date: "February 3, 2021"
 output:
   xaringan::moon_reader:
-    css: [default, default-fonts]
+    css: xaringan-themer.css
     nature:
       ratio: '16:9'
       img_dir: img
@@ -24,7 +24,23 @@ library(here)
 library(socviz)
 library(tidyverse)
 library(countdown)
+library(xaringanthemer)
  
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+
+style_duo_accent(
+  primary_color = "#1c5253",
+  secondary_color = "#c8c8c8",
+  link_color = choose_dark_or_light("#FFFFFF", "#cf7270"),
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i"),
+  code_font_google   = google_font("Fira Mono")
+)
+
+# style_mono_light(base_color = "#23395b")
+
 ```
 
 # Today
@@ -54,7 +70,7 @@ library(countdown)
 3. organized in a way that enables at least some exploration, when it’s appropriate,  
 4. and presented in an attractive manner, but always remembering that honesty, clarity, and depth come first.”  
 
-From p. 12 of Cairo, A. (2016). The truthful art: Data, charts, and maps for communication. New Riders.
+From p. 12 of Cairo, A. (2016). *The truthful art: Data, charts, and maps for communication.* New Riders.
 
 
 .center[
@@ -236,7 +252,7 @@ Now ggplot knows the data, how to map it, and how to draw the plot (``geom_point
 ---
 # The ``ggplot`` Process
 
-"1. Tell the ``ggplot()`` function what our data is. (``data = ... ``)
+1. Tell the ``ggplot()`` function what our data is. (``data = ... ``)
 
 2. Tell ``ggplot()`` what relationships we want to see.For convenience we will put the results of the first two steps in an object called ``p``.  (``mapping = aes(...)``)
 
@@ -244,7 +260,7 @@ Now ggplot knows the data, how to map it, and how to draw the plot (``geom_point
 
 4. Layer on geoms as needed, by adding them to the ``p`` object one at a time.  
 
-5. Use some additional functions to adjust scales, labels, tick marks, titles. We’ll learn more about some of these functions shortly."
+5. Use some additional functions to adjust scales, labels, tick marks, titles. We’ll learn more about some of these functions shortly.
 
 From p. 60 of Healy, K. (2019). *Data visualization: A practical introduction*. Princeton ; Oxford: Princeton University Press.
 
