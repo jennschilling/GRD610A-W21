@@ -186,7 +186,25 @@ In tidy data:
 
 From Wickham, H. (2014). Tidy Data. *Journal of Statistical Software*, 59(10).
 
-```{r}
+### Mapping
+Build a plot layer by layer, starting with telling ggplot what data to use and how to map or link it  to parts of the plot, like the x and y axes. Then add on the type of ``geom``. 
+
+```{r ch-3-first-fig}
+
+p <- ggplot(data = gapminder,
+              mapping = aes(x = gdpPercap,
+                            y = lifeExp)) 
+
+  p + geom_point()
+
+```
+
+### Layer by Layer
+
+
+```{r ch-3-second-fig}
+
+
 
 ```
 

@@ -22,6 +22,7 @@ library(gapminder)
 library(here)
 library(socviz)
 library(tidyverse)
+library(countdown)
  
 ```
 
@@ -99,7 +100,14 @@ What aspects of the data visualizations and infographics presented in Chapter 1 
 
 class: center, middle
 
-# 10 Minute Break
+# 15 Minute Break
+
+```{r break-countdown, echo = FALSE}
+countdown(minutes = 15, seconds = 0,
+          right = "37%",
+          bottom = "27%",
+          warn_when = 60)
+```
 
 ---
 
@@ -117,6 +125,133 @@ In tidy data:
 3. Each type of observational unit forms a table.  
 
 From Wickham, H. (2014). Tidy Data. *Journal of Statistical Software*, 59(10).
+
+---
+
+# Wide Data
+
+```{r wide-table, echo = FALSE}
+
+head(gapminder %>%
+       select(country, year, lifeExp) %>%
+       pivot_wider(names_from = year,
+                   values_from = lifeExp)) %>% 
+  knitr::kable(format = "html")
+
+```
+---
+
+# Long Data 
+
+```{r long-table, echo = FALSE}
+
+head(gapminder %>%
+       select(country, year, lifeExp)) %>% 
+  knitr::kable(format = "html")
+
+```
+
+
+---
+
+# Tidy Data 
+
+```{r tidy-table, echo = FALSE}
+
+head(gapminder) %>%
+  knitr::kable(format = "html")
+
+```
+
+
+---
+
+# Mapping Data
+
+.pull-left[
+```{r no-mapping, fig.show = 'hide'}
+  p <- ggplot(data = gapminder)
+
+  p #<<
+  
+```
+
+ggplot knows the data, but not how to map it.
+
+]
+.pull-right[
+```{r ref.label = 'no-mapping', echo = FALSE}
+```
+]
+
+---
+
+# Mapping Data
+.pull-left[
+```{r mapping-added, fig.show = 'hide'}
+  p <- ggplot(data = gapminder,
+              mapping = aes(x = gdpPercap, #<<
+                            y = lifeExp)) #<<
+
+  p 
+  
+```
+
+- ``aes()`` links variables to parts of the plot
+ 
+- ggplot knows the data and how  to map it  
+ 
+- BUT we have not provided information about what to draw
+
+]
+.pull-right[
+```{r ref.label = 'mapping-added', echo = FALSE}
+```
+]
+
+---
+
+# Drawing Data
+.pull-left[
+```{r geom-added, fig.show = 'hide'}
+  p <- ggplot(data = gapminder,
+              mapping = aes(x = gdpPercap,
+                            y = lifeExp)) 
+
+  p + geom_point() #<<
+  
+```
+
+Now ggplot knows the data, how to map it, and how to draw the plot (``geom_point()``)
+
+]
+.pull-right[
+```{r ref.label = 'geom-added', echo = FALSE}
+```
+]
+
+---
+# The ``ggplot`` Process
+
+1. Tell the ``ggplot()`` function what our data is. (``data = ... ``)
+
+2. Tell ``ggplot()`` what relationships we want to see.For convenience we will put the results of the first two steps in an object called ``p``.  (``mapping = aes(...)``)
+
+3. Tell ``ggplot`` how we want to see the relationships in our data.  (``geom_...``)
+
+4. Layer on geoms as needed, by adding them to the ``p`` object one at a time.  
+
+5. Use some additional functions to adjust scales, labels, tick marks, titles. We’ll learn more about some of these functions shortly.
+
+From p. 60 of Healy, K. (2019). *Data visualization: A practical introduction*. Princeton ; Oxford: Princeton University Press.
+
+---
+
+
+class: center, middle
+
+# Lab Time
+
 
 ---
 
