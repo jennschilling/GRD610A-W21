@@ -6,13 +6,17 @@ date: "February 3, 2021"
 output:
   xaringan::moon_reader:
     css: [default, default-fonts]
-    countIncrementalSlides: FALSE
+    nature:
+      ratio: '16:9'
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
 ---
 
 ```{r setup, include=FALSE}
 
 options(htmltools.dir.version = FALSE)
-knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+knitr::opts_chunk$set(fig.retina = 3, warning = FALSE, message = FALSE)
 
 library(gapminder)
 library(here)
@@ -90,6 +94,29 @@ What aspects of the data visualizations and infographics presented in Chapter 1 
 [Wall Street Journal's "HealthCare.gov Explorer"](http://graphics.wsj.com/health-care-explorer/#/?age=30&fips=01001&metal_level=Silver)  
 
 [The Guardian's "Beyond the Border"](https://www.theguardian.com/world/ng-interactive/2014/aug/06/-sp-texas-border-deadliest-state-undocumented-migrants)  
+
+---
+
+class: center, middle
+
+# 10 Minute Break
+
+---
+
+# Chapter 3: Make A Plot
+
+![](ch-03-ggplot-flow.png)
+
+---
+
+# Tidy Data
+
+In tidy data:  
+1. Each variable forms a column.  
+2. Each observation forms a row.  
+3. Each type of observational unit forms a table.  
+
+From Wickham, H. (2014). Tidy Data. *Journal of Statistical Software*, 59(10).
 
 ---
 

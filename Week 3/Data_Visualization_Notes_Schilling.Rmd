@@ -1,7 +1,7 @@
 ---
 title: "Data Visualization Notes"
 author: "Jenn Schilling"
-date: "2021-01-27"
+date: "2021-02-03"
 output:
  html_document:
   theme: "flatly" # Theme Gallery: https://www.datadreaming.org/post/r-markdown-theme-gallery/
@@ -175,6 +175,16 @@ p + geom_point()
 
 
 ## Make a Plot
+
+``ggplot2`` is an ``R`` library/package that allows us to map data to visual elements. Using it we can control the way the data appears in the plot and how each element of the plot will be displayed. **Aesthetic Mappings** make the connection between the data and how it is displayed on the plot (location, size, color, shape, etc.). **Geoms** define the type of plot (scatterplot, line plot, box plot, bar chart, etc.). Code is added together to make the plot using ``+`` the plus sign. More pieces can be added to the plot that define the scales, legend, labels, axes, style or theme of the plot, etc. Each part can be added using different functions with arguments specifying the look of the plot; the plot is built up piece by piece. 
+
+### Tidy Data
+In tidy data:  
+1. Each variable forms a column.  
+2. Each observation forms a row.  
+3. Each type of observational unit forms a table.  
+
+From Wickham, H. (2014). Tidy Data. *Journal of Statistical Software*, 59(10).
 
 ```{r}
 
