@@ -8,6 +8,7 @@ output:
     css: [default, default-fonts]
     nature:
       ratio: '16:9'
+      img_dir: img
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
@@ -53,7 +54,7 @@ library(countdown)
 3. organized in a way that enables at least some exploration, when it’s appropriate,  
 4. and presented in an attractive manner, but always remembering that honesty, clarity, and depth come first.”  
 
-Alberto Cairo, *The Truthful Art*, p. 12
+From p. 12 of Cairo, A. (2016). The truthful art: Data, charts, and maps for communication. New Riders.
 
 
 .center[
@@ -65,7 +66,7 @@ Alberto Cairo, *The Truthful Art*, p. 12
 # Discussion
 
 
-**Candid communication:** "begin with the information and then...thoroughly analyze it to discover the messages worth spreading" (2019, Ciaro, *The Truthful Art*, p. 15)  
+**Candid communication:** "begin with the information and then...thoroughly analyze it to discover the messages worth spreading" (2016, Ciaro, *The Truthful Art*, p. 15)  
 
 
 What do you think of the elements of journalism (p. 21)?  
@@ -113,18 +114,19 @@ countdown(minutes = 15, seconds = 0,
 
 # Chapter 3: Make A Plot
 
-![](ch-03-ggplot-flow.png)
+![](img\\ch-03-ggplot-flow.png)
+From p. 56 of Healy, K. (2019). *Data visualization: A practical introduction*. Princeton ; Oxford: Princeton University Press.
 
 ---
 
 # Tidy Data
 
-In tidy data:  
+"In tidy data:  
 1. Each variable forms a column.  
 2. Each observation forms a row.  
-3. Each type of observational unit forms a table.  
+3. Each type of observational unit forms a table."  
 
-From Wickham, H. (2014). Tidy Data. *Journal of Statistical Software*, 59(10).
+From p. 4 of Wickham, H. (2014). Tidy Data. *Journal of Statistical Software*, 59(10).
 
 ---
 
@@ -139,6 +141,7 @@ head(gapminder %>%
   knitr::kable(format = "html")
 
 ```
+
 ---
 
 # Long Data 
@@ -180,7 +183,7 @@ ggplot knows the data, but not how to map it.
 
 ]
 .pull-right[
-```{r ref.label = 'no-mapping', echo = FALSE}
+```{r plot-no-mapping, ref.label = 'no-mapping', echo = FALSE}
 ```
 ]
 
@@ -205,7 +208,7 @@ ggplot knows the data, but not how to map it.
 
 ]
 .pull-right[
-```{r ref.label = 'mapping-added', echo = FALSE}
+```{r plot-mapping-added, ref.label = 'mapping-added', echo = FALSE}
 ```
 ]
 
@@ -226,14 +229,14 @@ Now ggplot knows the data, how to map it, and how to draw the plot (``geom_point
 
 ]
 .pull-right[
-```{r ref.label = 'geom-added', echo = FALSE}
+```{r plot-geom-added, ref.label = 'geom-added', echo = FALSE}
 ```
 ]
 
 ---
 # The ``ggplot`` Process
 
-1. Tell the ``ggplot()`` function what our data is. (``data = ... ``)
+"1. Tell the ``ggplot()`` function what our data is. (``data = ... ``)
 
 2. Tell ``ggplot()`` what relationships we want to see.For convenience we will put the results of the first two steps in an object called ``p``.  (``mapping = aes(...)``)
 
@@ -241,7 +244,7 @@ Now ggplot knows the data, how to map it, and how to draw the plot (``geom_point
 
 4. Layer on geoms as needed, by adding them to the ``p`` object one at a time.  
 
-5. Use some additional functions to adjust scales, labels, tick marks, titles. We’ll learn more about some of these functions shortly.
+5. Use some additional functions to adjust scales, labels, tick marks, titles. We’ll learn more about some of these functions shortly."
 
 From p. 60 of Healy, K. (2019). *Data visualization: A practical introduction*. Princeton ; Oxford: Princeton University Press.
 
