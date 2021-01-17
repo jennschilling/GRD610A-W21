@@ -189,7 +189,7 @@ From Wickham, H. (2014). Tidy Data. *Journal of Statistical Software*, 59(10).
 ### Mapping
 Build a plot layer by layer, starting with telling ggplot what data to use and how to map or link it  to parts of the plot, like the x and y axes. Then add on the type of ``geom``. 
 
-```{r ch-3-first-fig}
+```{r ch-3-fig-1}
 
 p <- ggplot(data = gapminder,
               mapping = aes(x = gdpPercap,
@@ -201,13 +201,122 @@ p <- ggplot(data = gapminder,
 
 ### Layer by Layer
 
+Trying different ``geom_`` functions.
 
-```{r ch-3-second-fig}
+```{r ch-3-fig-2}
 
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp))
+
+p + geom_smooth()
+
+p + geom_point() + # add the points back into the plot 
+  geom_smooth() 
+
+p + geom_point() + 
+  geom_smooth(method = "lm") # use a linear model
+
+p + geom_point() +
+  geom_smooth(method = "gam") + # generalized additive model
+  scale_x_log10() # transform x-axis to log-10 scale
+
+p + geom_point() +
+  geom_smooth(method = "gam") +
+  scale_x_log10(labels = scales::dollar) # format x-axis in dollars
+
+```
+
+### Mapping Aesthetics
+
+Using the aesthetics mapping, different parts of the data can be encoded in different ways.  
+
+```{r ch3-fig-3}
+
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp,
+                          color = "purple")) # ggplot adds the value "purple" to all rows
+
+p + geom_point() +
+  geom_smooth(method = "loess") +
+  scale_x_log10()
+
+# To actually turn all of the points purple, we need to set the color property of the geom_ function
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp))
+
+p + geom_point(color = "purple") + # set point color to purple
+  geom_smooth(method = "loess") +
+  scale_x_log10()
+
+p + geom_point(alpha = 0.3) + # make points more transparent
+  geom_smooth(color = "orange", # make line orange
+              se = FALSE, # remove standard error band
+              size = 8, # increase thickness of the line
+              method = "lm") +
+  scale_x_log10()
+
+
+p + geom_point(alpha = 0.3) + # make points more transparent
+  geom_smooth(method = "gam") +
+  scale_x_log10(labels = scales::dollar) +
+  # Add title and labels
+  labs(x = "GDP per Capita", 
+       y = "Life Expectancy in Years",
+       title = "Economic Growth and Life Expectancy",
+       subtitle = "Data points are country-years",
+       caption = "Source: Gapminder")
+
+# Map data by continent
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp,
+                          color = continent))
+
+p + geom_point() +
+  geom_smooth(method = "loess") +
+  scale_x_log10()
+
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp,
+                          color = continent,
+                          fill = continent)) # now the error bands will also have the color
+
+p + geom_point() +
+  geom_smooth(method = "loess") +
+  scale_x_log10()
+
+```
+
+### Aesthetics by Geom
+
+```{r ch3-fig-4}
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp))
+
+p + geom_point(mapping = aes(color = continent)) + # points will be colored by continent
+  geom_smooth(method = "loess") + # the smoothed line will be for all data
+  scale_x_log10()
+
+p + geom_point(mapping = aes(color = log(pop))) + # points will be colored by population
+  scale_x_log10()
 
 
 ```
 
+### Saving  
+Use ``here()`` to save plots in the current directory. This function can also be used to reference folders within the current directory. For this class, use ``.svg`` to save in vector format and embed in Adobe Illustrator. The function to save a plot is ``ggsave()`` which will automatically save the last plot and can also be provided a ``ggplot`` object to save. 
+
+### Where to Go Next  
+Pick at least two of the questions presented under the *Where to Go Next* section and answer them.
 
 ## Show the Right Numbers
 
