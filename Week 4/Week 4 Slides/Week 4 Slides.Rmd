@@ -1,0 +1,179 @@
+---
+title: "GRD 610A Data Visualization II"
+subtitle: "Plot Types"
+author: "Jenn Schilling"
+date: "February 10, 2021"
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    nature:
+      ratio: '16:9'
+      img_dir: img
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(fig.retina = 3, warning = FALSE, message = FALSE)
+
+library(gapminder)
+library(here)
+library(socviz)
+library(tidyverse)
+library(countdown)
+library(xaringanthemer)
+ 
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+
+style_duo_accent(
+  primary_color = "#1c5253",
+  secondary_color = "#c8c8c8",
+  link_color = choose_dark_or_light("#FFFFFF", "#cf7270"),
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i"),
+  code_font_google   = google_font("Fira Mono"),
+  inverse_background_color = "#1c5253",
+  inverse_header_color = "#FFFFFF"
+)
+
+# style_mono_light(base_color = "#23395b")
+
+```
+
+# Today
+
+- Data Visualization of the Week  
+
+- Discussion of Chapter 2 of *The Truthful Art* (Cairo)  
+
+- Lab on Plot Types (Show the Right Numbers) - Chapter 4 of *Data Visualization* (Healy)  
+
+- First Homework Assignment
+
+---
+
+# Discussion
+
+The Five Qualities of Great Visualizations:
+1. Truthful  
+2. Functional  
+3. Beautiful  
+4. Insightful  
+5. Enlightening  
+
+From p. 45 of Cairo, A. (2016). *The truthful art: Data, charts, and maps for communication.* New Riders.
+
+[Define the Qualities](https://padlet.com/jschilling_ccs/zmlnjzhiexx3kf14)
+
+---
+
+# Discussion
+
+The Five Qualities of Great Visualizations:
+1. Truthful  
+2. Functional  
+3. Beautiful  
+4. Insightful  
+5. Enlightening  
+
+From p. 45 of Cairo, A. (2016). *The truthful art: Data, charts, and maps for communication.* New Riders.
+
+--
+
+**Do you agree that these are the five qualities of great visualizations?**
+
+--
+
+**Which is most important? Why?**
+
+--
+
+**Which is least important? Why?**
+
+--
+
+**What would you add?**
+
+
+--
+
+**What aspects of the data visualizations and infographics presented in Chapter 2 of *The Truthful Art* stood out to you?**
+
+
+
+---
+
+class: center, middle
+
+# 15 Minute Break
+
+```{r break-countdown, echo = FALSE}
+countdown(minutes = 15, seconds = 0,
+          right = "37%",
+          bottom = "27%",
+          warn_when = 60)
+```
+
+
+---
+# A Reminder of The ``ggplot`` Process
+
+1. Tell the ``ggplot()`` function what our data is. (``data = ... ``)
+
+2. Tell ``ggplot()`` what relationships we want to see.For convenience we will put the results of the first two steps in an object called ``p``.  (``mapping = aes(...)``)
+
+3. Tell ``ggplot`` how we want to see the relationships in our data.  (``geom_...``)
+
+4. Layer on geoms as needed, by adding them to the ``p`` object one at a time.  
+
+5. Use some additional functions to adjust scales, labels, tick marks, titles. We’ll learn more about some of these functions shortly.
+
+From p. 60 of Healy, K. (2019). *Data visualization: A practical introduction*. Princeton ; Oxford: Princeton University Press.
+
+---
+
+# Chapter 4: Show the Right Numbers
+
+**"Code almost never works properly the first time you write it.** (Healy, 2019, p. 73)
+
+---
+
+class: center, middle, inverse
+
+# Lab Time
+
+
+---
+
+# Homework Assignment
+
+**Task: ** Create 3 different types of charts.  
+
+**Due: ** February 17, 2020 
+
+[Rubric](https://bb.collegeforcreativestudies.edu/webapps/rubric/do/course/manageRubrics?dispatch=view&context=course&rubricId=_42755_1&course_id=_35307_1)
+
+**Notes**
+
+- You should explore a dataset other than the *gapminder* one we've been using in the labs (some ideas: *babynames*, *palmerpenguins*, a CSV file you found)  
+
+- To use an R package dataset, remember to run *install.packages("package_name")* once in the console and add *library(package_name)* to the *setup* portion of the .Rmd file
+
+- See Blackboard assignment for a template .Rmd file
+
+---
+
+# Tasks to Complete
+
+- Reading (see Syllabus)  
+
+- Homework
+
+- Prepare for your Data Visualization of the Week  
+
+

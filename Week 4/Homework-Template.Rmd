@@ -1,0 +1,92 @@
+---
+title: "GRD 610A Data Visualization II"
+subtitle: "Homework #XX"
+author: "Jenn Schilling"
+date: "2021-02-10"
+output:
+ html_document:
+  theme: "simplex" # Theme Gallery: https://www.datadreaming.org/post/r-markdown-theme-gallery/
+---
+
+
+```{r setup, include=FALSE}
+
+## By defult, show code for all chunks in the knitted document,
+## as well as the output. To override for a particular chunk
+## use echo = FALSE in its options.
+knitr::opts_chunk$set(echo = TRUE)
+
+## Set the default size of figures
+knitr::opts_chunk$set(fig.width=8, fig.height=5)  
+
+## Load the libraries we will be using
+library(gapminder)
+library(here)
+library(socviz)
+library(tidyverse)
+
+```
+
+
+
+******
+
+# Getting Data 
+
+If you want to use a different dataset package, run one of the install.package() line once in the Console
+```{r install-package, include=TRUE, eval=FALSE}
+
+install.packages("palmerpenguins")
+
+install.packages("babynames")
+
+```
+
+Then add the library function call to the setup section above
+```{r add-library, include=TRUE, eval=FALSE}
+
+library(palmerpenguins)
+
+library(babynames)
+
+```
+
+If you want to use your own dataset, add the code below to the setup section
+
+```{r use-your-own-data, include=TRUE, eval=FALSE}
+
+# From a URL
+ url <- "https://cdn.rawgit.com/kjhealy/viz-organdata/master/organdonation.csv"
+ organs <- read_csv(file = url)
+
+# From your computer (save the file in the same folder as your Rmd file)
+ data <- read_csv("file_name.csv")
+
+```
+
+**Remove this section after you implement it (everything between and including the ```******```)** 
+
+******
+
+# Homework Assignment
+
+This is where you will put your R code and create your plots
+
+```{r first-plot}
+
+
+
+```
+
+```{r second-plot}
+
+
+
+```
+
+```{r third-plot}
+
+
+
+```
+
