@@ -36,7 +36,9 @@ style_duo_accent(
   link_color = choose_dark_or_light("#FFFFFF", "#cf7270"),
   header_font_google = google_font("Josefin Sans"),
   text_font_google   = google_font("Montserrat", "300", "300i"),
-  code_font_google   = google_font("Fira Mono")
+  code_font_google   = google_font("Fira Mono"),
+  inverse_background_color = "#1c5253",
+  inverse_header_color = "#FFFFFF"
 )
 
 # style_mono_light(base_color = "#23395b")
@@ -45,7 +47,7 @@ style_duo_accent(
 
 # Today
 
-- Visualization of the Week  
+- Data Visualization of the Week  
 
 - Discussion of Introduction and Chapter 1 of *The Truthful Art* (Cairo)  
 
@@ -267,7 +269,7 @@ From p. 60 of Healy, K. (2019). *Data visualization: A practical introduction*. 
 ---
 
 
-class: center, middle
+class: center, middle, inverse
 
 # Lab Time
 
@@ -278,7 +280,7 @@ class: center, middle
 
 - Reading (see Syllabus)  
 
-- Prepare for your Visualization of the Week  
+- Prepare for your Data Visualization of the Week  
 
 - Practice R  
 
