@@ -318,13 +318,220 @@ Use ``here()`` to save plots in the current directory. This function can also be
 ### Where to Go Next  
 Pick at least two of the questions presented under the *Where to Go Next* section and answer them.
 
-## Show the Right Numbers
+## Show the Right Numbers  
 
+**"Code almost never works properly the first time you write it."** (p. 73)  
 
+### Grouping  
 
-```{r}
+```{r group-plot}
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = year,
+                          y = gdpPercap)) 
+
+p + geom_line() # Something is wrong, we didn't tell it how to group
+
+p + geom_line(aes(group = country)) # Now there is a line per country
 
 ```
+
+
+### Faceting  
+
+Facet = small multiple (i.e. a separate graph for each value of the variable)  
+
+```{r facet-plots}
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = year,
+                          y = gdpPercap))
+
+p + geom_line(aes(group = country)) +
+  facet_wrap(~continent) # make a separate plot for each continent
+
+# Make it look a little nicer
+p + geom_line(color = "gray70",
+              aes(group = country)) +
+  geom_smooth(size = 1.1, method = "loess", se = FALSE) +
+  scale_y_log10(labels = scales::dollar) +
+  facet_wrap(~continent, ncol = 5) +
+  labs(x = "Year",
+       y = "GDP per capita",
+       title = "GDP per capita on Five Continents")
+
+# New dataset 2016 General Social Survey with more categorical data
+glimpse(gss_sm)
+
+# Practice using facet_grid() to facet between multiple variables
+p <- ggplot(data = gss_sm,
+            mapping = aes(x = age,
+                          y = childs))
+
+p + geom_point(alpha = 0.2) +
+  geom_smooth() +
+  facet_grid(sex ~ race)
+
+```
+
+
+### Transforming  
+
+Each ``geom_`` function has an associated ``stat_`` function that is used to plot the data. Sometimes this involves transforming the data in some way. 
+
+```{r transform-plot}
+
+p <- ggplot(data = gss_sm,
+            mapping = aes(x = bigregion))
+
+p + geom_bar() # makes a bar graph that counts the number of observations per region; count is computed for us
+
+p + geom_bar(mapping = aes(y = ..prop..)) # the prop statistic can show us proportions
+
+# But this is not right, each shows 100%
+
+# So, we need to fix the automatic grouping that is occurring by region
+p + geom_bar(mapping = aes(y = ..prop.., group = 1)) # using group = 1 is basically a placeholder that says all the data is in the same group
+
+# Look at a different variable
+table(gss_sm$religion)
+
+p <- ggplot(data = gss_sm,
+            mapping = aes(x = religion, color = religion))
+
+p + geom_bar() # only the outline has a color - we need to use fill
+
+p <- ggplot(data = gss_sm,
+            mapping = aes(x = religion, fill = religion))
+
+p + geom_bar()
+
+# Remove the legend
+p + geom_bar() +
+  guides(fill = FALSE)
+
+```
+```{r frequency-plots}
+
+# How can we look at two variables together
+p <- ggplot(data = gss_sm,
+            mapping = aes(x = bigregion,
+                          fill = religion))
+
+p + geom_bar() # Stacked bar chart of counts
+
+p + geom_bar(position = "fill") # Stacked bar chart of proportions
+
+p + geom_bar(position = "dodge") # Bar chart of counts side by side
+
+p + geom_bar(position = "dodge",
+             mapping = aes(y = ..prop..)) # Bar chart of proportions side by side
+
+# Not quite right - all are 100% 
+
+p + geom_bar(position = "dodge",
+             mapping = aes(y = ..prop..,
+                           group = religion)) # Bar chart of proportions side by side
+
+# The proportions sum to 1 by religion across the regions
+
+p <- ggplot(data = gss_sm,
+            mapping = aes(x = religion))
+
+p + geom_bar(position = "dodge",
+             mapping = aes(y = ..prop..,
+                           group = bigregion)) +
+  facet_wrap(~bigregion, ncol = 2)
+
+# Now  the proportions sum to 1 by region across religions
+
+
+```
+Histograms create bins of numerical data and display the distribution of the data within those bins.  
+
+```{r histogram-density-plots}
+
+# A new dataset
+glimpse(midwest)
+
+p <- ggplot(data = midwest,
+            mapping = aes(x = area))
+
+p + geom_histogram() # count is computed automatically by the default stat function
+
+p + geom_histogram(bins = 10) # set 10 bins
+
+# Look at only two states
+oh_wi <- c("OH", "WI")
+
+p <- ggplot(data = subset(midwest, subset = state %in% oh_wi),
+            mapping = aes(x = percollege,
+                          fill = state))
+
+p + geom_histogram(alpha = 0.4, bins = 20) # Overlapping histograms
+
+# Density estimate of the underlying distribution - density plot
+p <- ggplot(data = midwest,
+            mapping = aes(x = area))
+
+p + geom_density()
+
+# Density by state
+p <- ggplot(data = midwest,
+            mapping = aes(x = area,
+                          fill = state,
+                          color = state))
+
+p + geom_density(alpha = 0.3)
+
+# Compare to geom_line(stat = "density")
+
+p + geom_line(stat = "density")
+
+# Scaled density
+p <- ggplot(data = subset(midwest, subset = state %in% oh_wi),
+            mapping = aes(x = percollege,
+                          fill = state,
+                          color = state))
+
+p + geom_density(alpha = 0.3,
+                 mapping = aes(y = ..scaled..))
+
+```
+Avoiding transformations - sometimes the data is already aggregated or summarized and we do not need a transformation.
+
+```{r no-transform-plots}
+
+titanic # this data is already summarized
+
+p <- ggplot(data = titanic,
+            mapping = aes(x = fate,
+                          y = percent,
+                          fill = sex))
+
+p + geom_bar(position = "dodge",
+             stat = "identity") + # plot values as provided, do not summarize/count/etc.
+  theme(legend.position = "top") # this puts the legend at the top of the graph
+
+oecd_sum # another dataset that is already summarized
+
+p <- ggplot(data = oecd_sum,
+            mapping = aes(x = year, 
+                          y = diff,
+                          fill = hi_lo))
+
+p + geom_col() + # this is the same as geom_bar with stat = "identity"
+  guides(fill = FALSE) + # no legend
+  labs(x = NULL, # no x-axis label
+       y = "Difference in Years",
+       title = "The US Life Expectancy Gap",
+       subtitle = "Difference between US and OECD average life expectancies, 1960-2015",
+       caption = "Data: OECD. After a chart by Christopher Ingraham, Washington Post, December 27th 2017")
+
+```
+
+### Where to Go Next  
+Pick at least two of the questions presented under the *Where to Go Next* section and answer them.
 
 
 ## Graph Tables, Make Labels, Add Notes
