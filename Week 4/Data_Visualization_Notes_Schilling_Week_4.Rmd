@@ -443,7 +443,7 @@ p + geom_bar(position = "dodge",
                            group = bigregion)) +
   facet_wrap(~bigregion, ncol = 2)
 
-# Now  the proportions sum to 1 by region across religions
+# Now the proportions sum to 1 by region across religions
 
 
 ```

@@ -1,4 +1,4 @@
-name: Document
+name: Publish Document
 title:
 username:
 account: rpubs
@@ -6,5 +6,5 @@ server: rpubs.com
 hostUrl: rpubs.com
 appId: https://api.rpubs.com/api/v1/document/714962/72df5b9727b74b70bd8f2575957d0e53
 bundleId: https://api.rpubs.com/api/v1/document/714962/72df5b9727b74b70bd8f2575957d0e53
-url: http://rpubs.com/publish/claim/714962/2fce2ef465934bb6a73f07b690ae8f1e
-when: 1611014408.71457
+url: http://rpubs.com/jennschilling/714962/edit
+when: 1611014458.21627

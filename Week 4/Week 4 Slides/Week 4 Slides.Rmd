@@ -25,6 +25,9 @@ library(socviz)
 library(tidyverse)
 library(countdown)
 library(xaringanthemer)
+library(flair)
+library(flipbookr)
+library(DT)
  
 ```
 
@@ -41,7 +44,11 @@ style_duo_accent(
   inverse_header_color = "#FFFFFF"
 )
 
-# style_mono_light(base_color = "#23395b")
+```
+
+```{css change-css-options, eval = TRUE, echo = FALSE}
+
+.remark-code{line-height: 1.5; font-size: 80%} # smaller code font size
 
 ```
 
@@ -121,17 +128,17 @@ countdown(minutes = 15, seconds = 0,
 
 
 ---
-# A Reminder of The ``ggplot`` Process
+# A Reminder of The ggplot Process
 
-1. Tell the ``ggplot()`` function what our data is. (``data = ... ``)
+1. Tell the `ggplot()` function what our data is. (`data = ... `)
 
-2. Tell ``ggplot()`` what relationships we want to see.For convenience we will put the results of the first two steps in an object called ``p``.  (``mapping = aes(...)``)
+2. Tell `ggplot()` what relationships we want to see.For convenience we will put the results of the first two steps in an object called `p`.  (`mapping = aes(...)`)
 
-3. Tell ``ggplot`` how we want to see the relationships in our data.  (``geom_...``)
+3. Tell ggplot how we want to see the relationships in our data.  (`geom_...`)
 
-4. Layer on geoms as needed, by adding them to the ``p`` object one at a time.  
+4. Layer on geoms as needed, by adding them to the `p` object one at a time.  
 
-5. Use some additional functions to adjust scales, labels, tick marks, titles. We’ll learn more about some of these functions shortly.
+5. Use some additional functions to adjust scales, labels, tick marks, titles. 
 
 From p. 60 of Healy, K. (2019). *Data visualization: A practical introduction*. Princeton ; Oxford: Princeton University Press.
 
@@ -139,7 +146,146 @@ From p. 60 of Healy, K. (2019). *Data visualization: A practical introduction*. 
 
 # Chapter 4: Show the Right Numbers
 
-**"Code almost never works properly the first time you write it.** (Healy, 2019, p. 73)
+**"Code almost never works properly the first time you write it."** (Healy, 2019, p. 73)
+
+The *grammar of graphics* tells R how to produce a graphic from data.
+
+Chapter 4 Covers: 
+
+- Grouping  
+- Faceting  
+- Transforming 
+
+---
+
+# Grouping
+
+.pull-left[
+```{r group, fig.show = 'hide', include = FALSE}
+p <- ggplot(data = gapminder,
+            mapping = aes(x = year,
+                          y = gdpPercap)) 
+
+p + geom_line(mapping = aes(group = country)) 
+  
+```
+
+```{r decorate-group, echo = FALSE}
+
+  decorate("group", eval = FALSE) %>%
+  flair("mapping = aes(group = country)") %>% 
+  knit_print.with_flair()
+  
+  
+```
+]
+
+.pull-right[
+```{r plot-group, ref.label = 'group', echo = FALSE}
+```
+]
+
+---
+
+# Faceting
+
+.pull-left[
+```{r facet, fig.show = 'hide', include = FALSE}
+p <- ggplot(data = gapminder,
+            mapping = aes(x = year,
+                          y = gdpPercap))
+
+p + geom_line(mapping = aes(group = country)) +
+  facet_wrap(~continent)
+  
+```
+
+```{r decorate-facet, echo = FALSE}
+
+  decorate("facet", eval = FALSE) %>%
+  flair("facet_wrap(~continent)") %>% 
+  knit_print.with_flair()
+  
+  
+```
+]
+
+.pull-right[
+```{r plot-facet, ref.label = 'facet', echo = FALSE}
+```
+]
+
+---
+
+# Transforming 
+**New Dataset: 2016 General Social Survey**
+
+```{r new-data, echo = FALSE}
+head(gss_sm) %>%
+  datatable(
+    extensions = 'FixedColumns',
+    options = list(
+      dom = 't',
+      scrollX = TRUE,
+      scrollCollapse = TRUE
+      )) # Source: https://stackoverflow.com/questions/31085580/resize-datatables-to-fit-within-r-markdown
+
+```
+
+
+---
+
+# Transforming
+
+.pull-left[
+```{r transform, fig.show = 'hide', include = FALSE}
+
+p <- ggplot(data = gss_sm,
+            mapping = aes(x = bigregion))
+
+p + geom_bar()
+  
+```
+
+```{r decorate-transform, echo = FALSE}
+
+  decorate("transform", eval = FALSE) %>%
+  flair("geom_bar()") %>% 
+  knit_print.with_flair()
+  
+  
+```
+]
+
+.pull-right[
+```{r plot-transform, ref.label = 'transform', echo = FALSE}
+```
+]
+
+---
+
+```{r build-plot, include = FALSE}
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = year,
+                          y = gdpPercap))
+
+p + geom_line(color = "gray70",
+              aes(group = country)) +
+  geom_smooth(size = 1.1, 
+              method = "loess", 
+              se = FALSE) +
+  scale_y_log10(labels = scales::dollar) +
+  facet_wrap(~continent, ncol = 5) +
+  labs(x = "Year",
+       y = "GDP per capita",
+       title = "GDP per capita on Five Continents")
+
+```
+
+`r chunk_reveal(chunk_name = "build-plot", title = "# Building a Plot", widths = c(50,50))`
+
+
 
 ---
 
@@ -160,9 +306,11 @@ class: center, middle, inverse
 
 **Notes**
 
-- You should explore a dataset other than the *gapminder* one we've been using in the labs (some ideas: *babynames*, *palmerpenguins*, a CSV file you found)  
+- You should explore a dataset other than the `gapminder` one we've been using in the labs (some ideas: `babynames`, `palmerpenguins`, a CSV file you found)  
 
-- To use an R package dataset, remember to run *install.packages("package_name")* once in the console and add *library(package_name)* to the *setup* portion of the .Rmd file
+- To use an R package dataset, remember to run `install.packages("package_name")` once in the console and add `library(package_name)` to the `setup` portion of the .Rmd file
+
+- Use your resources: Healy, Google, Student Community BUT cite where you get code from if you copy it directly  
 
 - See Blackboard assignment for a template .Rmd file
 
