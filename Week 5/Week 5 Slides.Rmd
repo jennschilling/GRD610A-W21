@@ -66,7 +66,23 @@ style_duo_accent(
 
 # Discussion - The Truth Continuum
 
+.pull-left[
 
+#### Axiom: Any visualization is a model  
+(Cairo, 2016, p. 69)
+
+#### Coda: The more adequately a model fits whatever it stands for without being needlessley complex, and the easier it is for is intended audience to interpret correctly, the better it will be.  
+(Cairo, 2016, p. 70)
+
+]
+
+--
+
+.pull-right[
+
+- Do you agree or disagree? Why or why not?
+
+]
 
 ---
 
@@ -139,32 +155,7 @@ p + geom_line(mapping = aes(group = country))
 ```
 ]
 
----
 
-
-
----
-
-```{r build-plot, include = FALSE}
-
-p <- ggplot(data = gapminder,
-            mapping = aes(x = year,
-                          y = gdpPercap))
-
-p + geom_line(color = "gray70",
-              aes(group = country)) +
-  geom_smooth(size = 1.1, 
-              method = "loess", 
-              se = FALSE) +
-  scale_y_log10(labels = scales::dollar) +
-  facet_wrap(~continent, ncol = 5) +
-  labs(x = "Year",
-       y = "GDP per capita",
-       title = "GDP per capita on Five Continents")
-
-```
-
-`r chunk_reveal(chunk_name = "build-plot", title = "# Building a Plot", widths = c(50,50))`
 
 
 
