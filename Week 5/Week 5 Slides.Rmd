@@ -17,6 +17,9 @@ output:
 ```{r setup, include=FALSE}
 
 options(htmltools.dir.version = FALSE)
+
+options(knitr.duplicate.label = "allow")
+
 knitr::opts_chunk$set(fig.retina = 3, warning = FALSE, message = FALSE)
 
 library(gapminder)
@@ -221,50 +224,60 @@ class: center, middle
 ```{r break-countdown, echo = FALSE}
 countdown(minutes = 15, seconds = 0,
           right = "37%",
-          bottom = "27%",
+          bottom = "25%",
           warn_when = 60)
 ```
-
-
----
-# A Reminder of The ggplot Process
-
-1. Tell the `ggplot()` function what our data is. (`data = ... `)
-
-2. Tell `ggplot()` what relationships we want to see.For convenience we will put the results of the first two steps in an object called `p`.  (`mapping = aes(...)`)
-
-3. Tell ggplot how we want to see the relationships in our data.  (`geom_...`)
-
-4. Layer on geoms as needed, by adding them to the `p` object one at a time.  
-
-5. Use some additional functions to adjust scales, labels, tick marks, titles. 
-
-From p. 60 of Healy, K. (2019). *Data visualization: A practical introduction*. Princeton ; Oxford: Princeton University Press.
 
 ---
 
 # Chapter 5: Show the Right Numbers
 
+### The pipe operator: `%>%`
 
+![](Week-5-Slides_files/img/ch-05-dplyr-pipe-example.png)
+
+.left[
+Figure 5.1 (Healy, 2019, p.95)
+]
+
+???
+
+The pipe operator allows us to pass data from one step to another; in the diagram the yellow triangles represent the pipe operator. A pipeline of operations follows a sequence such as group, filter/select, mutate, then summarize. 
 
 ---
 
-# Grouping
+# Dataset (2016 General Social Survey)
+
+```{r new-data, echo = FALSE}
+head(gss_sm) %>%
+  datatable(
+    extensions = 'FixedColumns',
+    options = list(
+      dom = 't',
+      scrollX = TRUE,
+      scrollCollapse = TRUE
+      )) # Source: https://stackoverflow.com/questions/31085580/resize-datatables-to-fit-within-r-markdown
+
+```
+
+---
+
+# Pipe Operator 
 
 .pull-left[
-```{r group, fig.show = 'hide', include = FALSE}
-p <- ggplot(data = gapminder,
-            mapping = aes(x = year,
-                          y = gdpPercap)) 
-
-p + geom_line(mapping = aes(group = country)) 
+```{r group, include = FALSE}
+gss_sm %>%
+  group_by(bigregion, religion) %>%
+  summarize(N = n()) %>%
+  mutate(freq = N / sum(N),
+         pct = round((freq * 100), 0))
   
 ```
 
 ```{r decorate-group, echo = FALSE}
 
   decorate("group", eval = FALSE) %>%
-  flair("mapping = aes(group = country)") %>% 
+  flair("%>%") %>% 
   knit_print.with_flair()
   
   
@@ -272,13 +285,104 @@ p + geom_line(mapping = aes(group = country))
 ]
 
 .pull-right[
-```{r plot-group, ref.label = 'group', echo = FALSE}
+```{r output-group, ref.label = 'group', echo = FALSE}
+```
+]
+
+???
+
+Get the proportion of each religion by region
+
+---
+
+```{r build-pipe, include = FALSE}
+
+gss_sm %>%
+  group_by(bigregion, religion) %>%
+  summarize(N = n()) %>%
+  mutate(freq = N / sum(N),
+         pct = round((freq * 100), 0))
+
+```
+
+`r chunk_reveal(chunk_name = "build-pipe", title = "# Pipe Operator - Step by Step", widths = c(50,50))`
+
+
+
+---
+
+# Assignment / Equals
+
+.pull-left[
+### Before
+
+```{r argument-example, include = FALSE, eval = FALSE}
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = year,
+                          y = gdpPercap))
+
+```
+
+```{r decorate-example, echo = FALSE}
+
+  decorate("argument-example", eval = FALSE) %>%
+  flair("=") %>% 
+  knit_print.with_flair()
+  
+  
+```
+]
+
+--
+
+.pull-right[
+### Now
+
+```{r group-2, ref.label = 'group', include = FALSE}
+
+  
+```
+
+```{r decorate-group-2, echo = FALSE}
+
+  decorate("group-2", eval = FALSE) %>%
+  flair("=") %>% 
+  knit_print.with_flair()
+  
+  
 ```
 ]
 
 
 
 
+???
+
+Notice the use of the equals sign to assign a value to a name that we choose. Before we've only seen this as a way to assign a value to a pre-named argument of a function (aes(x = year)).
+
+---
+
+# Creating Columns / Variables
+
+```{r group-3, ref.label = 'group', include = FALSE}
+
+  
+```
+
+```{r decorate-group-3, echo = FALSE}
+
+  decorate("group-3", eval = FALSE) %>%
+  flair("freq") %>% 
+  knit_print.with_flair()
+  
+  
+```
+
+
+???
+
+Notice the use of the freq column right after we made it.
 
 ---
 
@@ -286,6 +390,11 @@ class: center, middle, inverse
 
 # Lab Time
 
+### Pages 91 - 101, 110-113, 132 (bullet points 2-3), 133 (bullet points 1-3) 
+
+???
+
+Note na.rm option on p. 110
 
 ---
 
@@ -299,9 +408,9 @@ class: center, middle, inverse
 
 **Notes**
 
-- You should explore a dataset other than the `gapminder` one we've been using in the labs (some ideas: `babynames`, `palmerpenguins`, a CSV file you found)  
+- You should explore a dataset other than `gapminder` (some ideas: `babynames`, `palmerpenguins`, a CSV file you found; you may also use `gss_sm` or `organdata`, but you must create something different than the book/lab)  
 
-- To use an R package dataset, remember to run `install.packages("package_name")` once in the console and add `library(package_name)` to the `setup` portion of the .Rmd file
+- To use an R package dataset that you have not used before, remember to run `install.packages("package_name")` once in the console and add `library(package_name)` to the `setup` portion of the .Rmd file
 
 - Use your resources: Healy, Google, Student Community BUT cite where you get code from if you copy it directly  
 

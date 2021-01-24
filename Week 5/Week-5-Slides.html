@@ -8,6 +8,17 @@
     <script src="Week-5-Slides_files/header-attrs/header-attrs.js"></script>
     <link href="Week-5-Slides_files/countdown/countdown.css" rel="stylesheet" />
     <script src="Week-5-Slides_files/countdown/countdown.js"></script>
+    <script src="Week-5-Slides_files/htmlwidgets/htmlwidgets.js"></script>
+    <script src="Week-5-Slides_files/jquery/jquery.min.js"></script>
+    <link href="Week-5-Slides_files/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="Week-5-Slides_files/datatables-binding/datatables.js"></script>
+    <link href="Week-5-Slides_files/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="Week-5-Slides_files/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="Week-5-Slides_files/dt-core/js/jquery.dataTables.min.js"></script>
+    <link href="Week-5-Slides_files/dt-ext-fixedcolumns/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+    <script src="Week-5-Slides_files/dt-ext-fixedcolumns/js/dataTables.fixedColumns.min.js"></script>
+    <link href="Week-5-Slides_files/crosstalk/css/crosstalk.css" rel="stylesheet" />
+    <script src="Week-5-Slides_files/crosstalk/js/crosstalk.min.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -198,50 +209,325 @@ class: center, middle
 
 # 15 Minute Break
 
-<div class="countdown" id="timer_600de4fb" style="right:37%;bottom:27%;" data-warnwhen="60">
+<div class="countdown" id="timer_600e0633" style="right:37%;bottom:25%;" data-warnwhen="60">
 <code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
-
-
----
-# A Reminder of The ggplot Process
-
-1. Tell the `ggplot()` function what our data is. (`data = ... `)
-
-2. Tell `ggplot()` what relationships we want to see.For convenience we will put the results of the first two steps in an object called `p`.  (`mapping = aes(...)`)
-
-3. Tell ggplot how we want to see the relationships in our data.  (`geom_...`)
-
-4. Layer on geoms as needed, by adding them to the `p` object one at a time.  
-
-5. Use some additional functions to adjust scales, labels, tick marks, titles. 
-
-From p. 60 of Healy, K. (2019). *Data visualization: A practical introduction*. Princeton ; Oxford: Princeton University Press.
 
 ---
 
 # Chapter 5: Show the Right Numbers
 
+### The pipe operator: `%&gt;%`
 
+![](Week-5-Slides_files/img/ch-05-dplyr-pipe-example.png)
+
+.left[
+Figure 5.1 (Healy, 2019, p.95)
+]
+
+???
+
+The pipe operator allows us to pass data from one step to another; in the diagram the yellow triangles represent the pipe operator. A pipeline of operations follows a sequence such as group, filter/select, mutate, then summarize. 
 
 ---
 
-# Grouping
+# Dataset (2016 General Social Survey)
+
+<div id="htmlwidget-f995b23863d676e428c7" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f995b23863d676e428c7">{"x":{"filter":"none","extensions":["FixedColumns"],"data":[["1","2","3","4","5","6"],[2016,2016,2016,2016,2016,2016],[1,2,3,4,5,6],[1,2,3,1,3,2],[47,61,72,43,55,53],[3,0,2,4,2,2],[2,3,3,3,2,2],["Bachelor","High School","Bachelor","High School","Graduate","Junior College"],["White","White","White","White","White","White"],["Male","Male","Male","Female","Female","Female"],["New England","New England","New England","New England","New England","New England"],["$170000 or over","$50000 to 59999","$75000 to $89999","$170000 or over","$170000 or over","$60000 to 74999"],["None","None","Catholic","Catholic","None","None"],["Married","Never Married","Married","Married","Married","Married"],["Graduate","Lt High School","High School",null,"Bachelor",null],["High School","High School","Lt High School","High School","High School","High School"],["Independent","Ind,near Dem","Not Str Republican","Not Str Republican","Not Str Democrat","Not Str Democrat"],["Moderate","Liberal","Conservative","Moderate","Slightly Liberal","Slightly Liberal"],["Pretty Happy","Pretty Happy","Very Happy","Pretty Happy","Very Happy","Very Happy"],[null,"1 Partner","1 Partner",null,"1 Partner","1 Partner"],[null,"Legal","Not Legal",null,"Legal","Legal"],["Aquarius","Scorpio","Pisces","Cancer","Scorpio","Scorpio"],[3,1,2,2,1,1],[0.956993511490439,0.478496755745219,0.956993511490439,1.91398702298088,1.43549026723566,0.956993511490439],["Gt $170000","Gt $50000","Gt $75000","Gt $170000","Gt $170000","Gt $60000"],["Age 45-55","Age 55-65","Age 65+","Age 35-45","Age 45-55","Age 45-55"],["Age 34-49","Age 49-62","Age 62+","Age 34-49","Age 49-62","Age 49-62"],["2","3","3","3","2","2"],["3","0","2","4+","2","2"],["None","None","Catholic","Catholic","None","None"],["Northeast","Northeast","Northeast","Northeast","Northeast","Northeast"],[null,"1","1",null,"1","1"],[0,1,0,0,1,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>year<\/th>\n      <th>id<\/th>\n      <th>ballot<\/th>\n      <th>age<\/th>\n      <th>childs<\/th>\n      <th>sibs<\/th>\n      <th>degree<\/th>\n      <th>race<\/th>\n      <th>sex<\/th>\n      <th>region<\/th>\n      <th>income16<\/th>\n      <th>relig<\/th>\n      <th>marital<\/th>\n      <th>padeg<\/th>\n      <th>madeg<\/th>\n      <th>partyid<\/th>\n      <th>polviews<\/th>\n      <th>happy<\/th>\n      <th>partners<\/th>\n      <th>grass<\/th>\n      <th>zodiac<\/th>\n      <th>pres12<\/th>\n      <th>wtssall<\/th>\n      <th>income_rc<\/th>\n      <th>agegrp<\/th>\n      <th>ageq<\/th>\n      <th>siblings<\/th>\n      <th>kids<\/th>\n      <th>religion<\/th>\n      <th>bigregion<\/th>\n      <th>partners_rc<\/th>\n      <th>obama<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","scrollX":true,"scrollCollapse":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,22,23,32]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+---
+
+# Pipe Operator 
 
 .pull-left[
 
 
 
-&lt;code class ='r hljs remark-code'&gt;p &lt;- ggplot(data = gapminder,&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;mapping = aes(x = year,&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;y = gdpPercap)) &lt;br&gt;&lt;br&gt;p + geom_line(&lt;span style='background-color:#ffff7f'&gt;mapping = aes(group = country)&lt;/span&gt;)&lt;/code&gt;
+&lt;code class ='r hljs remark-code'&gt;gss_sm &lt;span style='background-color:#ffff7f'&gt;%&gt;%&lt;/span&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;group_by(bigregion, religion) &lt;span style='background-color:#ffff7f'&gt;%&gt;%&lt;/span&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;summarize(N = n()) &lt;span style='background-color:#ffff7f'&gt;%&gt;%&lt;/span&gt;&lt;br&gt;&amp;nbsp;&amp;nbsp;mutate(freq = N / sum(N),&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;pct = round((freq * 100), 0))&lt;/code&gt;
 ]
 
 .pull-right[
-&lt;img src="Week-5-Slides_files/figure-html/plot-group-1.png" width="504" /&gt;
+
+```
+## # A tibble: 24 x 5
+## # Groups:   bigregion [4]
+##    bigregion religion       N    freq   pct
+##    &lt;fct&gt;     &lt;fct&gt;      &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt;
+##  1 Northeast Protestant   158 0.324      32
+##  2 Northeast Catholic     162 0.332      33
+##  3 Northeast Jewish        27 0.0553      6
+##  4 Northeast None         112 0.230      23
+##  5 Northeast Other         28 0.0574      6
+##  6 Northeast &lt;NA&gt;           1 0.00205     0
+##  7 Midwest   Protestant   325 0.468      47
+##  8 Midwest   Catholic     172 0.247      25
+##  9 Midwest   Jewish         3 0.00432     0
+## 10 Midwest   None         157 0.226      23
+## # ... with 14 more rows
+```
+]
+
+???
+
+Get the proportion of each religion by region
+
+---
+
+
+
+count: false
+ 
+# Pipe Operator - Step by Step
+.panel1-build-pipe-auto[
+
+```r
+*gss_sm
+```
+]
+ 
+.panel2-build-pipe-auto[
+
+```
+## # A tibble: 2,867 x 32
+##     year    id ballot   age childs sibs  degree race  sex   region income16
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;labe&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;lab&gt; &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;  &lt;fct&gt;   
+##  1  2016     1 1         47      3 2     Bache~ White Male  New E~ $170000~
+##  2  2016     2 2         61      0 3     High ~ White Male  New E~ $50000 ~
+##  3  2016     3 3         72      2 3     Bache~ White Male  New E~ $75000 ~
+##  4  2016     4 1         43      4 3     High ~ White Fema~ New E~ $170000~
+##  5  2016     5 3         55      2 2     Gradu~ White Fema~ New E~ $170000~
+##  6  2016     6 2         53      2 2     Junio~ White Fema~ New E~ $60000 ~
+##  7  2016     7 1         50      2 2     High ~ White Male  New E~ $170000~
+##  8  2016     8 3         23      3 6     High ~ Other Fema~ Middl~ $30000 ~
+##  9  2016     9 1         45      3 5     High ~ Black Male  Middl~ $60000 ~
+## 10  2016    10 3         71      4 1     Junio~ White Male  Middl~ $60000 ~
+## # ... with 2,857 more rows, and 21 more variables: relig &lt;fct&gt;, marital &lt;fct&gt;,
+## #   padeg &lt;fct&gt;, madeg &lt;fct&gt;, partyid &lt;fct&gt;, polviews &lt;fct&gt;, happy &lt;fct&gt;,
+## #   partners &lt;fct&gt;, grass &lt;fct&gt;, zodiac &lt;fct&gt;, pres12 &lt;labelled&gt;,
+## #   wtssall &lt;dbl&gt;, income_rc &lt;fct&gt;, agegrp &lt;fct&gt;, ageq &lt;fct&gt;, siblings &lt;fct&gt;,
+## #   kids &lt;fct&gt;, religion &lt;fct&gt;, bigregion &lt;fct&gt;, partners_rc &lt;fct&gt;, obama &lt;dbl&gt;
+```
+]
+
+---
+count: false
+ 
+# Pipe Operator - Step by Step
+.panel1-build-pipe-auto[
+
+```r
+gss_sm %&gt;%
+* group_by(bigregion, religion)
+```
+]
+ 
+.panel2-build-pipe-auto[
+
+```
+## # A tibble: 2,867 x 32
+## # Groups:   bigregion, religion [24]
+##     year    id ballot   age childs sibs  degree race  sex   region income16
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;labe&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;lab&gt; &lt;fct&gt;  &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;  &lt;fct&gt;   
+##  1  2016     1 1         47      3 2     Bache~ White Male  New E~ $170000~
+##  2  2016     2 2         61      0 3     High ~ White Male  New E~ $50000 ~
+##  3  2016     3 3         72      2 3     Bache~ White Male  New E~ $75000 ~
+##  4  2016     4 1         43      4 3     High ~ White Fema~ New E~ $170000~
+##  5  2016     5 3         55      2 2     Gradu~ White Fema~ New E~ $170000~
+##  6  2016     6 2         53      2 2     Junio~ White Fema~ New E~ $60000 ~
+##  7  2016     7 1         50      2 2     High ~ White Male  New E~ $170000~
+##  8  2016     8 3         23      3 6     High ~ Other Fema~ Middl~ $30000 ~
+##  9  2016     9 1         45      3 5     High ~ Black Male  Middl~ $60000 ~
+## 10  2016    10 3         71      4 1     Junio~ White Male  Middl~ $60000 ~
+## # ... with 2,857 more rows, and 21 more variables: relig &lt;fct&gt;, marital &lt;fct&gt;,
+## #   padeg &lt;fct&gt;, madeg &lt;fct&gt;, partyid &lt;fct&gt;, polviews &lt;fct&gt;, happy &lt;fct&gt;,
+## #   partners &lt;fct&gt;, grass &lt;fct&gt;, zodiac &lt;fct&gt;, pres12 &lt;labelled&gt;,
+## #   wtssall &lt;dbl&gt;, income_rc &lt;fct&gt;, agegrp &lt;fct&gt;, ageq &lt;fct&gt;, siblings &lt;fct&gt;,
+## #   kids &lt;fct&gt;, religion &lt;fct&gt;, bigregion &lt;fct&gt;, partners_rc &lt;fct&gt;, obama &lt;dbl&gt;
+```
+]
+
+---
+count: false
+ 
+# Pipe Operator - Step by Step
+.panel1-build-pipe-auto[
+
+```r
+gss_sm %&gt;%
+  group_by(bigregion, religion) %&gt;%
+* summarize(N = n())
+```
+]
+ 
+.panel2-build-pipe-auto[
+
+```
+## # A tibble: 24 x 3
+## # Groups:   bigregion [4]
+##    bigregion religion       N
+##    &lt;fct&gt;     &lt;fct&gt;      &lt;int&gt;
+##  1 Northeast Protestant   158
+##  2 Northeast Catholic     162
+##  3 Northeast Jewish        27
+##  4 Northeast None         112
+##  5 Northeast Other         28
+##  6 Northeast &lt;NA&gt;           1
+##  7 Midwest   Protestant   325
+##  8 Midwest   Catholic     172
+##  9 Midwest   Jewish         3
+## 10 Midwest   None         157
+## # ... with 14 more rows
+```
+]
+
+---
+count: false
+ 
+# Pipe Operator - Step by Step
+.panel1-build-pipe-auto[
+
+```r
+gss_sm %&gt;%
+  group_by(bigregion, religion) %&gt;%
+  summarize(N = n()) %&gt;%
+* mutate(freq = N / sum(N),
+*        pct = round((freq * 100), 0))
+```
+]
+ 
+.panel2-build-pipe-auto[
+
+```
+## # A tibble: 24 x 5
+## # Groups:   bigregion [4]
+##    bigregion religion       N    freq   pct
+##    &lt;fct&gt;     &lt;fct&gt;      &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt;
+##  1 Northeast Protestant   158 0.324      32
+##  2 Northeast Catholic     162 0.332      33
+##  3 Northeast Jewish        27 0.0553      6
+##  4 Northeast None         112 0.230      23
+##  5 Northeast Other         28 0.0574      6
+##  6 Northeast &lt;NA&gt;           1 0.00205     0
+##  7 Midwest   Protestant   325 0.468      47
+##  8 Midwest   Catholic     172 0.247      25
+##  9 Midwest   Jewish         3 0.00432     0
+## 10 Midwest   None         157 0.226      23
+## # ... with 14 more rows
+```
+]
+
+---
+count: false
+ 
+# Pipe Operator - Step by Step
+.panel1-build-pipe-auto[
+
+```r
+gss_sm %&gt;%
+  group_by(bigregion, religion) %&gt;%
+  summarize(N = n()) %&gt;%
+  mutate(freq = N / sum(N),
+         pct = round((freq * 100), 0))
+```
+]
+ 
+.panel2-build-pipe-auto[
+
+```
+## # A tibble: 24 x 5
+## # Groups:   bigregion [4]
+##    bigregion religion       N    freq   pct
+##    &lt;fct&gt;     &lt;fct&gt;      &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt;
+##  1 Northeast Protestant   158 0.324      32
+##  2 Northeast Catholic     162 0.332      33
+##  3 Northeast Jewish        27 0.0553      6
+##  4 Northeast None         112 0.230      23
+##  5 Northeast Other         28 0.0574      6
+##  6 Northeast &lt;NA&gt;           1 0.00205     0
+##  7 Midwest   Protestant   325 0.468      47
+##  8 Midwest   Catholic     172 0.247      25
+##  9 Midwest   Jewish         3 0.00432     0
+## 10 Midwest   None         157 0.226      23
+## # ... with 14 more rows
+```
+]
+
+&lt;style&gt;
+.panel1-build-pipe-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-build-pipe-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-build-pipe-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+
+
+---
+
+# Assignment / Equals
+
+.pull-left[
+### Before
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;p &lt;- ggplot(data &lt;span style='background-color:#ffff7f'&gt;=&lt;/span&gt; gapminder,&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;mapping &lt;span style='background-color:#ffff7f'&gt;=&lt;/span&gt; aes(x &lt;span style='background-color:#ffff7f'&gt;=&lt;/span&gt; year,&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;y &lt;span style='background-color:#ffff7f'&gt;=&lt;/span&gt; gdpPercap))&lt;/code&gt;
+]
+
+--
+
+.pull-right[
+### Now
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;gss_sm %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;group_by(bigregion, religion) %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;summarize(N &lt;span style='background-color:#ffff7f'&gt;=&lt;/span&gt; n()) %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;mutate(freq &lt;span style='background-color:#ffff7f'&gt;=&lt;/span&gt; N / sum(N),&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;pct &lt;span style='background-color:#ffff7f'&gt;=&lt;/span&gt; round((freq * 100), 0))&lt;/code&gt;
 ]
 
 
 
 
+???
+
+Notice the use of the equals sign to assign a value to a name that we choose. Before we've only seen this as a way to assign a value to a pre-named argument of a function (aes(x = year)).
+
+---
+
+# Creating Columns / Variables
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;gss_sm %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;group_by(bigregion, religion) %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;summarize(N = n()) %&gt;%&lt;br&gt;&amp;nbsp;&amp;nbsp;mutate(&lt;span style='background-color:#ffff7f'&gt;freq&lt;/span&gt; = N / sum(N),&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;pct = round((&lt;span style='background-color:#ffff7f'&gt;freq&lt;/span&gt; * 100), 0))&lt;/code&gt;
+
+
+???
+
+Notice the use of the freq column right after we made it.
 
 ---
 
@@ -249,6 +535,11 @@ class: center, middle, inverse
 
 # Lab Time
 
+### Pages 91 - 101, 110-113, 132 (bullet points 2-3), 133 (bullet points 1-3) 
+
+???
+
+Note na.rm option on p. 110
 
 ---
 
@@ -262,9 +553,9 @@ class: center, middle, inverse
 
 **Notes**
 
-- You should explore a dataset other than the `gapminder` one we've been using in the labs (some ideas: `babynames`, `palmerpenguins`, a CSV file you found)  
+- You should explore a dataset other than `gapminder` (some ideas: `babynames`, `palmerpenguins`, a CSV file you found; you may also use `gss_sm` or `organdata`, but you must create something different than the book/lab)  
 
-- To use an R package dataset, remember to run `install.packages("package_name")` once in the console and add `library(package_name)` to the `setup` portion of the .Rmd file
+- To use an R package dataset that you have not used before, remember to run `install.packages("package_name")` once in the console and add `library(package_name)` to the `setup` portion of the .Rmd file
 
 - Use your resources: Healy, Google, Student Community BUT cite where you get code from if you copy it directly  
 

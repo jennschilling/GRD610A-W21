@@ -16,10 +16,10 @@ These are my notes for **GRD 610A: Data Visualization II** in Winter 2021 at the
 
 ```{r setup, include=FALSE}
 
-## By defult, show code for all chunks in the knitted document,
+## By default, show code for all chunks in the knitted document,
 ## as well as the output. To override for a particular chunk
 ## use echo = FALSE in its options.
-knitr::opts_chunk$set(echo = TRUE) 
+knitr::opts_chunk$set(echo = TRUE, message = FALSE) 
 
 ## Set the default size of figures
 knitr::opts_chunk$set(fig.width=8, fig.height=5)  
@@ -536,11 +536,110 @@ Pick at least two of the questions presented under the *Where to Go Next* sectio
 
 ## Graph Tables, Make Labels, Add Notes
 
+### Summarizing Data
 
+It is best practice to calculate the summary statistics first and then plot them, rather than using the `stat_` functions within `geom_` functions. This is because it makes the code easier to understand and read and allows us to double check the data and aggregations more easily.
 
-```{r}
+The pipe operator `%>%` from `dplyr` allows us to pass data from one operation or function to another. Usually there is a sequence of steps: group, filter/select, mutate, then summarize. 
+
+Within `group_by()`, grouping levels (left to right) go from outermost to innermost. Functions used to create new variables (such as `summarize()`) will be applied to the innermost group level first. 
+
+```{r summarize}
+
+# Create a tibble/datat table with the percent of each religion by region
+rel_by_region <- gss_sm %>%
+  group_by(bigregion, religion) %>%
+  summarize(N = n()) %>%
+  mutate(freq = N / sum(N),
+         pct = round((freq * 100), 0))
+
+# Check the percentages sum to 100 by region
+rel_by_region %>% 
+  group_by(bigregion) %>%
+  summarise(total = sum(pct))
+
+# Make a plot (note: Healy stops using the argument name)
+p <- ggplot(data = rel_by_region,
+            mapping = aes(x = bigregion,
+                          y = pct,
+                          fill = religion))
+
+p + 
+  geom_col(position = "dodge2") +
+  labs(x = "Region",
+       y = "Percent",
+       fill = "Reiligion") +
+  theme(legend.position = "top")
+
+# Let's rearrange it a little
+p <- ggplot(data = rel_by_region,
+            mapping = aes(x = religion,
+                          y = pct,
+                          fill = religion))
+
+p + 
+  geom_col(position = "dodge2") +
+  labs(x = NULL, # don't put a label on the axis
+       y = "Percent",
+       fill = "Religion") +
+  guides(fill = FALSE) +
+  coord_flip() + # switches the x and y axes after the plot is made
+  facet_grid(~ bigregion)
 
 ```
+
+### Continuous Variables by Group or Category
+
+Will be revisited in Week 8, but we will look at some more `dplyr` examples here.
+
+```{r box-plots}
+
+# Get information about consent laws by country
+by_country <- organdata %>%
+  group_by(consent_law, country) %>%
+  summarize(donors_mean = mean(donors, na.rm = TRUE),
+            donors_sd = sd(donors, na.rm = TRUE),
+            gdp_mean = mean(gdp, na.rm = TRUE),
+            health_mean = mean(health, na.rm = TRUE),
+            roads_mean = mean(roads, na.rm = TRUE),
+            cerebvas_mean = mean(cerebvas, na.rm = TRUE))
+
+by_country
+
+# Another way to do this in a shorter step
+by_country <- organdata %>%
+  group_by(consent_law, country) %>%
+  summarize_if(is.numeric, 
+               list(mean = mean, sd = sd), # note funs is deprecated
+               na.rm = TRUE) %>% 
+  ungroup()
+
+
+# Make a simple plot of our summarized data
+p <- ggplot(data = by_country,
+            mapping = aes(x = donors_mean,
+                          y = reorder(country, donors_mean), # this puts the countries in order by donors_mean
+                          color = consent_law))
+
+p + 
+  geom_point(size = 3) +
+  labs(x = "Donor Procurement Rate",
+       y = "", # another way of putting no label on an axis
+       color = "Consent Law")
+
+```
+
+### Plot Text Directly
+
+Week 6
+
+### Write and Draw in the Plot Area
+
+Week 6
+
+### Understanding Scales, Guides, and Themes
+
+Week 6
 
 
 ### Where to Go Next  
