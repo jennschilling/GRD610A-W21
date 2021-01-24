@@ -1,0 +1,208 @@
+---
+title: "GRD 610A Data Visualization II"
+subtitle: "Data Manipulation"
+author: "Jenn Schilling"
+date: "February 17, 2021"
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    nature:
+      ratio: '16:9'
+      img_dir: img
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(fig.retina = 3, warning = FALSE, message = FALSE)
+
+library(gapminder)
+library(here)
+library(socviz)
+library(tidyverse)
+library(countdown)
+library(xaringanthemer)
+library(flair)
+library(flipbookr)
+library(DT)
+ 
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+
+style_duo_accent(
+  primary_color = "#1c5253",
+  secondary_color = "#c8c8c8",
+  link_color = choose_dark_or_light("#FFFFFF", "#cf7270"),
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i"),
+  code_font_google   = google_font("Fira Mono"),
+  inverse_background_color = "#1c5253",
+  inverse_header_color = "#FFFFFF"
+)
+
+```
+
+```{css change-css-options, eval = TRUE, echo = FALSE}
+
+.remark-code{line-height: 1.5; font-size: 80%} # smaller code font size
+
+```
+
+# Today
+
+- Data Visualization of the Week  
+
+- Discussion of Chapter 3 of *The Truthful Art* (Cairo)  
+
+- Lab on Summary statistics, grouped analysis, manipulating rows, columns and tables - Chapter 5 of *Data Visualization* (Healy)  
+
+- Second Homework Assignment
+
+---
+
+# Discussion
+
+
+
+---
+
+# Discussion
+
+
+
+
+---
+
+class: center, middle
+
+# 15 Minute Break
+
+```{r break-countdown, echo = FALSE}
+countdown(minutes = 15, seconds = 0,
+          right = "37%",
+          bottom = "27%",
+          warn_when = 60)
+```
+
+
+---
+# A Reminder of The ggplot Process
+
+1. Tell the `ggplot()` function what our data is. (`data = ... `)
+
+2. Tell `ggplot()` what relationships we want to see.For convenience we will put the results of the first two steps in an object called `p`.  (`mapping = aes(...)`)
+
+3. Tell ggplot how we want to see the relationships in our data.  (`geom_...`)
+
+4. Layer on geoms as needed, by adding them to the `p` object one at a time.  
+
+5. Use some additional functions to adjust scales, labels, tick marks, titles. 
+
+From p. 60 of Healy, K. (2019). *Data visualization: A practical introduction*. Princeton ; Oxford: Princeton University Press.
+
+---
+
+# Chapter 5: Show the Right Numbers
+
+
+
+---
+
+# Grouping
+
+.pull-left[
+```{r group, fig.show = 'hide', include = FALSE}
+p <- ggplot(data = gapminder,
+            mapping = aes(x = year,
+                          y = gdpPercap)) 
+
+p + geom_line(mapping = aes(group = country)) 
+  
+```
+
+```{r decorate-group, echo = FALSE}
+
+  decorate("group", eval = FALSE) %>%
+  flair("mapping = aes(group = country)") %>% 
+  knit_print.with_flair()
+  
+  
+```
+]
+
+.pull-right[
+```{r plot-group, ref.label = 'group', echo = FALSE}
+```
+]
+
+---
+
+
+
+---
+
+```{r build-plot, include = FALSE}
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = year,
+                          y = gdpPercap))
+
+p + geom_line(color = "gray70",
+              aes(group = country)) +
+  geom_smooth(size = 1.1, 
+              method = "loess", 
+              se = FALSE) +
+  scale_y_log10(labels = scales::dollar) +
+  facet_wrap(~continent, ncol = 5) +
+  labs(x = "Year",
+       y = "GDP per capita",
+       title = "GDP per capita on Five Continents")
+
+```
+
+`r chunk_reveal(chunk_name = "build-plot", title = "# Building a Plot", widths = c(50,50))`
+
+
+
+---
+
+class: center, middle, inverse
+
+# Lab Time
+
+
+---
+
+# Homework Assignment
+
+**Task: ** Create 3 calculated fields and plot them.  
+
+**Due: ** February 24, 2020 
+
+[Rubric](https://bb.collegeforcreativestudies.edu/webapps/rubric/do/course/manageRubrics?dispatch=view&context=course&rubricId=_42755_1&course_id=_35307_1)
+
+**Notes**
+
+- You should explore a dataset other than the `gapminder` one we've been using in the labs (some ideas: `babynames`, `palmerpenguins`, a CSV file you found)  
+
+- To use an R package dataset, remember to run `install.packages("package_name")` once in the console and add `library(package_name)` to the `setup` portion of the .Rmd file
+
+- Use your resources: Healy, Google, Student Community BUT cite where you get code from if you copy it directly  
+
+- See Blackboard assignment for a template .Rmd file
+
+---
+
+# Tasks to Complete
+
+- Reading (Cairo - Chapter 4)  
+
+- Homework
+
+- Prepare for your Data Visualization of the Week  
+
+
