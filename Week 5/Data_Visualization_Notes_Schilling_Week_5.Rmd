@@ -1,0 +1,568 @@
+---
+title: "Data Visualization Notes"
+author: "Jenn Schilling"
+date: "2021-02-10"
+output:
+ html_document:
+  theme: "flatly" # Theme Gallery: https://www.datadreaming.org/post/r-markdown-theme-gallery/
+  toc: TRUE
+  toc_float: TRUE
+  code_download: TRUE
+---
+   
+## Data Visualization Notes
+
+These are my notes for **GRD 610A: Data Visualization II** in Winter 2021 at the College for Creative Studies. These notes are for my work in the book *Data Visualization* by Kieran Healy (Princeton University Press, 2019). 
+
+```{r setup, include=FALSE}
+
+## By defult, show code for all chunks in the knitted document,
+## as well as the output. To override for a particular chunk
+## use echo = FALSE in its options.
+knitr::opts_chunk$set(echo = TRUE) 
+
+## Set the default size of figures
+knitr::opts_chunk$set(fig.width=8, fig.height=5)  
+
+## Load the libraries we will be using
+library(gapminder)
+library(here)
+library(socviz)
+library(tidyverse)
+
+## Libraries: Install once per machine, load once per R session
+
+## Week 2 / Chapter 2 Notes published here: https://rpubs.com/jennschilling/dgr610a_w21_w2_notes
+
+```
+
+
+## Get Started
+
+### Everything has a name
+Objects in R are created and referred to by their names. Certain names are not allowed because they are reserved words such as ``TRUE``, ``if``, ``mean()``, and ``NA``. Names also cannot start with a number or contain spaces. There are different naming conventions.  
+
+**Snake Case**  
+``my_data``  
+``this_is_snake_case``  
+
+**Camel Case**  
+``myData``  
+``thisIsCamelCase``
+
+**Pascal Case**  
+``MyData``  
+``ThisIsPascalCase``
+
+Pick one naming convention and stick with it. Be consistent; don't switch between conventions. I recommend snake case.
+
+```{r naming, error=TRUE}
+
+# This is a comment (it starts with #)
+
+my_data <- c(1, 2, 3, 4) # Assign using <- ; use ALT + - or OPTION + -
+
+My_Data  
+# Cannot be found because we called it my_data (lowercase)
+
+# Now we can see it
+my_data 
+
+```
+
+### Everything is an object; using functions
+Think of functions like a recipe. The arguments of the function are the ingredients and what happens within the function is the sequence of cooking steps. 
+```{r objects-functions}
+
+c(1, 2, 3, 1, 3, 5, 25) # c() is the combine function, it puts things together into a vector/list
+
+my_numbers <- c(1, 2, 3, 1, 3, 5, 25)
+your_numbers <- c(5, 31, 71, 1, 3, 21, 6)
+
+my_numbers
+
+mean(x = my_numbers)
+mean(my_numbers) # you don't have to specify the argument names, but order matters if you do not specify
+
+mean(x = your_numbers)
+
+my_summary <- summary(my_numbers)
+
+my_summary
+
+table(my_numbers)
+
+sd(my_numbers)
+
+my_numbers * 5
+
+my_numbers + 1
+
+my_numbers + my_numbers # How is this different than the last line?
+
+# If you're not sure what an object is, ask for its class or type
+
+class(my_numbers)
+
+class(my_summary)
+
+class(summary)
+
+my_new_vector <- c(my_numbers, "Apple") # What happens if we combine a word with numbers?
+
+my_new_vector
+
+class(my_new_vector)
+
+# Let's look at a new dataset
+
+titanic
+
+class(titanic) 
+
+# Titanic is a data frame, which is like a table
+# The $ operator can be used to access a column of a data frame by name
+
+titanic$percent
+
+# Tibbles are slightly different than data frames. They are also data tables, but they provide more information.
+
+titanic_tb <- as_tibble(titanic)
+
+titanic_tb # How is does this compare to titanic above?
+
+# To see inside an object, ask for its structure
+
+str(my_numbers)
+
+str(my_summary)
+
+```
+Programming in R can be challenging and it takes time to get used to. Be patient and take a break if you get stuck. Make sure parentheses are opened and closed. Complete your commands (look out for the + in the console). Take your time and lookout for typos. 
+
+### Get Data into R
+In this section, we will get data from a URL and make a quick figure.
+
+```{r get-data}
+
+# Data source
+url <- "https://cdn.rawgit.com/kjhealy/viz-organdata/master/organdonation.csv"
+
+# Read the CSV from the URL
+organs <- read_csv(file = url)
+
+# Take a quick look at the data
+glimpse(organs)
+
+# View(organs) # Run in RStudio
+
+```
+
+```{r make-figure}
+
+# Another way to view data 
+gapminder
+
+# Make a plot object
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap, 
+                          y = lifeExp))
+
+# Create a scatterplot
+p + geom_point()
+
+```
+
+
+## Make a Plot
+
+``ggplot2`` is an ``R`` library/package that allows us to map data to visual elements. Using it we can control the way the data appears in the plot and how each element of the plot will be displayed. **Aesthetic Mappings** make the connection between the data and how it is displayed on the plot (location, size, color, shape, etc.). **Geoms** define the type of plot (scatterplot, line plot, box plot, bar chart, etc.). Code is added together to make the plot using ``+`` the plus sign. More pieces can be added to the plot that define the scales, legend, labels, axes, style or theme of the plot, etc. Each part can be added using different functions with arguments specifying the look of the plot; the plot is built up piece by piece. 
+
+### Tidy Data
+In tidy data:  
+1. Each variable forms a column.  
+2. Each observation forms a row.  
+3. Each type of observational unit forms a table.  
+
+From Wickham, H. (2014). Tidy Data. *Journal of Statistical Software*, 59(10).
+
+### Mapping
+Build a plot layer by layer, starting with telling ggplot what data to use and how to map or link it  to parts of the plot, like the x and y axes. Then add on the type of ``geom``. 
+
+```{r ch-3-fig-1}
+
+p <- ggplot(data = gapminder,
+              mapping = aes(x = gdpPercap,
+                            y = lifeExp)) 
+
+  p + geom_point()
+
+```
+
+### Layer by Layer
+
+Trying different ``geom_`` functions.
+
+```{r ch-3-fig-2}
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp))
+
+p + geom_smooth()
+
+p + geom_point() + # add the points back into the plot 
+  geom_smooth() 
+
+p + geom_point() + 
+  geom_smooth(method = "lm") # use a linear model
+
+p + geom_point() +
+  geom_smooth(method = "gam") + # generalized additive model
+  scale_x_log10() # transform x-axis to log-10 scale
+
+p + geom_point() +
+  geom_smooth(method = "gam") +
+  scale_x_log10(labels = scales::dollar) # format x-axis in dollars
+
+```
+
+### Mapping Aesthetics
+
+Using the aesthetics mapping, different parts of the data can be encoded in different ways.  
+
+```{r ch3-fig-3}
+
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp,
+                          color = "purple")) # ggplot adds the value "purple" to all rows
+
+p + geom_point() +
+  geom_smooth(method = "loess") +
+  scale_x_log10()
+
+# To actually turn all of the points purple, we need to set the color property of the geom_ function
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp))
+
+p + geom_point(color = "purple") + # set point color to purple
+  geom_smooth(method = "loess") +
+  scale_x_log10()
+
+p + geom_point(alpha = 0.3) + # make points more transparent
+  geom_smooth(color = "orange", # make line orange
+              se = FALSE, # remove standard error band
+              size = 8, # increase thickness of the line
+              method = "lm") +
+  scale_x_log10()
+
+
+p + geom_point(alpha = 0.3) + # make points more transparent
+  geom_smooth(method = "gam") +
+  scale_x_log10(labels = scales::dollar) +
+  # Add title and labels
+  labs(x = "GDP per Capita", 
+       y = "Life Expectancy in Years",
+       title = "Economic Growth and Life Expectancy",
+       subtitle = "Data points are country-years",
+       caption = "Source: Gapminder")
+
+# Map data by continent
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp,
+                          color = continent))
+
+p + geom_point() +
+  geom_smooth(method = "loess") +
+  scale_x_log10()
+
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp,
+                          color = continent,
+                          fill = continent)) # now the error bands will also have the color
+
+p + geom_point() +
+  geom_smooth(method = "loess") +
+  scale_x_log10()
+
+```
+
+### Aesthetics by Geom
+
+```{r ch3-fig-4}
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp))
+
+p + geom_point(mapping = aes(color = continent)) + # points will be colored by continent
+  geom_smooth(method = "loess") + # the smoothed line will be for all data
+  scale_x_log10()
+
+p + geom_point(mapping = aes(color = log(pop))) + # points will be colored by population
+  scale_x_log10()
+
+
+```
+
+### Saving  
+Use ``here()`` to save plots in the current directory. This function can also be used to reference folders within the current directory. For this class, use ``.svg`` to save in vector format and embed in Adobe Illustrator. The function to save a plot is ``ggsave()`` which will automatically save the last plot and can also be provided a ``ggplot`` object to save. 
+
+### Where to Go Next  
+Pick at least two of the questions presented under the *Where to Go Next* section and answer them.
+
+## Show the Right Numbers  
+
+**"Code almost never works properly the first time you write it."** (p. 73)  
+
+### Grouping  
+
+```{r group-plot}
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = year,
+                          y = gdpPercap)) 
+
+p + geom_line() # Something is wrong, we didn't tell it how to group
+
+p + geom_line(aes(group = country)) # Now there is a line per country
+
+```
+
+
+### Faceting  
+
+Facet = small multiple (i.e. a separate graph for each value of the variable)  
+
+```{r facet-plots}
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = year,
+                          y = gdpPercap))
+
+p + geom_line(aes(group = country)) +
+  facet_wrap(~continent) # make a separate plot for each continent
+
+# Make it look a little nicer
+p + geom_line(color = "gray70",
+              aes(group = country)) +
+  geom_smooth(size = 1.1, method = "loess", se = FALSE) +
+  scale_y_log10(labels = scales::dollar) +
+  facet_wrap(~continent, ncol = 5) +
+  labs(x = "Year",
+       y = "GDP per capita",
+       title = "GDP per capita on Five Continents")
+
+# New dataset 2016 General Social Survey with more categorical data
+glimpse(gss_sm)
+
+# Practice using facet_grid() to facet between multiple variables
+p <- ggplot(data = gss_sm,
+            mapping = aes(x = age,
+                          y = childs))
+
+p + geom_point(alpha = 0.2) +
+  geom_smooth() +
+  facet_grid(sex ~ race)
+
+```
+
+
+### Transforming  
+
+Each ``geom_`` function has an associated ``stat_`` function that is used to plot the data. Sometimes this involves transforming the data in some way. 
+
+```{r transform-plot}
+
+p <- ggplot(data = gss_sm,
+            mapping = aes(x = bigregion))
+
+p + geom_bar() # makes a bar graph that counts the number of observations per region; count is computed for us
+
+p + geom_bar(mapping = aes(y = ..prop..)) # the prop statistic can show us proportions
+
+# But this is not right, each shows 100%
+
+# So, we need to fix the automatic grouping that is occurring by region
+p + geom_bar(mapping = aes(y = ..prop.., group = 1)) # using group = 1 is basically a placeholder that says all the data is in the same group
+
+# Look at a different variable
+table(gss_sm$religion)
+
+p <- ggplot(data = gss_sm,
+            mapping = aes(x = religion, color = religion))
+
+p + geom_bar() # only the outline has a color - we need to use fill
+
+p <- ggplot(data = gss_sm,
+            mapping = aes(x = religion, fill = religion))
+
+p + geom_bar()
+
+# Remove the legend
+p + geom_bar() +
+  guides(fill = FALSE)
+
+```
+```{r frequency-plots}
+
+# How can we look at two variables together
+p <- ggplot(data = gss_sm,
+            mapping = aes(x = bigregion,
+                          fill = religion))
+
+p + geom_bar() # Stacked bar chart of counts
+
+p + geom_bar(position = "fill") # Stacked bar chart of proportions
+
+p + geom_bar(position = "dodge") # Bar chart of counts side by side
+
+p + geom_bar(position = "dodge",
+             mapping = aes(y = ..prop..)) # Bar chart of proportions side by side
+
+# Not quite right - all are 100% 
+
+p + geom_bar(position = "dodge",
+             mapping = aes(y = ..prop..,
+                           group = religion)) # Bar chart of proportions side by side
+
+# The proportions sum to 1 by religion across the regions
+
+p <- ggplot(data = gss_sm,
+            mapping = aes(x = religion))
+
+p + geom_bar(position = "dodge",
+             mapping = aes(y = ..prop..,
+                           group = bigregion)) +
+  facet_wrap(~bigregion, ncol = 2)
+
+# Now the proportions sum to 1 by region across religions
+
+
+```
+Histograms create bins of numerical data and display the distribution of the data within those bins.  
+
+```{r histogram-density-plots}
+
+# A new dataset
+glimpse(midwest)
+
+p <- ggplot(data = midwest,
+            mapping = aes(x = area))
+
+p + geom_histogram() # count is computed automatically by the default stat function
+
+p + geom_histogram(bins = 10) # set 10 bins
+
+# Look at only two states
+oh_wi <- c("OH", "WI")
+
+p <- ggplot(data = subset(midwest, subset = state %in% oh_wi),
+            mapping = aes(x = percollege,
+                          fill = state))
+
+p + geom_histogram(alpha = 0.4, bins = 20) # Overlapping histograms
+
+# Density estimate of the underlying distribution - density plot
+p <- ggplot(data = midwest,
+            mapping = aes(x = area))
+
+p + geom_density()
+
+# Density by state
+p <- ggplot(data = midwest,
+            mapping = aes(x = area,
+                          fill = state,
+                          color = state))
+
+p + geom_density(alpha = 0.3)
+
+# Compare to geom_line(stat = "density")
+
+p + geom_line(stat = "density")
+
+# Scaled density
+p <- ggplot(data = subset(midwest, subset = state %in% oh_wi),
+            mapping = aes(x = percollege,
+                          fill = state,
+                          color = state))
+
+p + geom_density(alpha = 0.3,
+                 mapping = aes(y = ..scaled..))
+
+```
+Avoiding transformations - sometimes the data is already aggregated or summarized and we do not need a transformation.
+
+```{r no-transform-plots}
+
+titanic # this data is already summarized
+
+p <- ggplot(data = titanic,
+            mapping = aes(x = fate,
+                          y = percent,
+                          fill = sex))
+
+p + geom_bar(position = "dodge",
+             stat = "identity") + # plot values as provided, do not summarize/count/etc.
+  theme(legend.position = "top") # this puts the legend at the top of the graph
+
+oecd_sum # another dataset that is already summarized
+
+p <- ggplot(data = oecd_sum,
+            mapping = aes(x = year, 
+                          y = diff,
+                          fill = hi_lo))
+
+p + geom_col() + # this is the same as geom_bar with stat = "identity"
+  guides(fill = FALSE) + # no legend
+  labs(x = NULL, # no x-axis label
+       y = "Difference in Years",
+       title = "The US Life Expectancy Gap",
+       subtitle = "Difference between US and OECD average life expectancies, 1960-2015",
+       caption = "Data: OECD. After a chart by Christopher Ingraham, Washington Post, December 27th 2017")
+
+```
+
+### Where to Go Next  
+Pick at least two of the questions presented under the *Where to Go Next* section and answer them.
+
+
+## Graph Tables, Make Labels, Add Notes
+
+
+
+```{r}
+
+```
+
+
+### Where to Go Next  
+Pick at least two of the questions presented under the *Where to Go Next* section and answer them.
+
+## Work with Models
+
+```{r}
+
+```
+
+## Draw Maps
+
+```{r}
+
+```
+
+
+## Refine your Plots
+
+```{r}
+
+```
+
+
