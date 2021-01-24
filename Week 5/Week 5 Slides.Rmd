@@ -64,7 +64,7 @@ style_duo_accent(
 
 ---
 
-# Discussion
+# Discussion - The Truth Continuum
 
 
 
@@ -201,7 +201,7 @@ class: center, middle, inverse
 
 - Reading (Cairo - Chapter 4)  
 
-- Homework
+- Homework #2 
 
 - Prepare for your Data Visualization of the Week  
 
