@@ -293,6 +293,7 @@ class: center, middle, inverse
 
 # Lab Time
 
+### Note: Skip Section 4.6 
 
 ---
 
