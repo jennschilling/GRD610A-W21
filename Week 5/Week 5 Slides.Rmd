@@ -437,6 +437,10 @@ Note na.rm option on p. 110
 - Turn in your R code as an `.Rmd` file, including comments about what you did and why, **and** the final infographic. 
 - In class on **March 3**, be prepared to share information about your dataset, your visuals, what they show, and the choices you made in their design. You will share both your code and the final infographic.
 
+???
+
+In class on March 3, we will be sharing critiques of each other's work. If you'd like to resubmit and make changes after class on Marh 3, you can do so and re-submit the assignment on Blackboard. 
+
 ---
 
 # Tasks to Complete
