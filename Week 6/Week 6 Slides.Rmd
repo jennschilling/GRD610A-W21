@@ -69,153 +69,109 @@ style_duo_accent(
 
 ---
 
-# Discussion - The Truth Continuum
+# Of Conjectures and Uncertainty
+
+### Conjecture
+
+**Definition:** "a guess about something based on how it seems and not on proof" (Cambridge Dictionary)
+
+**Requirements** (Cairo, 2016, pp. 102-104)
+- Makes sense
+- Testable
+- Made of several components
+- If any component changes, the conjecture becomes useless
+
+???
+
+"Conjectures first need to make sense (even if they end up being wrong) based on existing knowledge of how nature works." (Cairo, 2016, p. 102)  
+
+"For a conjecture to be good, it also needs to be testable...Being testable also implies being falsifiable." (Cairo, 2016, p. 103)  
+
+"A good conjecture is made of several components, and these need to be hard to change without making the whole conjecture useless. In the words of physicist David Deutsch, a good conjecture is "hard to vary, because all its details play a functional role." (Cairo, 2016, p. 104)
+
+---
+
+# Of Conjectures and Uncertainty
+
+### Hypothesis
+
+**Definition:** "a conjecture that is formalized to be tested empirically" (Cairo, 2016, p. 105)
+
+**Variables**
+- Independent (predictor/explanatory)
+- Dependent (outcome/response)
 
 .pull-left[
-
-#### Axiom: Any visualization is a model  
-(Cairo, 2016, p. 69)
-
-#### Coda: The more adequately a model fits whatever it stands for without being needlessley complex, and the easier it is for is intended audience to interpret correctly, the better it will be.  
-(Cairo, 2016, p. 70)
-
+**Variable Scales**
+- Nominal or Categorical
+- Ordinal
+- Interval
+- Ratio
 ]
-
---
-
 .pull-right[
-
-- How do you define a model?
-
-{{content}}
-
+**Variable Types**
+- Discrete
+- Continuous
 ]
-
---
-
-- What does it mean for one model to be "better" than another?
-
-{{content}}
-
---
-
-- Do you agree or disagree with this axiom and coda? Why or why not?
-
-{{content}}
-
---
-
-- Why is it important to consider complexity, controls, and models in data visualization? 
-
 
 ???
 
-"A model is an abstraction that describes, explains, or predicts something about the workings of nature" (p. 86)
+When developing a hypothesis, you need to identify the specific variables and how they will be measured
 
-
+Nominal - sex, location, political party  
+Ordinal - ranking, happiness level  
+Interval - incremental measurements of the same size, no zero point, IQ score (value can be twice as large, but not twice as intelligent)  
+Ratio - meaningful zero point; weight, height, speed
 
 ---
 
-# Discussion - The Truth Continuum
+# Of Conjectures and Uncertainty
 
+### Study
 
-.pull-left[
+"Test it [the hypothesis] against reality" (Cairo, 2016, p. 107)
 
-#### "It's more complicated than that."
+**Types of Studies**
+- Observational Study
+- Cross-Sectional Study
+- Longitudinal Study
 
-#### Good visualizations shouldn't over-simplify information. They need to clarify it. In many cases, clarifying a subject requires *increasing* the amount of information, not *reducing* it.
+**Population versus Sample**
 
-(Cairo, 2016, p. 78)
+**Extraneous Variables**
+- Confounding variable
+- Lurking variable
 
-]
-
---
-
-.pull-right[
-
-- What does it mean to present nuance and context in data visualization? What are the implications of this on design?
-
-{{content}}
-
-]
-
---
-
-- How does this relate to considering your audience when creating a data visualization?
-
+A **controlled experiment** goes beyond an observational study and tries to account for confounding variables.
 
 ???
 
-It is important to consider the audience's prior knowledge, context, assumptions, and perspectives.
+Cross-sectional study - point in time 
 
+We get data in a study from a sample and make inferences about a population (random sampling is best)  
+
+Extraneous variables are variables that could affect the outcome but are not measured. Confounding variables can be identified and controlled for. Lurking variables are unknown so they cannot be identified. 
+
+Controlled experiments include a large number of people that are representative of the population, divides people into an experimental group and a control group (blindly), measure both groups and compare the results.
 
 ---
 
-# Discussion - The Truth Continuum
+# Of Conjectures and Uncertainty
 
-### Mind Bugs
+### Uncertainty
 
---
+"Data always vary randomly because the object of our inquires, nature itself, is also random." 
+(Cairo, 2016, p. 114)
 
-#### Patternicity
-
-We look for and see patterns in everything, even when they are not there.
-
---
-
-#### Storytelling
-
-We like to generalize and see cause and effect, even when it's not there.
-
---
-
-#### Confirmation
-
-We look for information and interpret evidence as confirming our views, avoiding dissonance and ignoring alternate viewpoints.
-
---
-
-.center[
-
-#### What does this mean for data visualization design?
-
-]
-
----
-
-# Discussion - The Truth Continuum
-
-- What do you think of Cairo's truth continuum? 
-
---
-
-- How can we judge or evaluate the data visualizations we create on the truth continuum?
+**Sample Variation** is the variation or change in a statistic or measurement from sample to sample.
 
 ???
 
-Judge based on rigor, effectiveness, precision, accuracy
+Example - weighing yourself each day and the weight fluctuates
 
---
+Example - random sampling of 1,000 people in U.S. and asking their political affiliation; get slightly different results each time
 
-- What should we aim for on the truth continuum? 
-
---
-
-- What are some strategies that you will use to make truer data visualization?
-
-???
-
-Strategies: 
-- use multiple figures
-- consider the comparison (to what, to whom, to when, to where)
-- take error into account (sampling error, etc.)
-- increase depth
-- increase breadth 
-- look for other sources 
-
---
-
-- Is there a conflict between simplifying and making true models/visualizations? How can a designer approach such a conflict?
+We can visualize uncertainty using shading and error bars/lines 
 
 ---
 
@@ -232,159 +188,10 @@ countdown(minutes = 15, seconds = 0,
 
 ---
 
-# Chapter 5: Show the Right Numbers
-
-### The pipe operator: `%>%`
-
-![](Week-5-Slides_files/img/ch-05-dplyr-pipe-example.png)
-
-.left[
-Figure 5.1 (Healy, 2019, p.95)
-]
-
-???
-
-The pipe operator allows us to pass data from one step to another; in the diagram the yellow triangles represent the pipe operator. A pipeline of operations follows a sequence such as group, filter/select, mutate, then summarize. 
-
----
-
-# Dataset (2016 General Social Survey)
-
-```{r new-data, echo = FALSE}
-head(gss_sm) %>%
-  datatable(
-    extensions = 'FixedColumns',
-    options = list(
-      dom = 't',
-      scrollX = TRUE,
-      scrollCollapse = TRUE
-      )) # Source: https://stackoverflow.com/questions/31085580/resize-datatables-to-fit-within-r-markdown
-
-```
-
----
-
-# Pipe Operator 
-
-.pull-left[
-```{r group, include = FALSE}
-gss_sm %>%
-  group_by(bigregion, religion) %>%
-  summarize(N = n()) %>%
-  mutate(freq = N / sum(N),
-         pct = round((freq * 100), 0))
-  
-```
-
-```{r decorate-group, echo = FALSE}
-
-  decorate("group", eval = FALSE) %>%
-  flair("%>%") %>% 
-  knit_print.with_flair()
-  
-  
-```
-]
-
-.pull-right[
-```{r output-group, ref.label = 'group', echo = FALSE}
-```
-]
-
-???
-
-Get the proportion of each religion by region
-
----
-
-```{r build-pipe, include = FALSE}
-
-gss_sm %>%
-  group_by(bigregion, religion) %>%
-  summarize(N = n()) %>%
-  mutate(freq = N / sum(N),
-         pct = round((freq * 100), 0))
-
-```
-
-`r chunk_reveal(chunk_name = "build-pipe", title = "# Pipe Operator - Step by Step", widths = c(50,50))`
+## Chapter 5: Graph Tables, Add Labels, Make Notes
 
 
 
----
-
-# Assignment / Equals
-
-.pull-left[
-### Before
-
-```{r argument-example, include = FALSE, eval = FALSE}
-
-p <- ggplot(data = gapminder,
-            mapping = aes(x = year,
-                          y = gdpPercap))
-
-```
-
-```{r decorate-example, echo = FALSE}
-
-  decorate("argument-example", eval = FALSE) %>%
-  flair("=") %>% 
-  knit_print.with_flair()
-  
-  
-```
-]
-
---
-
-.pull-right[
-### Now
-
-```{r group-2, ref.label = 'group', include = FALSE}
-
-  
-```
-
-```{r decorate-group-2, echo = FALSE}
-
-  decorate("group-2", eval = FALSE) %>%
-  flair("=") %>% 
-  knit_print.with_flair()
-  
-  
-```
-]
-
-
-
-
-???
-
-Notice the use of the equals sign to assign a value to a name that we choose. Before we've only seen this as a way to assign a value to a pre-named argument of a function (aes(x = year)).
-
----
-
-# Creating Columns / Variables
-
-```{r group-3, ref.label = 'group', include = FALSE}
-
-  
-```
-
-```{r decorate-group-3, echo = FALSE}
-
-  decorate("group-3", eval = FALSE) %>%
-  flair("freq") %>% 
-  knit_print.with_flair()
-  
-  
-```
-
-
-???
-
-Notice the use of the freq column right after we made it.
 
 ---
 
@@ -394,25 +201,21 @@ class: center, middle, inverse
 
 ### Pages 91 - 101, 110-113, 132 (bullet points 2-3), 133 (bullet points 1-3) 
 
-???
 
-Note na.rm option on p. 110
 
 ---
 
 # Homework Assignment
 
-**Task: ** Create 3 calculated fields and plot them.  
+**Task: ** Modify 3 previous plots with additional labels/annotations.  
 
-**Due: ** February 24, 2021 
+**Due: ** March 3, 2021 
 
 [Rubric](https://bb.collegeforcreativestudies.edu/webapps/rubric/do/course/manageRubrics?dispatch=view&context=course&rubricId=_42755_1&course_id=_35307_1)
 
 **Notes**
 
-- You should explore a dataset other than `gapminder` (some ideas: `babynames`, `palmerpenguins`, a CSV file you found; you may also use `gss_sm` or `organdata`, but you must create something different than the book/lab)  
-
-- To use an R package dataset that you have not used before, remember to run `install.packages("package_name")` once in the console and add `library(package_name)` to the `setup` portion of the .Rmd file
+- Use plots from labs or homework assignments
 
 - Use your resources: Healy, Google, Student Community BUT cite where you get code from if you copy it directly  
 
@@ -428,8 +231,6 @@ Note na.rm option on p. 110
 
 [Rubric](https://bb.collegeforcreativestudies.edu/webapps/rubric/do/course/manageRubrics?dispatch=view&context=course&rubricId=_42756_1&course_id=_35307_1)
 
-- Pick a dataset using one of the resources available on Blackboard. The dataset must be approved; email Jenn a link to the dataset for approval prior to **February 24**.  
-
 - Create summary statistics and 3-5 polished visuals based on the dataset using **only R**. 
 
 - The visuals created in R must include: titles, axis labels, data labels and legends (as needed), your name and the data source (as footnotes/captions)  
@@ -441,18 +242,14 @@ Note na.rm option on p. 110
 
 ???
 
-In class on March 3, we will be sharing critiques of each others work. If you'd like to resubmit and make changes after class on Marh 3, you can do so and re-submit the assignment on Blackboard. 
+In class on March 3, we will be sharing critiques of each others' work. If you'd like to make changes after class on March 3, you can do so and resubmit the assignment on Blackboard. 
 
 ---
 
 # Tasks to Complete
 
-- Reading (Cairo - Chapter 4: Of Conjectures and Uncertainty)  
+- Homework #3
 
-- Homework #2
-
-- Start Working on Midterm (dataset must be approved by **February 24**)
-
-- Prepare for your Data Visualization of the Week  
+- Midterm
 
 

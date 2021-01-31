@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>GRD 610A Data Visualization II</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Jenn Schilling" />
+    <meta name="date" content="2021-02-24" />
+    <script src="Week-6-Slides_files/header-attrs/header-attrs.js"></script>
+    <link href="Week-6-Slides_files/countdown/countdown.css" rel="stylesheet" />
+    <script src="Week-6-Slides_files/countdown/countdown.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# GRD 610A Data Visualization II
+## Labels
+### Jenn Schilling
+### February 24, 2021
+
+---
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+
+.remark-code{line-height: 1.5; font-size: 80%} # smaller code font size
+
+&lt;/style&gt;
+
+# Today
+
+- Data Visualization of the Week  
+
+- Discussion of Chapter 4: Of Conjectures and Uncertainty of *The Truthful Art* (Cairo)  
+
+- Lab on adding axis labels, titles, legends, labeling points, and annotating plots. - Chapter 5 of *Data Visualization* (Healy)  
+
+- Homework Assignment #3
+
+- Midterm 
+
+---
+
+# Of Conjectures and Uncertainty
+
+### Conjecture
+
+**Definition:** "a guess about something based on how it seems and not on proof" (Cambridge Dictionary)
+
+**Requirements** (Cairo, 2016, pp. 102-104)
+- Makes sense
+- Testable
+- Made of several components
+- If any component changes, the conjecture becomes useless
+
+???
+
+"Conjectures first need to make sense (even if they end up being wrong) based on existing knowledge of how nature works." (Cairo, 2016, p. 102)  
+
+"For a conjecture to be good, it also needs to be testable...Being testable also implies being falsifiable." (Cairo, 2016, p. 103)  
+
+"A good conjecture is made of several components, and these need to be hard to change without making the whole conjecture useless. In the words of physicist David Deutsch, a good conjecture is "hard to vary, because all its details play a functional role." (Cairo, 2016, p. 104)
+
+---
+
+# Of Conjectures and Uncertainty
+
+### Hypothesis
+
+**Definition:** "a conjecture that is formalized to be tested empirically" (Cairo, 2016, p. 105)
+
+**Variables**
+- Independent (predictor/explanatory)
+- Dependent (outcome/response)
+
+.pull-left[
+**Variable Scales**
+- Nominal or Categorical
+- Ordinal
+- Interval
+- Ratio
+]
+.pull-right[
+**Variable Types**
+- Discrete
+- Continuous
+]
+
+???
+
+When developing a hypothesis, you need to identify the specific variables and how they will be measured
+
+Nominal - sex, location, political party  
+Ordinal - ranking, happiness level  
+Interval - incremental measurements of the same size, no zero point, IQ score (value can be twice as large, but not twice as intelligent)  
+Ratio - meaningful zero point; weight, height, speed
+
+---
+
+# Of Conjectures and Uncertainty
+
+### Study
+
+"Test it [the hypothesis] against reality" (Cairo, 2016, p. 107)
+
+**Types of Studies**
+- Observational Study
+- Cross-Sectional Study
+- Longitudinal Study
+
+**Population versus Sample**
+
+**Extraneous Variables**
+- Confounding variable
+- Lurking variable
+
+A **controlled experiment** goes beyond an observational study and tries to account for confounding variables.
+
+???
+
+Cross-sectional study - point in time 
+
+We get data in a study from a sample and make inferences about a population (random sampling is best)  
+
+Extraneous variables are variables that could affect the outcome but are not measured. Confounding variables can be identified and controlled for. Lurking variables are unknown so they cannot be identified. 
+
+Controlled experiments include a large number of people that are representative of the population, divides people into an experimental group and a control group (blindly), measure both groups and compare the results.
+
+---
+
+# Of Conjectures and Uncertainty
+
+### Uncertainty
+
+"Data always vary randomly because the object of our inquires, nature itself, is also random." 
+(Cairo, 2016, p. 114)
+
+**Sample Variation** is the variation or change in a statistic or measurement from sample to sample.
+
+???
+
+Example - weighing yourself each day and the weight fluctuates
+
+Example - random sampling of 1,000 people in U.S. and asking their political affiliation; get slightly different results each time
+
+We can visualize uncertainty using shading and error bars/lines 
+
+---
+
+class: center, middle
+
+# 15 Minute Break
+
+<div class="countdown" id="timer_60172780" style="right:37%;bottom:25%;" data-warnwhen="60">
+<code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+---
+
+## Chapter 5: Graph Tables, Add Labels, Make Notes
+
+
+
+
+---
+
+class: center, middle, inverse
+
+# Lab Time
+
+### Pages 91 - 101, 110-113, 132 (bullet points 2-3), 133 (bullet points 1-3) 
+
+
+
+---
+
+# Homework Assignment
+
+**Task: ** Modify 3 previous plots with additional labels/annotations.  
+
+**Due: ** March 3, 2021 
+
+[Rubric](https://bb.collegeforcreativestudies.edu/webapps/rubric/do/course/manageRubrics?dispatch=view&amp;context=course&amp;rubricId=_42755_1&amp;course_id=_35307_1)
+
+**Notes**
+
+- Use plots from labs or homework assignments
+
+- Use your resources: Healy, Google, Student Community BUT cite where you get code from if you copy it directly  
+
+- See Blackboard assignment for a template `.Rmd` file
+
+---
+
+# Midterm
+
+**Task: ** Using R and an approved dataset, create a polished infographic that contains at least 3 charts.  
+
+**Due: ** March 3, 2021
+
+[Rubric](https://bb.collegeforcreativestudies.edu/webapps/rubric/do/course/manageRubrics?dispatch=view&amp;context=course&amp;rubricId=_42756_1&amp;course_id=_35307_1)
+
+- Create summary statistics and 3-5 polished visuals based on the dataset using **only R**. 
+
+- The visuals created in R must include: titles, axis labels, data labels and legends (as needed), your name and the data source (as footnotes/captions)  
+
+- Output the visuals to `.svg` and import them into Adobe Illustrator to create an infographic that includes a narrative, the visuals from R, and other graphics.  
+
+- Turn in your R code as an `.Rmd` file, including comments about what you did and why, **and** the final infographic. 
+- In class on **March 3**, be prepared to share information about your dataset, your visuals, what they show, and the choices you made in their design. You will share both your code and the final infographic.
+
+???
+
+In class on March 3, we will be sharing critiques of each others' work. If you'd like to make changes after class on March 3, you can do so and resubmit the assignment on Blackboard. 
+
+---
+
+# Tasks to Complete
+
+- Homework #3
+
+- Midterm
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"img_dir": "img",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
