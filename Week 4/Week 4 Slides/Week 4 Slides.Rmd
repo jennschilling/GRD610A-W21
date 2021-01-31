@@ -301,7 +301,7 @@ class: center, middle, inverse
 
 **Task: ** Create 3 different types of charts.  
 
-**Due: ** February 17, 2020 
+**Due: ** February 17, 2021 
 
 [Rubric](https://bb.collegeforcreativestudies.edu/webapps/rubric/do/course/manageRubrics?dispatch=view&context=course&rubricId=_42755_1&course_id=_35307_1)
 
@@ -319,7 +319,7 @@ class: center, middle, inverse
 
 # Tasks to Complete
 
-- Reading (see Syllabus)  
+- Reading (Cairo - Chapter 3: The Truth Continuum)  
 
 - Homework
 
