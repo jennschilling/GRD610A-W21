@@ -1,7 +1,7 @@
 ---
 title: "Data Visualization Notes"
 author: "Jenn Schilling"
-date: "2021-02-10"
+date: "2021-02-17"
 output:
  html_document:
   theme: "flatly" # Theme Gallery: https://www.datadreaming.org/post/r-markdown-theme-gallery/
