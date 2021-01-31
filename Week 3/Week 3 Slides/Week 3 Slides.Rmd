@@ -146,6 +146,14 @@ From p. 56 of Healy, K. (2019). *Data visualization: A practical introduction*. 
 
 From p. 4 of Wickham, H. (2014). Tidy Data. *Journal of Statistical Software*, 59(10).
 
+.center[
+```{r r4ds-tidy-data, echo = FALSE, out.width = "90%"}
+knitr::include_graphics("img\\tidy-1.png")
+```
+
+Figure 12.1 from [R for Data Science](https://r4ds.had.co.nz/tidy-data.html)
+
+]
 ---
 
 # Wide Data
