@@ -232,7 +232,7 @@ countdown(minutes = 15, seconds = 0,
 
 ---
 
-# Chapter 5: Show the Right Numbers
+# Chapter 5: Graph Tables, Add Labels, Make Notes
 
 ### The pipe operator: `%>%`
 
