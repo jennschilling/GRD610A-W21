@@ -1,7 +1,7 @@
 ---
 title: "Data Visualization Notes"
 author: "Jenn Schilling"
-date: "2021-02-10"
+date: "2021-02-24"
 output:
  html_document:
   theme: "flatly" # Theme Gallery: https://www.datadreaming.org/post/r-markdown-theme-gallery/
@@ -631,15 +631,183 @@ p +
 
 ### Plot Text Directly
 
-Week 6
+`geom_text()` is used to plot labels on a graph. The argument `hjust` can be used to left or right justify the text. `hjust = 0` will left-justify; `hjust = 1` will right-justify.  
+
+```{r plot-text}
+
+p <- ggplot(data = by_country,
+            mapping = aes(x = roads_mean,
+                          y = donors_mean)) 
+
+p + 
+  geom_point() + # plot points
+  geom_text(mapping = aes(label = country)) # plot the labels
+
+# Text is right on top of the points, use hjust to move it
+p + 
+  geom_point() +
+  geom_text(mapping = aes(label = country),
+            hjust = 0)
+
+
+```
+The `ggrepepl` package provides two geoms that are more flexible for plotting labels.
+
+```{r ggrepel}
+
+library(ggrepel)
+
+# Switch datasets
+elections_historic %>% select(2:7)
+
+# Set titles and labels
+p_title <- "Presidential Elections: Popular & Electoral College Margins"
+p_subtitle <- "1824-2016"
+p_caption <- "Data for 2016 are provisional"
+x_label <- "Winner's share of Popular Vote"
+y_label <- "Winner's share of Electoral College Votes"
+
+p <- ggplot(data = elections_historic,
+            mapping = aes(x = popular_pct,
+                          y = ec_pct,
+                          label = winner_label))
+
+p + 
+  geom_hline(yintercept = 0.5,
+             size = 1.4,
+             color = "gray80") +
+  geom_vline(xintercept = 0.5,
+             size = 1.4,
+             color = "gray80") +
+  geom_point() +
+  geom_text_repel() +
+  scale_x_continuous(labels = scales::percent) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(x = x_label,
+       y = y_label,
+       title = p_title,
+       subtitle = p_subtitle,
+       caption = p_caption)
+
+
+```
+
+### Label Outliers
+
+To label specific points, we need to tell the geom which points to label using the `subset()` function rather than giving the geom the entire dataset.
+
+```{r label-outliers-1}
+
+p <- ggplot(data = by_country,
+            mapping = aes(x = gdp_mean,
+                          y = health_mean))
+
+p + 
+  geom_point() +
+  # Only label points with mean GDP greater than 25,000
+  geom_text_repel(data = subset(by_country, gdp_mean > 25000),
+                  mapping = aes(label = country)) 
+
+p +
+  geom_point() +
+  # Only label points with mean GDP greater than 25,000 OR 
+  # mean health less than 1,500 or Belgium
+  geom_text_repel(data = subset(by_country, 
+                                gdp_mean > 25000 |
+                                  health_mean < 1500 |
+                                  country %in% "Belgium"),
+                  mapping = aes(label = country))
+
+
+
+
+
+```
+
+An alternative to using `subset()` to filter the data is to add a variable that already has the conditions for labeling to the dataset.
+
+```{r label-outliers-2}
+
+# Add code/indicator variable to organ data
+organdata$ind <- organdata$ccode %in% c("Ita", "Spa") & organdata$year > 1998
+
+p <- ggplot(data = organdata,
+            mapping = aes(x = roads,
+                          y = donors,
+                          color = ind))
+
+p + 
+  geom_point() +
+  geom_text_repel(data = subset(organdata, ind),
+                  mapping = aes(label = ccode)) +
+  guides(label = FALSE,
+         color = FALSE) # removes legend
+
+```
+
 
 ### Write and Draw in the Plot Area
 
-Week 6
+`annotate()` can be used to add annotations from different geoms to plots (text, shading, etc.)
+
+```{r annotate}
+
+p <- ggplot(data = organdata,
+            mapping = aes(x = roads,
+                          y = donors))
+
+p + 
+  geom_point() +
+  annotate(geom = "text", # a text annotation
+           x = 91, # x position for the annotation
+           y = 33, # y position for the annotation
+           label = "A surprisingly high \n recovery rate", # label for the annotation
+           hjust = 0) # left-align
+
+p + 
+  geom_point() +
+  annotate(geom = "rect", # a rectangular annotation
+           xmin = 125, xmax = 155, # x position for the annotation
+           ymin = 30, ymax = 35, # y position for the annotation
+           fill = "red", alpha = 0.2) + # color/fill properties for the annotation
+    annotate(geom = "text", # a text annotation
+           x = 91, # x position for the annotation
+           y = 33, # y position for the annotation
+           label = "A surprisingly high \n recovery rate", # label for the annotation
+           hjust = 0) 
+
+```
+
 
 ### Understanding Scales, Guides, and Themes
 
-Week 6
+`scale_<MAPPING>_<KIND>()` functions can be used to adjust the axes and colors used in plots. The `guide()` function can be used to adjust the legend. The `theme()` function can be used to adjust the overall look of a plot.
+
+```{r scales}
+
+p <- ggplot(data = organdata,
+            mapping = aes(x = roads,
+                          y = donors, 
+                          color = world))
+
+# Adjust the x and y axes
+p + 
+  geom_point() +
+  scale_x_log10() +
+  scale_y_continuous(breaks = c(5, 15, 25),
+                     labels = c("Five", "Fifteen", "Twenty Five"))
+
+# Adjust the color legend
+p + 
+  geom_point() +
+  scale_color_discrete(labels = c("Corporatist", "Liberal", 
+                                  "Social Democrat", "Unclassified")) +
+  labs(x = "Road Deaths",
+       y = "Donor Procurement",
+       color = "Welfare State")
+
+```
+
 
 
 ### Where to Go Next  
