@@ -590,7 +590,7 @@ p +
 
 ### Continuous Variables by Group or Category
 
-Will be revisited in Week 8, but we will look at some more `dplyr` examples here.
+Will be revisited in Week 9, but we will look at some more `dplyr` examples here.
 
 ```{r box-plots}
 
