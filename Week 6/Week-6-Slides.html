@@ -38,7 +38,7 @@ class: center, middle, inverse, title-slide
 
 - Discussion of Chapter 4: Of Conjectures and Uncertainty of *The Truthful Art* (Cairo)  
 
-- Lab on adding axis labels, titles, legends, labeling points, and annotating plots. - Chapter 5 of *Data Visualization* (Healy)  
+- Lab on adding axis labels, titles, legends, labeling points, and annotating plots - Chapter 5 of *Data Visualization* (Healy)  
 
 - Homework Assignment #3
 
@@ -137,7 +137,7 @@ Controlled experiments include a large number of people that are representative 
 
 ### Uncertainty
 
-"Data always vary randomly because the object of our inquires, nature itself, is also random." 
+"Data always vary randomly because the object of our inquires, nature itself, is also random."  
 (Cairo, 2016, p. 114)
 
 **Sample Variation** is the variation or change in a statistic or measurement from sample to sample.
@@ -156,7 +156,7 @@ class: center, middle
 
 # 15 Minute Break
 
-<div class="countdown" id="timer_60172780" style="right:37%;bottom:25%;" data-warnwhen="60">
+<div class="countdown" id="timer_6017493a" style="right:37%;bottom:25%;" data-warnwhen="60">
 <code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -164,6 +164,559 @@ class: center, middle
 
 ## Chapter 5: Graph Tables, Add Labels, Make Notes
 
+.center[
+&lt;img src="Week-6-Slides_files/figure-html/first-labels-1.png" width="504" /&gt;
+]
+
+---
+
+# Building a Labeled Plot
+
+
+```r
+library(ggrepel)
+
+elections_historic %&gt;% select(2:7)
+```
+
+```
+## # A tibble: 49 x 6
+##     year winner                 win_party ec_pct popular_pct popular_margin
+##    &lt;int&gt; &lt;chr&gt;                  &lt;chr&gt;      &lt;dbl&gt;       &lt;dbl&gt;          &lt;dbl&gt;
+##  1  1824 John Quincy Adams      D.-R.      0.322       0.309        -0.104 
+##  2  1828 Andrew Jackson         Dem.       0.682       0.559         0.122 
+##  3  1832 Andrew Jackson         Dem.       0.766       0.547         0.178 
+##  4  1836 Martin Van Buren       Dem.       0.578       0.508         0.142 
+##  5  1840 William Henry Harrison Whig       0.796       0.529         0.0605
+##  6  1844 James Polk             Dem.       0.618       0.495         0.0145
+##  7  1848 Zachary Taylor         Whig       0.562       0.473         0.0479
+##  8  1852 Franklin Pierce        Dem.       0.858       0.508         0.0695
+##  9  1856 James Buchanan         Dem.       0.588       0.453         0.122 
+## 10  1860 Abraham Lincoln        Rep.       0.594       0.396         0.101 
+## # ... with 39 more rows
+```
+
+---
+
+# Building a Labeled Plot
+
+
+```r
+p_title &lt;- "Presidential Elections: Popular &amp; Electoral College Margins"
+p_subtitle &lt;- "1824-2016"
+p_caption &lt;- "Data for 2016 are provisional"
+
+x_label &lt;- "Winner's share of Popular Vote"
+y_label &lt;- "Winner's share of Electoral College Votes"
+```
+
+
+
+
+
+---
+
+count: false
+ 
+#Building a Labeled Plot
+.panel1-build-plot-auto[
+
+```r
+*p &lt;- ggplot(data = elections_historic,
+*           mapping = aes(x = popular_pct,
+*                         y = ec_pct,
+*                         label = winner_label))
+```
+]
+ 
+.panel2-build-plot-auto[
+
+]
+
+---
+count: false
+ 
+#Building a Labeled Plot
+.panel1-build-plot-auto[
+
+```r
+p &lt;- ggplot(data = elections_historic,
+            mapping = aes(x = popular_pct,
+                          y = ec_pct,
+                          label = winner_label))
+
+*p 
+```
+]
+ 
+.panel2-build-plot-auto[
+&lt;img src="Week-6-Slides_files/figure-html/build-plot_auto_02_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Building a Labeled Plot
+.panel1-build-plot-auto[
+
+```r
+p &lt;- ggplot(data = elections_historic,
+            mapping = aes(x = popular_pct,
+                          y = ec_pct,
+                          label = winner_label))
+
+p +
+* geom_hline(yintercept = 0.5,
+*            size = 1.4,
+*            color = "gray80")
+```
+]
+ 
+.panel2-build-plot-auto[
+&lt;img src="Week-6-Slides_files/figure-html/build-plot_auto_03_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Building a Labeled Plot
+.panel1-build-plot-auto[
+
+```r
+p &lt;- ggplot(data = elections_historic,
+            mapping = aes(x = popular_pct,
+                          y = ec_pct,
+                          label = winner_label))
+
+p +
+  geom_hline(yintercept = 0.5,
+             size = 1.4,
+             color = "gray80") +
+* geom_vline(xintercept = 0.5,
+*            size = 1.4,
+*            color = "gray80")
+```
+]
+ 
+.panel2-build-plot-auto[
+&lt;img src="Week-6-Slides_files/figure-html/build-plot_auto_04_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Building a Labeled Plot
+.panel1-build-plot-auto[
+
+```r
+p &lt;- ggplot(data = elections_historic,
+            mapping = aes(x = popular_pct,
+                          y = ec_pct,
+                          label = winner_label))
+
+p +
+  geom_hline(yintercept = 0.5,
+             size = 1.4,
+             color = "gray80") +
+  geom_vline(xintercept = 0.5,
+             size = 1.4,
+             color = "gray80") +
+* geom_point()
+```
+]
+ 
+.panel2-build-plot-auto[
+&lt;img src="Week-6-Slides_files/figure-html/build-plot_auto_05_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Building a Labeled Plot
+.panel1-build-plot-auto[
+
+```r
+p &lt;- ggplot(data = elections_historic,
+            mapping = aes(x = popular_pct,
+                          y = ec_pct,
+                          label = winner_label))
+
+p +
+  geom_hline(yintercept = 0.5,
+             size = 1.4,
+             color = "gray80") +
+  geom_vline(xintercept = 0.5,
+             size = 1.4,
+             color = "gray80") +
+  geom_point() +
+* geom_text_repel(seed = 1234)
+```
+]
+ 
+.panel2-build-plot-auto[
+&lt;img src="Week-6-Slides_files/figure-html/build-plot_auto_06_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Building a Labeled Plot
+.panel1-build-plot-auto[
+
+```r
+p &lt;- ggplot(data = elections_historic,
+            mapping = aes(x = popular_pct,
+                          y = ec_pct,
+                          label = winner_label))
+
+p +
+  geom_hline(yintercept = 0.5,
+             size = 1.4,
+             color = "gray80") +
+  geom_vline(xintercept = 0.5,
+             size = 1.4,
+             color = "gray80") +
+  geom_point() +
+  geom_text_repel(seed = 1234) +
+* scale_x_continuous(labels = scales::percent)
+```
+]
+ 
+.panel2-build-plot-auto[
+&lt;img src="Week-6-Slides_files/figure-html/build-plot_auto_07_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Building a Labeled Plot
+.panel1-build-plot-auto[
+
+```r
+p &lt;- ggplot(data = elections_historic,
+            mapping = aes(x = popular_pct,
+                          y = ec_pct,
+                          label = winner_label))
+
+p +
+  geom_hline(yintercept = 0.5,
+             size = 1.4,
+             color = "gray80") +
+  geom_vline(xintercept = 0.5,
+             size = 1.4,
+             color = "gray80") +
+  geom_point() +
+  geom_text_repel(seed = 1234) +
+  scale_x_continuous(labels = scales::percent) +
+* scale_y_continuous(labels = scales::percent)
+```
+]
+ 
+.panel2-build-plot-auto[
+&lt;img src="Week-6-Slides_files/figure-html/build-plot_auto_08_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Building a Labeled Plot
+.panel1-build-plot-auto[
+
+```r
+p &lt;- ggplot(data = elections_historic,
+            mapping = aes(x = popular_pct,
+                          y = ec_pct,
+                          label = winner_label))
+
+p +
+  geom_hline(yintercept = 0.5,
+             size = 1.4,
+             color = "gray80") +
+  geom_vline(xintercept = 0.5,
+             size = 1.4,
+             color = "gray80") +
+  geom_point() +
+  geom_text_repel(seed = 1234) +
+  scale_x_continuous(labels = scales::percent) +
+  scale_y_continuous(labels = scales::percent) +
+* labs(x = x_label,
+*      y = y_label,
+*      title = p_title,
+*      subtitle = p_subtitle,
+*      caption = p_caption)
+```
+]
+ 
+.panel2-build-plot-auto[
+&lt;img src="Week-6-Slides_files/figure-html/build-plot_auto_09_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Building a Labeled Plot
+.panel1-build-plot-auto[
+
+```r
+p &lt;- ggplot(data = elections_historic,
+            mapping = aes(x = popular_pct,
+                          y = ec_pct,
+                          label = winner_label))
+
+p +
+  geom_hline(yintercept = 0.5,
+             size = 1.4,
+             color = "gray80") +
+  geom_vline(xintercept = 0.5,
+             size = 1.4,
+             color = "gray80") +
+  geom_point() +
+  geom_text_repel(seed = 1234) +
+  scale_x_continuous(labels = scales::percent) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(x = x_label,
+       y = y_label,
+       title = p_title,
+       subtitle = p_subtitle,
+       caption = p_caption)
+```
+]
+ 
+.panel2-build-plot-auto[
+&lt;img src="Week-6-Slides_files/figure-html/build-plot_auto_10_output-1.png" width="504" /&gt;
+]
+
+&lt;style&gt;
+.panel1-build-plot-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-build-plot-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-build-plot-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+???
+
+Note seed set in geom_text_repel
+
+---
+
+# Label Outliers
+
+Only label points with mean GDP greater than 25,000 OR mean health less than 1,500 OR the country Belgium
+
+
+```r
+p &lt;- ggplot(data = by_country,
+            mapping = aes(x = gdp_mean,
+                          y = health_mean))
+
+p +
+  geom_point() +
+* geom_text_repel(data = subset(by_country,
+*                               gdp_mean &gt; 25000 |
+*                                 health_mean &lt; 1500 |
+*                                 country %in% "Belgium"),
+                  mapping = aes(label = country))
+```
+
+---
+
+# Label Outliers
+
+.center[
+&lt;img src="Week-6-Slides_files/figure-html/plot-outliers-1.png" width="504" /&gt;
+]
+
+---
+
+
+
+
+
+count: false
+ 
+#Annotations
+.panel1-annotate-auto[
+
+```r
+*p &lt;- ggplot(data = organdata,
+*           mapping = aes(x = roads,
+*                         y = donors))
+```
+]
+ 
+.panel2-annotate-auto[
+
+]
+
+---
+count: false
+ 
+#Annotations
+.panel1-annotate-auto[
+
+```r
+p &lt;- ggplot(data = organdata,
+            mapping = aes(x = roads,
+                          y = donors))
+
+*p 
+```
+]
+ 
+.panel2-annotate-auto[
+&lt;img src="Week-6-Slides_files/figure-html/annotate_auto_02_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Annotations
+.panel1-annotate-auto[
+
+```r
+p &lt;- ggplot(data = organdata,
+            mapping = aes(x = roads,
+                          y = donors))
+
+p +
+* geom_point()
+```
+]
+ 
+.panel2-annotate-auto[
+&lt;img src="Week-6-Slides_files/figure-html/annotate_auto_03_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Annotations
+.panel1-annotate-auto[
+
+```r
+p &lt;- ggplot(data = organdata,
+            mapping = aes(x = roads,
+                          y = donors))
+
+p +
+  geom_point() +
+* annotate(geom = "rect",
+*          xmin = 125, xmax = 155,
+*          ymin = 30, ymax = 35,
+*          fill = "red", alpha = 0.2)
+```
+]
+ 
+.panel2-annotate-auto[
+&lt;img src="Week-6-Slides_files/figure-html/annotate_auto_04_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Annotations
+.panel1-annotate-auto[
+
+```r
+p &lt;- ggplot(data = organdata,
+            mapping = aes(x = roads,
+                          y = donors))
+
+p +
+  geom_point() +
+  annotate(geom = "rect",
+           xmin = 125, xmax = 155,
+           ymin = 30, ymax = 35,
+           fill = "red", alpha = 0.2) +
+*   annotate(geom = "text",
+*          x = 91,
+*          y = 33,
+*          label = "A surprisingly high \n recovery rate",
+*          hjust = 0)
+```
+]
+ 
+.panel2-annotate-auto[
+&lt;img src="Week-6-Slides_files/figure-html/annotate_auto_05_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Annotations
+.panel1-annotate-auto[
+
+```r
+p &lt;- ggplot(data = organdata,
+            mapping = aes(x = roads,
+                          y = donors))
+
+p +
+  geom_point() +
+  annotate(geom = "rect",
+           xmin = 125, xmax = 155,
+           ymin = 30, ymax = 35,
+           fill = "red", alpha = 0.2) +
+    annotate(geom = "text",
+           x = 91,
+           y = 33,
+           label = "A surprisingly high \n recovery rate",
+           hjust = 0)
+```
+]
+ 
+.panel2-annotate-auto[
+&lt;img src="Week-6-Slides_files/figure-html/annotate_auto_06_output-1.png" width="504" /&gt;
+]
+
+&lt;style&gt;
+.panel1-annotate-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-annotate-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-annotate-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
 
 
 
@@ -173,7 +726,7 @@ class: center, middle, inverse
 
 # Lab Time
 
-### Pages 91 - 101, 110-113, 132 (bullet points 2-3), 133 (bullet points 1-3) 
+### Pages 115 - 131 , 132 (bullet point 1) 
 
 
 
