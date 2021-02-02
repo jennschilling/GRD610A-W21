@@ -5,7 +5,7 @@ author: "Jenn Schilling"
 date: "February 24, 2021"
 output:
   xaringan::moon_reader:
-    css: xaringan-themer.css
+    css: [xaringan-themer.css, bottom-note.css]
     nature:
       ratio: '16:9'
       img_dir: img
@@ -122,6 +122,27 @@ Nominal - sex, location, political party
 Ordinal - ranking, happiness level  
 Interval - incremental measurements of the same size, no zero point, IQ score (value can be twice as large, but not twice as intelligent)  
 Ratio - meaningful zero point; weight, height, speed
+
+---
+
+.center[
+```{r var-types-1, echo = FALSE, out.width = "95%"}
+knitr::include_graphics("https://pbs.twimg.com/media/EkoCPz4VkAA_nST?format=jpg&name=4096x4096")
+```
+]
+
+.bottom-note[Artwork by @allison_horst]
+
+---
+
+.center[
+```{r var-types-2, echo = FALSE, out.width = "75%"}
+knitr::include_graphics("https://pbs.twimg.com/media/EkoDNU6U0AISh-u?format=jpg&name=4096x4096")
+```
+]
+
+.bottom-note[Artwork by @allison_horst]
+
 
 ---
 
