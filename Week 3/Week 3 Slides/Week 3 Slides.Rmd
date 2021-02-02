@@ -72,7 +72,7 @@ style_duo_accent(
 3. organized in a way that enables at least some exploration, when it’s appropriate,  
 4. and presented in an attractive manner, but always remembering that honesty, clarity, and depth come first.”  
 
-From p. 12 of Cairo, A. (2016). *The truthful art: Data, charts, and maps for communication.* New Riders.
+.bottom-note[From p. 12 of Cairo, A. (2016). *The truthful art: Data, charts, and maps for communication.* New Riders.]
 
 
 .center[
@@ -335,7 +335,7 @@ class: center, middle, inverse
 
 # Tasks to Complete
 
-- Reading (see Syllabus)  
+- Reading (Cairo - Chapter 2: The Five Qualities of Great Visualization)  
 
 - Prepare for your Data Visualization of the Week  
 
