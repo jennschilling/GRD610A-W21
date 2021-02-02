@@ -73,7 +73,7 @@ The Five Qualities of Great Visualizations:
 4. Insightful  
 5. Enlightening  
 
-From p. 45 of Cairo, A. (2016). *The truthful art: Data, charts, and maps for communication.* New Riders.
+.bottom-note[From p. 45 of Cairo, A. (2016). *The truthful art: Data, charts, and maps for communication.* New Riders.]
 
 [Define the Qualities](https://padlet.com/jschilling_ccs/zmlnjzhiexx3kf14)
 
@@ -88,7 +88,7 @@ The Five Qualities of Great Visualizations:
 4. Insightful  
 5. Enlightening  
 
-From p. 45 of Cairo, A. (2016). *The truthful art: Data, charts, and maps for communication.* New Riders.
+.bottom-note[From p. 45 of Cairo, A. (2016). *The truthful art: Data, charts, and maps for communication.* New Riders.]
 
 --
 
@@ -317,11 +317,22 @@ class: center, middle, inverse
 
 ---
 
+
+.center[
+```{r project, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/cracked_setwd.png")
+```
+]
+
+.bottom-note[Artwork by @allison_horst]
+
+---
+
 # Tasks to Complete
 
 - Reading (Cairo - Chapter 3: The Truth Continuum)  
 
-- Homework
+- Homework #1
 
 - Prepare for your Data Visualization of the Week  
 
