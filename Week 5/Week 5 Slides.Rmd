@@ -5,7 +5,7 @@ author: "Jenn Schilling"
 date: "February 17, 2021"
 output:
   xaringan::moon_reader:
-    css: xaringan-themer.css
+    css: [xaringan-themer.css, bottom-note.css]
     nature:
       ratio: '16:9'
       img_dir: img
@@ -63,7 +63,7 @@ style_duo_accent(
 
 - Lab on Summary statistics, grouped analysis, manipulating rows, columns and tables - Chapter 5 of *Data Visualization* (Healy)  
 
-- Homework Assignment #2
+- Homework #2
 
 - Midterm 
 
@@ -232,19 +232,39 @@ countdown(minutes = 15, seconds = 0,
 
 ---
 
-# Chapter 5: Graph Tables, Add Labels, Make Notes
+.center[
+```{r debug, echo = FALSE, out.width = "90%"}
+knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/raw/master/other-stats-artwork/debugging.jpg")
+```
+]
+
+.bottom-note[Artwork by @allison_horst]
+
+---
+
+## Chapter 5: Graph Tables, Add Labels, Make Notes
 
 ### The pipe operator: `%>%`
 
 ![](Week-5-Slides_files/img/ch-05-dplyr-pipe-example.png)
 
-.left[
+.bottom-note[
 Figure 5.1 (Healy, 2019, p.95)
 ]
 
 ???
 
 The pipe operator allows us to pass data from one step to another; in the diagram the yellow triangles represent the pipe operator. A pipeline of operations follows a sequence such as group, filter/select, mutate, then summarize. 
+
+---
+
+.center[
+```{r mutate, echo = FALSE, out.width = "70%"}
+knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/dplyr_mutate.png")
+```
+]
+
+.bottom-note[Artwork by @allison_horst]
 
 ---
 
