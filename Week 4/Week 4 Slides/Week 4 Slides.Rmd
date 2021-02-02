@@ -5,7 +5,7 @@ author: "Jenn Schilling"
 date: "February 10, 2021"
 output:
   xaringan::moon_reader:
-    css: xaringan-themer.css
+    css: [xaringan-themer.css, bottom-note.css]
     nature:
       ratio: '16:9'
       img_dir: img
@@ -140,7 +140,7 @@ countdown(minutes = 15, seconds = 0,
 
 5. Use some additional functions to adjust scales, labels, tick marks, titles. 
 
-From p. 60 of Healy, K. (2019). *Data visualization: A practical introduction*. Princeton ; Oxford: Princeton University Press.
+.bottom-note[From p. 60 of Healy, K. (2019). *Data visualization: A practical introduction*. Princeton ; Oxford: Princeton University Press.]
 
 ---
 
