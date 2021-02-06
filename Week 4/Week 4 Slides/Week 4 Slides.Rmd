@@ -158,6 +158,48 @@ Chapter 4 Covers:
 
 ---
 
+# The `gapminder` Dataset
+
+.center[
+```{r gapminder-data, echo = FALSE}
+
+head(gapminder, n = 12) %>%
+  knitr::kable(format = "html")
+
+```
+]
+
+---
+
+# Grouping
+
+.pull-left[
+```{r wo-group, fig.show = 'hide', include = FALSE}
+p <- ggplot(data = gapminder,
+            mapping = aes(x = year,
+                          y = gdpPercap)) 
+
+p + geom_line() 
+  
+```
+
+```{r decorate-wo-group, echo = FALSE}
+
+  decorate("wo-group", eval = FALSE) %>%
+  flair("geom_lin()") %>% 
+  knit_print.with_flair()
+  
+  
+```
+]
+
+.pull-right[
+```{r plot-wo-group, ref.label = 'wo-group', echo = FALSE}
+```
+]
+
+---
+
 # Grouping
 
 .pull-left[
@@ -218,7 +260,7 @@ p + geom_line(mapping = aes(group = country)) +
 ---
 
 # Transforming 
-**New Dataset: 2016 General Social Survey**
+**New Dataset: 2016 General Social Survey `gss_sm`**
 
 ```{r new-data, echo = FALSE}
 head(gss_sm) %>%

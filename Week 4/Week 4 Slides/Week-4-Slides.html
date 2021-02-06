@@ -111,7 +111,7 @@ class: center, middle
 
 # 15 Minute Break
 
-<div class="countdown" id="timer_6018cf9e" style="right:37%;bottom:27%;" data-warnwhen="60">
+<div class="countdown" id="timer_601ef242" style="right:37%;bottom:27%;" data-warnwhen="60">
 <code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -147,6 +147,138 @@ Chapter 4 Covers:
 
 ---
 
+# The `gapminder` Dataset
+
+.center[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; country &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; continent &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; year &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; lifeExp &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; pop &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; gdpPercap &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Afghanistan &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Asia &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1952 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28.801 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8425333 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 779.4453 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Afghanistan &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Asia &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1957 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 30.332 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9240934 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 820.8530 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Afghanistan &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Asia &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1962 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 31.997 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10267083 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 853.1007 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Afghanistan &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Asia &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1967 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 34.020 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11537966 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 836.1971 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Afghanistan &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Asia &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1972 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36.088 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13079460 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 739.9811 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Afghanistan &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Asia &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1977 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 38.438 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14880372 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 786.1134 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Afghanistan &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Asia &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1982 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 39.854 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 12881816 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 978.0114 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Afghanistan &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Asia &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1987 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 40.822 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13867957 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 852.3959 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Afghanistan &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Asia &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1992 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 41.674 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16317921 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 649.3414 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Afghanistan &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Asia &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1997 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 41.763 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 22227415 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 635.3414 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Afghanistan &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Asia &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2002 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 42.129 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 25268405 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 726.7341 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Afghanistan &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Asia &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2007 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 43.828 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 31889923 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 974.5803 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+---
+
+# Grouping
+
+.pull-left[
+
+
+
+&lt;code class ='r hljs remark-code'&gt;p &lt;- ggplot(data = gapminder,&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;mapping = aes(x = year,&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;y = gdpPercap)) &lt;br&gt;&lt;br&gt;p + geom_line()&lt;/code&gt;
+]
+
+.pull-right[
+&lt;img src="Week-4-Slides_files/figure-html/plot-wo-group-1.png" width="504" /&gt;
+]
+
+---
+
 # Grouping
 
 .pull-left[
@@ -178,10 +310,10 @@ Chapter 4 Covers:
 ---
 
 # Transforming 
-**New Dataset: 2016 General Social Survey**
+**New Dataset: 2016 General Social Survey `gss_sm`**
 
-<div id="htmlwidget-db3f671c7e3b33ae95e9" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-db3f671c7e3b33ae95e9">{"x":{"filter":"none","extensions":["FixedColumns"],"data":[["1","2","3","4","5","6"],[2016,2016,2016,2016,2016,2016],[1,2,3,4,5,6],[1,2,3,1,3,2],[47,61,72,43,55,53],[3,0,2,4,2,2],[2,3,3,3,2,2],["Bachelor","High School","Bachelor","High School","Graduate","Junior College"],["White","White","White","White","White","White"],["Male","Male","Male","Female","Female","Female"],["New England","New England","New England","New England","New England","New England"],["$170000 or over","$50000 to 59999","$75000 to $89999","$170000 or over","$170000 or over","$60000 to 74999"],["None","None","Catholic","Catholic","None","None"],["Married","Never Married","Married","Married","Married","Married"],["Graduate","Lt High School","High School",null,"Bachelor",null],["High School","High School","Lt High School","High School","High School","High School"],["Independent","Ind,near Dem","Not Str Republican","Not Str Republican","Not Str Democrat","Not Str Democrat"],["Moderate","Liberal","Conservative","Moderate","Slightly Liberal","Slightly Liberal"],["Pretty Happy","Pretty Happy","Very Happy","Pretty Happy","Very Happy","Very Happy"],[null,"1 Partner","1 Partner",null,"1 Partner","1 Partner"],[null,"Legal","Not Legal",null,"Legal","Legal"],["Aquarius","Scorpio","Pisces","Cancer","Scorpio","Scorpio"],[3,1,2,2,1,1],[0.956993511490439,0.478496755745219,0.956993511490439,1.91398702298088,1.43549026723566,0.956993511490439],["Gt $170000","Gt $50000","Gt $75000","Gt $170000","Gt $170000","Gt $60000"],["Age 45-55","Age 55-65","Age 65+","Age 35-45","Age 45-55","Age 45-55"],["Age 34-49","Age 49-62","Age 62+","Age 34-49","Age 49-62","Age 49-62"],["2","3","3","3","2","2"],["3","0","2","4+","2","2"],["None","None","Catholic","Catholic","None","None"],["Northeast","Northeast","Northeast","Northeast","Northeast","Northeast"],[null,"1","1",null,"1","1"],[0,1,0,0,1,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>year<\/th>\n      <th>id<\/th>\n      <th>ballot<\/th>\n      <th>age<\/th>\n      <th>childs<\/th>\n      <th>sibs<\/th>\n      <th>degree<\/th>\n      <th>race<\/th>\n      <th>sex<\/th>\n      <th>region<\/th>\n      <th>income16<\/th>\n      <th>relig<\/th>\n      <th>marital<\/th>\n      <th>padeg<\/th>\n      <th>madeg<\/th>\n      <th>partyid<\/th>\n      <th>polviews<\/th>\n      <th>happy<\/th>\n      <th>partners<\/th>\n      <th>grass<\/th>\n      <th>zodiac<\/th>\n      <th>pres12<\/th>\n      <th>wtssall<\/th>\n      <th>income_rc<\/th>\n      <th>agegrp<\/th>\n      <th>ageq<\/th>\n      <th>siblings<\/th>\n      <th>kids<\/th>\n      <th>religion<\/th>\n      <th>bigregion<\/th>\n      <th>partners_rc<\/th>\n      <th>obama<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","scrollX":true,"scrollCollapse":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,22,23,32]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-cb01669094fefc5368bf" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cb01669094fefc5368bf">{"x":{"filter":"none","extensions":["FixedColumns"],"data":[["1","2","3","4","5","6"],[2016,2016,2016,2016,2016,2016],[1,2,3,4,5,6],[1,2,3,1,3,2],[47,61,72,43,55,53],[3,0,2,4,2,2],[2,3,3,3,2,2],["Bachelor","High School","Bachelor","High School","Graduate","Junior College"],["White","White","White","White","White","White"],["Male","Male","Male","Female","Female","Female"],["New England","New England","New England","New England","New England","New England"],["$170000 or over","$50000 to 59999","$75000 to $89999","$170000 or over","$170000 or over","$60000 to 74999"],["None","None","Catholic","Catholic","None","None"],["Married","Never Married","Married","Married","Married","Married"],["Graduate","Lt High School","High School",null,"Bachelor",null],["High School","High School","Lt High School","High School","High School","High School"],["Independent","Ind,near Dem","Not Str Republican","Not Str Republican","Not Str Democrat","Not Str Democrat"],["Moderate","Liberal","Conservative","Moderate","Slightly Liberal","Slightly Liberal"],["Pretty Happy","Pretty Happy","Very Happy","Pretty Happy","Very Happy","Very Happy"],[null,"1 Partner","1 Partner",null,"1 Partner","1 Partner"],[null,"Legal","Not Legal",null,"Legal","Legal"],["Aquarius","Scorpio","Pisces","Cancer","Scorpio","Scorpio"],[3,1,2,2,1,1],[0.956993511490439,0.478496755745219,0.956993511490439,1.91398702298088,1.43549026723566,0.956993511490439],["Gt $170000","Gt $50000","Gt $75000","Gt $170000","Gt $170000","Gt $60000"],["Age 45-55","Age 55-65","Age 65+","Age 35-45","Age 45-55","Age 45-55"],["Age 34-49","Age 49-62","Age 62+","Age 34-49","Age 49-62","Age 49-62"],["2","3","3","3","2","2"],["3","0","2","4+","2","2"],["None","None","Catholic","Catholic","None","None"],["Northeast","Northeast","Northeast","Northeast","Northeast","Northeast"],[null,"1","1",null,"1","1"],[0,1,0,0,1,1]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>year<\/th>\n      <th>id<\/th>\n      <th>ballot<\/th>\n      <th>age<\/th>\n      <th>childs<\/th>\n      <th>sibs<\/th>\n      <th>degree<\/th>\n      <th>race<\/th>\n      <th>sex<\/th>\n      <th>region<\/th>\n      <th>income16<\/th>\n      <th>relig<\/th>\n      <th>marital<\/th>\n      <th>padeg<\/th>\n      <th>madeg<\/th>\n      <th>partyid<\/th>\n      <th>polviews<\/th>\n      <th>happy<\/th>\n      <th>partners<\/th>\n      <th>grass<\/th>\n      <th>zodiac<\/th>\n      <th>pres12<\/th>\n      <th>wtssall<\/th>\n      <th>income_rc<\/th>\n      <th>agegrp<\/th>\n      <th>ageq<\/th>\n      <th>siblings<\/th>\n      <th>kids<\/th>\n      <th>religion<\/th>\n      <th>bigregion<\/th>\n      <th>partners_rc<\/th>\n      <th>obama<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","scrollX":true,"scrollCollapse":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6,22,23,32]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 
 ---
