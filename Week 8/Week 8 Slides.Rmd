@@ -1,0 +1,195 @@
+---
+title: "GRD 610A Data Visualization II"
+subtitle: "Labels"
+author: "Jenn Schilling"
+date: "February 24, 2021"
+output:
+  xaringan::moon_reader:
+    css: [xaringan-themer.css, bottom-note.css]
+    nature:
+      ratio: '16:9'
+      img_dir: img
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+
+options(htmltools.dir.version = FALSE)
+
+options(knitr.duplicate.label = "allow")
+
+knitr::opts_chunk$set(fig.retina = 3, warning = FALSE, message = FALSE)
+
+library(gapminder)
+library(here)
+library(socviz)
+library(tidyverse)
+library(countdown)
+library(xaringanthemer)
+library(flair)
+library(flipbookr)
+library(DT)
+ 
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+
+style_duo_accent(
+  primary_color = "#1c5253",
+  secondary_color = "#c8c8c8",
+  link_color = choose_dark_or_light("#FFFFFF", "#cf7270"),
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i"),
+  code_font_google   = google_font("Fira Mono"),
+  inverse_background_color = "#1c5253",
+  inverse_header_color = "#FFFFFF"
+)
+
+```
+
+```{css change-css-options, eval = TRUE, echo = FALSE}
+
+.remark-code{line-height: 1.5; font-size: 80%} # smaller code font size
+
+```
+
+# Today
+
+- Data Visualization of the Week  
+
+- Discussion of Chapter 5: Basic Principles of Data Visualization of *The Truthful Art* (Cairo)  
+
+- Lab on basics of mapping and options for visualizing data on a map - Chapter 7 of *Data Visualization* (Healy)  
+
+- Homework Assignment #4
+
+
+---
+
+# Of Conjectures and Uncertainty
+
+### Conjecture
+
+**Definition:** "a guess about something based on how it seems and not on proof" (Cambridge Dictionary)
+
+**Requirements** (Cairo, 2016, pp. 102-104)
+- Makes sense
+- Testable
+- Made of several components
+- If any component changes, the conjecture becomes useless
+
+???
+
+"Conjectures first need to make sense (even if they end up being wrong) based on existing knowledge of how nature works." (Cairo, 2016, p. 102)  
+
+"For a conjecture to be good, it also needs to be testable...Being testable also implies being falsifiable." (Cairo, 2016, p. 103)  
+
+"A good conjecture is made of several components, and these need to be hard to change without making the whole conjecture useless. In the words of physicist David Deutsch, a good conjecture is "hard to vary, because all its details play a functional role." (Cairo, 2016, p. 104)
+
+
+
+---
+
+class: center, middle
+
+# 15 Minute Break
+
+```{r break-countdown, echo = FALSE}
+countdown(minutes = 15, seconds = 0,
+          right = "37%",
+          bottom = "25%",
+          warn_when = 60)
+```
+
+---
+
+## Chapter 5: Graph Tables, Add Labels, Make Notes
+
+.center[
+```{r first-labels, echo = FALSE}
+
+by_country <- organdata %>%
+  group_by(consent_law, country) %>%
+  summarize_if(is.numeric, 
+               list(mean = mean, sd = sd), # note funs is deprecated
+               na.rm = TRUE) %>% 
+  ungroup()
+
+p <- ggplot(data = by_country,
+            mapping = aes(x = roads_mean,
+                          y = donors_mean)) 
+
+p + 
+  geom_point() + # plot points
+  geom_text(mapping = aes(label = country)) # plot the labels
+
+```
+]
+
+
+---
+
+
+```{r annotate, include = FALSE}
+p <- ggplot(data = organdata,
+            mapping = aes(x = roads,
+                          y = donors))
+
+p + 
+  geom_point() +
+  annotate(geom = "rect", 
+           xmin = 125, xmax = 155, 
+           ymin = 30, ymax = 35, 
+           fill = "red", alpha = 0.2) + 
+    annotate(geom = "text", 
+           x = 91, 
+           y = 33, 
+           label = "A surprisingly high \n recovery rate", 
+           hjust = 0) 
+
+```
+
+
+`r chunk_reveal(chunk_name = "annotate", title = "#Annotations", widths = c(50,50))`
+
+---
+
+class: center, middle, inverse
+
+# Lab Time
+
+### Chapter 7
+
+
+
+---
+
+# Homework Assignment
+
+**Task: ** Create 3 maps  
+
+**Due: ** March 3, 2021 
+
+[Rubric](https://bb.collegeforcreativestudies.edu/webapps/rubric/do/course/manageRubrics?dispatch=view&context=course&rubricId=_42755_1&course_id=_35307_1)
+
+**Notes**
+
+- NOTES ABOUT DATA TO USE
+
+- Use your resources: Healy, Google, Student Community BUT cite where you get code from if you copy it directly  
+
+- See Blackboard assignment for a template `.Rmd` file
+
+---
+
+# Tasks to Complete
+
+- Reading (Cairo - Chapter 10: Mapping Data)
+
+- Homework #4
+
+
+
+
