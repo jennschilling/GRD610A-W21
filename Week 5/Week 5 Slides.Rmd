@@ -461,7 +461,9 @@ Note na.rm option on p. 110
 
 ???
 
-In class on March 3, we will be sharing critiques of each others work. If you'd like to resubmit and make changes after class on Marh 3, you can do so and re-submit the assignment on Blackboard. 
+In class on March 3, we will be sharing critiques of each others work. If you'd like to resubmit and make changes after class on March 3, you can do so and re-submit the assignment on Blackboard. 
+
+Presentation to the class: share your .Rmd file and be prepared to explain your data (what is it about, what does it tell you, what messages did you find in it), your visualizations (how did you create them, why did you create them, what design choices you made); share your infographic (what design choices did you make and why, what story or message does the infographic show)
 
 ---
 
