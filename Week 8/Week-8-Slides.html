@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>GRD 610A Data Visualization II</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Jenn Schilling" />
+    <meta name="date" content="2021-03-10" />
+    <script src="Week-8-Slides_files/header-attrs/header-attrs.js"></script>
+    <link href="Week-8-Slides_files/countdown/countdown.css" rel="stylesheet" />
+    <script src="Week-8-Slides_files/countdown/countdown.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="bottom-note.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# GRD 610A Data Visualization II
+## Maps
+### Jenn Schilling
+### March 10, 2021
+
+---
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+
+.remark-code{line-height: 1.5; font-size: 80%} # smaller code font size
+
+&lt;/style&gt;
+
+# Today
+
+- Data Visualization of the Week  
+
+- Discussion of Chapter 5: Basic Principles of Visualization in *The Truthful Art* (Cairo)  
+
+- Lab on basics of mapping and options for visualizing data on a map  
+(Chapter 7 of *Data Visualization* by Healy)  
+
+- Homework Assignment #4
+
+
+---
+
+# Basic Principles of Visualization
+
+**"How do you know that you have chosen the right graphic form to represent your data?"**
+
+.bottom-note[
+(Cairo, 2016, pp. 121, 124-125)
+]
+
+--
+
+1. "Think about the task or tasks you want to enable, or the messages that you wish to convey."
+
+???
+What relationships and comparisons do you want the viewer to make  
+
+
+--
+
+2. "Try different graphic forms."
+
+--
+
+3. "Arrange the components of the graphic so as to make it as easy as possible to extract meaning from it."
+
+???
+Consider adding interactivity, if possible
+
+
+--
+
+4. "Test the outcomes"
+
+
+???
+View the graph yourself and with other people to see what conclusions they draw from your graphic
+
+--
+
+**Resources**
+- [The Data Visualisation Catalogue](https://datavizcatalogue.com/)  
+
+- [Interactive Chart Chooser](https://depictdatastudio.com/charts/)  
+
+- Scaled of elementary perceptual tasks (Cairo, 2016, p. 128) 
+
+
+
+???
+"if you wish to create a successful chart, you need to construct it based on elementary tasks "as high in the hierarchy as possible"...Area, color, and angle are much less effective than those graphic forms based on positioning objects on common scales." (Cairo, 2016, p. 129)
+
+"Methods of encoding on the bottom half of the scale may be appropriate when the goal isn't to enable accurate judgments but to reveal general patterns." (Cairo, 2016, p. 129) - Figure 5.6 example of a map shaded by unemployment rates that allows you to see general patterns in the U.S. by state rather than make comparisons by county.
+
+It depends on the message you want to convey and the way that you want the viewer to interact with the data; think about the comparisons you want the user to make
+
+---
+
+# Basic Principles of Visualization
+
+**A Couple of General Rules:**
+
+- Always plot your data directly  
+
+- Use logical and meaningful baselines
+
+.bottom-center[
+.center[
+*"rules of visualization matter as much as the results of the tests you may conduct with readers"*
+
+*"very often readers don't interpret our visualizations as we want them to"*
+]
+]
+
+.bottom-note[
+(Cairo, 2016, pp. 134, 136, 146)
+]
+
+???
+
+- But also plot what matters most (i.e. if the difference matters more, plot it)
+
+- Consider using multiple plots if the data vary a lot; 0 is not always necessary as the baseline
+
+- Think about what you're trying to show and how in order to determine how to organize your data in a chart
+
+---
+
+# Basic Principles of Visualization
+
+- What principles did you take away from this chapter?
+
+--
+ 
+- How will you apply these principles to create visualizations? 
+
+--
+
+.bottom-center[
+*"The way data is visually presented has very real consequences on the lives of people who read your visualizations."*
+]
+ 
+.bottom-note[
+(Cairo, 2016, p. 148)
+]
+
+---
+
+class: center, middle
+
+# 15 Minute Break
+
+<div class="countdown" id="timer_60208608" style="right:37%;bottom:25%;" data-warnwhen="60">
+<code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+---
+
+# Chapter 7: Draw Maps
+
+.center[
+&lt;img src="Week-8-Slides_files/figure-html/first-labels-1.png" width="504" /&gt;
+]
+
+
+---
+
+
+
+
+
+count: false
+ 
+#Annotations
+.panel1-annotate-auto[
+
+```r
+*p &lt;- ggplot(data = organdata,
+*           mapping = aes(x = roads,
+*                         y = donors))
+```
+]
+ 
+.panel2-annotate-auto[
+
+]
+
+---
+count: false
+ 
+#Annotations
+.panel1-annotate-auto[
+
+```r
+p &lt;- ggplot(data = organdata,
+            mapping = aes(x = roads,
+                          y = donors))
+
+*p 
+```
+]
+ 
+.panel2-annotate-auto[
+&lt;img src="Week-8-Slides_files/figure-html/annotate_auto_02_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Annotations
+.panel1-annotate-auto[
+
+```r
+p &lt;- ggplot(data = organdata,
+            mapping = aes(x = roads,
+                          y = donors))
+
+p +
+* geom_point()
+```
+]
+ 
+.panel2-annotate-auto[
+&lt;img src="Week-8-Slides_files/figure-html/annotate_auto_03_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Annotations
+.panel1-annotate-auto[
+
+```r
+p &lt;- ggplot(data = organdata,
+            mapping = aes(x = roads,
+                          y = donors))
+
+p +
+  geom_point() +
+* annotate(geom = "rect",
+*          xmin = 125, xmax = 155,
+*          ymin = 30, ymax = 35,
+*          fill = "red", alpha = 0.2)
+```
+]
+ 
+.panel2-annotate-auto[
+&lt;img src="Week-8-Slides_files/figure-html/annotate_auto_04_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Annotations
+.panel1-annotate-auto[
+
+```r
+p &lt;- ggplot(data = organdata,
+            mapping = aes(x = roads,
+                          y = donors))
+
+p +
+  geom_point() +
+  annotate(geom = "rect",
+           xmin = 125, xmax = 155,
+           ymin = 30, ymax = 35,
+           fill = "red", alpha = 0.2) +
+*   annotate(geom = "text",
+*          x = 91,
+*          y = 33,
+*          label = "A surprisingly high \n recovery rate",
+*          hjust = 0)
+```
+]
+ 
+.panel2-annotate-auto[
+&lt;img src="Week-8-Slides_files/figure-html/annotate_auto_05_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Annotations
+.panel1-annotate-auto[
+
+```r
+p &lt;- ggplot(data = organdata,
+            mapping = aes(x = roads,
+                          y = donors))
+
+p +
+  geom_point() +
+  annotate(geom = "rect",
+           xmin = 125, xmax = 155,
+           ymin = 30, ymax = 35,
+           fill = "red", alpha = 0.2) +
+    annotate(geom = "text",
+           x = 91,
+           y = 33,
+           label = "A surprisingly high \n recovery rate",
+           hjust = 0)
+```
+]
+ 
+.panel2-annotate-auto[
+&lt;img src="Week-8-Slides_files/figure-html/annotate_auto_06_output-1.png" width="504" /&gt;
+]
+
+&lt;style&gt;
+.panel1-annotate-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-annotate-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-annotate-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+---
+
+class: center, middle, inverse
+
+# Lab Time
+
+### Chapter 7
+
+
+
+---
+
+# Homework Assignment
+
+**Task: ** Create 3 maps  
+
+**Due: ** March 3, 2021 
+
+[Rubric](https://bb.collegeforcreativestudies.edu/webapps/rubric/do/course/manageRubrics?dispatch=view&amp;context=course&amp;rubricId=_42755_1&amp;course_id=_35307_1)
+
+**Notes**
+
+- NOTES ABOUT DATA TO USE
+
+- Use your resources: Healy, Google, Student Community BUT cite where you get code from if you copy it directly  
+
+- See Blackboard assignment for a template `.Rmd` file
+
+---
+
+# Tasks to Complete
+
+- Reading (Cairo - Chapter 10: Mapping Data)
+
+- Homework #4
+
+- Prepare for your Data Visualization of the Week
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"img_dir": "img",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

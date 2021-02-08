@@ -6,3 +6,11 @@
   color: grey;
 
 }
+
+.bottom-center{
+  position: absolute;
+  padding: 50px;
+  text-align: center;
+  color: #1c5253;
+  font-weight: bold;
+}

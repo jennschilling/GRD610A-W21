@@ -1,8 +1,8 @@
 ---
 title: "GRD 610A Data Visualization II"
-subtitle: "Labels"
+subtitle: "Maps"
 author: "Jenn Schilling"
-date: "February 24, 2021"
+date: "March 10, 2021"
 output:
   xaringan::moon_reader:
     css: [xaringan-themer.css, bottom-note.css]
@@ -59,36 +59,119 @@ style_duo_accent(
 
 - Data Visualization of the Week  
 
-- Discussion of Chapter 5: Basic Principles of Data Visualization of *The Truthful Art* (Cairo)  
+- Discussion of Chapter 5: Basic Principles of Visualization in *The Truthful Art* (Cairo)  
 
-- Lab on basics of mapping and options for visualizing data on a map - Chapter 7 of *Data Visualization* (Healy)  
+- Lab on basics of mapping and options for visualizing data on a map  
+(Chapter 7 of *Data Visualization* by Healy)  
 
 - Homework Assignment #4
 
 
 ---
 
-# Of Conjectures and Uncertainty
+# Basic Principles of Visualization
 
-### Conjecture
+**"How do you know that you have chosen the right graphic form to represent your data?"**
 
-**Definition:** "a guess about something based on how it seems and not on proof" (Cambridge Dictionary)
+.bottom-note[
+(Cairo, 2016, pp. 121, 124-125)
+]
 
-**Requirements** (Cairo, 2016, pp. 102-104)
-- Makes sense
-- Testable
-- Made of several components
-- If any component changes, the conjecture becomes useless
+--
+
+1. "Think about the task or tasks you want to enable, or the messages that you wish to convey."
+
+???
+What relationships and comparisons do you want the viewer to make  
+
+
+--
+
+2. "Try different graphic forms."
+
+--
+
+3. "Arrange the components of the graphic so as to make it as easy as possible to extract meaning from it."
+
+???
+Consider adding interactivity, if possible
+
+
+--
+
+4. "Test the outcomes"
+
+
+???
+View the graph yourself and with other people to see what conclusions they draw from your graphic
+
+--
+
+**Resources**
+- [The Data Visualisation Catalogue](https://datavizcatalogue.com/)  
+
+- [Interactive Chart Chooser](https://depictdatastudio.com/charts/)  
+
+- Scaled of elementary perceptual tasks (Cairo, 2016, p. 128) 
+
+
+
+???
+"if you wish to create a successful chart, you need to construct it based on elementary tasks "as high in the hierarchy as possible"...Area, color, and angle are much less effective than those graphic forms based on positioning objects on common scales." (Cairo, 2016, p. 129)
+
+"Methods of encoding on the bottom half of the scale may be appropriate when the goal isn't to enable accurate judgments but to reveal general patterns." (Cairo, 2016, p. 129) - Figure 5.6 example of a map shaded by unemployment rates that allows you to see general patterns in the U.S. by state rather than make comparisons by county.
+
+It depends on the message you want to convey and the way that you want the viewer to interact with the data; think about the comparisons you want the user to make
+
+---
+
+# Basic Principles of Visualization
+
+**A Couple of General Rules:**
+
+- Always plot your data directly  
+
+- Use logical and meaningful baselines
+
+.bottom-center[
+.center[
+*"rules of visualization matter as much as the results of the tests you may conduct with readers"*
+
+*"very often readers don't interpret our visualizations as we want them to"*
+]
+]
+
+.bottom-note[
+(Cairo, 2016, pp. 134, 136, 146)
+]
 
 ???
 
-"Conjectures first need to make sense (even if they end up being wrong) based on existing knowledge of how nature works." (Cairo, 2016, p. 102)  
+- But also plot what matters most (i.e. if the difference matters more, plot it)
 
-"For a conjecture to be good, it also needs to be testable...Being testable also implies being falsifiable." (Cairo, 2016, p. 103)  
+- Consider using multiple plots if the data vary a lot; 0 is not always necessary as the baseline
 
-"A good conjecture is made of several components, and these need to be hard to change without making the whole conjecture useless. In the words of physicist David Deutsch, a good conjecture is "hard to vary, because all its details play a functional role." (Cairo, 2016, p. 104)
+- Think about what you're trying to show and how in order to determine how to organize your data in a chart
 
+---
 
+# Basic Principles of Visualization
+
+- What principles did you take away from this chapter?
+
+--
+ 
+- How will you apply these principles to create visualizations? 
+
+--
+
+.bottom-center[
+*"The way data is visually presented has very real consequences on the lives of people who read your visualizations."*
+]
+ 
+.bottom-note[
+(Cairo, 2016, p. 148)
+]
 
 ---
 
@@ -105,7 +188,7 @@ countdown(minutes = 15, seconds = 0,
 
 ---
 
-## Chapter 5: Graph Tables, Add Labels, Make Notes
+# Chapter 7: Draw Maps
 
 .center[
 ```{r first-labels, echo = FALSE}
@@ -189,6 +272,8 @@ class: center, middle, inverse
 - Reading (Cairo - Chapter 10: Mapping Data)
 
 - Homework #4
+
+- Prepare for your Data Visualization of the Week
 
 
 
