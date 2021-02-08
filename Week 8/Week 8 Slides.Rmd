@@ -235,7 +235,7 @@ ggplot(data = subset(election, st %nin% "DC"),
   labs(x = "Point Margin",
        y = "") +
   theme(axis.text = element_text(size = 8)) +
-  theme_bw()
+  theme_minimal()
 
 ```
 
