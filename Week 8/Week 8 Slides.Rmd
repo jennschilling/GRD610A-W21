@@ -190,23 +190,19 @@ countdown(minutes = 15, seconds = 0,
 
 # Chapter 7: Draw Maps
 
+**2016 U.S. Presidential Election Data**
+
 .center[
-```{r first-labels, echo = FALSE}
+```{r elections data, echo = FALSE}
 
-by_country <- organdata %>%
-  group_by(consent_law, country) %>%
-  summarize_if(is.numeric, 
-               list(mean = mean, sd = sd), # note funs is deprecated
-               na.rm = TRUE) %>% 
-  ungroup()
+# Election data - select columns of interest and view a sample of 5 rows
+election %>% 
+  select(state, total_vote, r_points, pct_trump, party, census) %>%
+  sample_n(10) %>%
+  knitr::kable(format = "html")
 
-p <- ggplot(data = by_country,
-            mapping = aes(x = roads_mean,
-                          y = donors_mean)) 
-
-p + 
-  geom_point() + # plot points
-  geom_text(mapping = aes(label = country)) # plot the labels
+# FIPS code is a unique six-digit identifier for every U.S. county
+# The first two digits of a FIPS code represent the state
 
 ```
 ]
@@ -215,27 +211,36 @@ p +
 ---
 
 
-```{r annotate, include = FALSE}
-p <- ggplot(data = organdata,
-            mapping = aes(x = roads,
-                          y = donors))
+```{r election-plot, include = FALSE}
 
-p + 
-  geom_point() +
-  annotate(geom = "rect", 
-           xmin = 125, xmax = 155, 
-           ymin = 30, ymax = 35, 
-           fill = "red", alpha = 0.2) + 
-    annotate(geom = "text", 
-           x = 91, 
-           y = 33, 
-           label = "A surprisingly high \n recovery rate", 
-           hjust = 0) 
+# Set colors for Democratic and Republican parties
+party_colors <- c("#2E74C0", "#CB454A")
+
+# Create a plot of the elections data in a faceted dot plot
+
+ggplot(data = subset(election, st %nin% "DC"),
+             mapping = aes(x = r_points,
+                           y = reorder(state, r_points),
+                           color = party)) +
+  geom_vline(xintercept = 0, color = "gray30") +
+  geom_point(size = 2) + 
+  scale_color_manual(values = party_colors) + 
+  scale_x_continuous(breaks = c(-30, -20, -10, 0, 10, 20, 30, 40),
+                              labels = c("30\n(Clinton)",
+                                         "20", "10", "0",
+                                         "10", "20", "30",
+                                         "40\n(Trump)")) + 
+  facet_wrap(~ census, ncol = 1, scales = "free_y") +
+  guides(color = FALSE) +
+  labs(x = "Point Margin",
+       y = "") +
+  theme(axis.text = element_text(size = 8)) +
+  theme_bw()
 
 ```
 
 
-`r chunk_reveal(chunk_name = "annotate", title = "#Annotations", widths = c(50,50))`
+`r chunk_reveal(chunk_name = "election-plot", title = "# Building a Plot", widths = c(50,50))`
 
 ---
 
