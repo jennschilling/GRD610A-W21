@@ -242,6 +242,11 @@ ggplot(data = subset(election, st %nin% "DC"),
 
 `r chunk_reveal(chunk_name = "election-plot", title = "# Building a Plot", widths = c(50,50))`
 
+
+---
+
+# NEED TO ADD MAP EXAMPLES
+
 ---
 
 class: center, middle, inverse
