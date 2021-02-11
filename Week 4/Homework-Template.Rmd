@@ -11,7 +11,7 @@ output:
 
 ```{r setup, include=FALSE}
 
-## By defult, show code for all chunks in the knitted document,
+## By default, show code for all chunks in the knitted document,
 ## as well as the output. To override for a particular chunk
 ## use echo = FALSE in its options.
 knitr::opts_chunk$set(echo = TRUE)

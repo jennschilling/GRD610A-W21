@@ -9,10 +9,10 @@ output:
   toc_float: TRUE
   code_download: TRUE
 ---
-   
+
 ## Data Visualization Notes
 
-These are my notes for **GRD 610A: Data Visualization II** in Winter 2021 at the College for Creative Studies. These notes are for my work in the book *Data Visualization* by Kieran Healy (Princeton University Press, 2019). 
+These are my notes for **GRD 610A: Data Visualization II** in Winter 2021 at the College for Creative Studies. These notes are for my work in the book *Data Visualization* by Kieran Healy (Princeton University Press, 2019).
 
 ```{r setup, include=FALSE}
 
@@ -36,23 +36,23 @@ library(tidyverse)
 
 ```
 
-
 ## Get Started
 
 ### Everything has a name
-Objects in R are created and referred to by their names. Certain names are not allowed because they are reserved words such as ``TRUE``, ``if``, ``mean()``, and ``NA``. Names also cannot start with a number or contain spaces. There are different naming conventions.  
 
-**Snake Case**  
-``my_data``  
-``this_is_snake_case``  
+Objects in R are created and referred to by their names. Certain names are not allowed because they are reserved words such as `TRUE`, `if`, `mean()`, and `NA`. Names also cannot start with a number or contain spaces. There are different naming conventions.
 
-**Camel Case**  
-``myData``  
-``thisIsCamelCase``
+**Snake Case**\
+`my_data`\
+`this_is_snake_case`
 
-**Pascal Case**  
-``MyData``  
-``ThisIsPascalCase``
+**Camel Case**\
+`myData`\
+`thisIsCamelCase`
+
+**Pascal Case**\
+`MyData`\
+`ThisIsPascalCase`
 
 Pick one naming convention and stick with it. Be consistent; don't switch between conventions. I recommend snake case.
 
@@ -71,7 +71,9 @@ my_data
 ```
 
 ### Everything is an object; using functions
-Think of functions like a recipe. The arguments of the function are the ingredients and what happens within the function is the sequence of cooking steps. 
+
+Think of functions like a recipe. The arguments of the function are the ingredients and what happens within the function is the sequence of cooking steps.
+
 ```{r objects-functions}
 
 c(1, 2, 3, 1, 3, 5, 25) # c() is the combine function, it puts things together into a vector/list
@@ -138,9 +140,11 @@ str(my_numbers)
 str(my_summary)
 
 ```
-Programming in R can be challenging and it takes time to get used to. Be patient and take a break if you get stuck. Make sure parentheses are opened and closed. Complete your commands (look out for the + in the console). Take your time and lookout for typos. 
+
+Programming in R can be challenging and it takes time to get used to. Be patient and take a break if you get stuck. Make sure parentheses are opened and closed. Complete your commands (look out for the + in the console). Take your time and lookout for typos.
 
 ### Get Data into R
+
 In this section, we will get data from a URL and make a quick figure.
 
 ```{r get-data}
@@ -173,21 +177,22 @@ p + geom_point()
 
 ```
 
-
 ## Make a Plot
 
-``ggplot2`` is an ``R`` library/package that allows us to map data to visual elements. Using it we can control the way the data appears in the plot and how each element of the plot will be displayed. **Aesthetic Mappings** make the connection between the data and how it is displayed on the plot (location, size, color, shape, etc.). **Geoms** define the type of plot (scatterplot, line plot, box plot, bar chart, etc.). Code is added together to make the plot using ``+`` the plus sign. More pieces can be added to the plot that define the scales, legend, labels, axes, style or theme of the plot, etc. Each part can be added using different functions with arguments specifying the look of the plot; the plot is built up piece by piece. 
+`ggplot2` is an `R` library/package that allows us to map data to visual elements. Using it we can control the way the data appears in the plot and how each element of the plot will be displayed. **Aesthetic Mappings** make the connection between the data and how it is displayed on the plot (location, size, color, shape, etc.). **Geoms** define the type of plot (scatterplot, line plot, box plot, bar chart, etc.). Code is added together to make the plot using `+` the plus sign. More pieces can be added to the plot that define the scales, legend, labels, axes, style or theme of the plot, etc. Each part can be added using different functions with arguments specifying the look of the plot; the plot is built up piece by piece.
 
 ### Tidy Data
-In tidy data:  
-1. Each variable forms a column.  
-2. Each observation forms a row.  
-3. Each type of observational unit forms a table.  
+
+In tidy data:\
+1. Each variable forms a column.\
+2. Each observation forms a row.\
+3. Each type of observational unit forms a table.
 
 From Wickham, H. (2014). Tidy Data. *Journal of Statistical Software*, 59(10).
 
 ### Mapping
-Build a plot layer by layer, starting with telling ggplot what data to use and how to map or link it  to parts of the plot, like the x and y axes. Then add on the type of ``geom``. 
+
+Build a plot layer by layer, starting with telling ggplot what data to use and how to map or link it to parts of the plot, like the x and y axes. Then add on the type of `geom`.
 
 ```{r ch-3-fig-1}
 
@@ -201,7 +206,7 @@ p <- ggplot(data = gapminder,
 
 ### Layer by Layer
 
-Trying different ``geom_`` functions.
+Trying different `geom_` functions.
 
 ```{r ch-3-fig-2}
 
@@ -229,7 +234,7 @@ p + geom_point() +
 
 ### Mapping Aesthetics
 
-Using the aesthetics mapping, different parts of the data can be encoded in different ways.  
+Using the aesthetics mapping, different parts of the data can be encoded in different ways.
 
 ```{r ch3-fig-3}
 
@@ -312,17 +317,19 @@ p + geom_point(mapping = aes(color = log(pop))) + # points will be colored by po
 
 ```
 
-### Saving  
-Use ``here()`` to save plots in the current directory. This function can also be used to reference folders within the current directory. For this class, use ``.svg`` to save in vector format and embed in Adobe Illustrator. The function to save a plot is ``ggsave()`` which will automatically save the last plot and can also be provided a ``ggplot`` object to save. 
+### Saving
 
-### Where to Go Next  
+Use `here()` to save plots in the current directory. This function can also be used to reference folders within the current directory. For this class, use `.svg` to save in vector format and embed in Adobe Illustrator. The function to save a plot is `ggsave()` which will automatically save the last plot and can also be provided a `ggplot` object to save.
+
+### Where to Go Next
+
 Pick at least two of the questions presented under the *Where to Go Next* section and answer them.
 
-## Show the Right Numbers  
+## Show the Right Numbers
 
-**"Code almost never works properly the first time you write it."** (p. 73)  
+**"Code almost never works properly the first time you write it."** (p. 73)
 
-### Grouping  
+### Grouping
 
 ```{r group-plot}
 
@@ -336,10 +343,9 @@ p + geom_line(aes(group = country)) # Now there is a line per country
 
 ```
 
+### Faceting
 
-### Faceting  
-
-Facet = small multiple (i.e. a separate graph for each value of the variable)  
+Facet = small multiple (i.e. a separate graph for each value of the variable)
 
 ```{r facet-plots}
 
@@ -374,10 +380,9 @@ p + geom_point(alpha = 0.2) +
 
 ```
 
+### Transforming
 
-### Transforming  
-
-Each ``geom_`` function has an associated ``stat_`` function that is used to plot the data. Sometimes this involves transforming the data in some way. 
+Each `geom_` function has an associated `stat_` function that is used to plot the data. Sometimes this involves transforming the data in some way.
 
 ```{r transform-plot}
 
@@ -411,6 +416,7 @@ p + geom_bar() +
   guides(fill = FALSE)
 
 ```
+
 ```{r frequency-plots}
 
 # How can we look at two variables together
@@ -447,7 +453,8 @@ p + geom_bar(position = "dodge",
 
 
 ```
-Histograms create bins of numerical data and display the distribution of the data within those bins.  
+
+Histograms create bins of numerical data and display the distribution of the data within those bins.
 
 ```{r histogram-density-plots}
 
@@ -498,6 +505,7 @@ p + geom_density(alpha = 0.3,
                  mapping = aes(y = ..scaled..))
 
 ```
+
 Avoiding transformations - sometimes the data is already aggregated or summarized and we do not need a transformation.
 
 ```{r no-transform-plots}
@@ -530,9 +538,9 @@ p + geom_col() + # this is the same as geom_bar with stat = "identity"
 
 ```
 
-### Where to Go Next  
-Pick at least two of the questions presented under the *Where to Go Next* section and answer them.
+### Where to Go Next
 
+Pick at least two of the questions presented under the *Where to Go Next* section and answer them.
 
 ## Graph Tables, Make Labels, Add Notes
 
@@ -552,11 +560,8 @@ Pick at least two of the questions presented under the *Where to Go Next* sectio
 
 ```
 
-
 ## Refine your Plots
 
 ```{r}
 
 ```
-
-
