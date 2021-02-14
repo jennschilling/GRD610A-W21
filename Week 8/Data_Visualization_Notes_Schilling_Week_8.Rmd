@@ -30,9 +30,27 @@ library(here)
 library(socviz)
 library(tidyverse)
 
+library(ggrepel)
+
 ## Libraries: Install once per machine, load once per R session
 
-## Week 2 / Chapter 2 Notes published here: https://rpubs.com/jennschilling/dgr610a_w21_w2_notes
+# Theme Map
+theme_map <- function(base_size=9, base_family="") {
+    require(grid)
+    theme_bw(base_size=base_size, base_family=base_family) 
+        theme(axis.line=element_blank(),
+              axis.text=element_blank(),
+              axis.ticks=element_blank(),
+              axis.title=element_blank(),
+              panel.background=element_blank(),
+              panel.border=element_blank(),
+              panel.grid=element_blank(),
+              panel.spacing=unit(0, "lines"),
+              plot.background=element_blank(),
+              legend.justification = c(0,0),
+              legend.position = c(0,0)
+              )
+}
 
 ```
 
@@ -949,8 +967,8 @@ p +
             lat0 = 39,
             lat1 = 45) +
   scale_fill_manual(values = party_colors) + # adjust the colors of the map
-  labs(title = "Election Results 2016", fill = NULL) # +
-#  theme_map() # no theme_map()
+  labs(title = "Election Results 2016", fill = NULL)  +
+  theme_map() # added in setup chunk
 
 ```
 Mapping the data only to states is a little deceptive because there are differences in voting by county and certain areas of the country have larger populations than others.
@@ -971,7 +989,8 @@ p + geom_polygon(color = "gray90",
             lat0 = 39,
             lat1 = 45) +
   labs(title = "Trump vote",
-       fill = "Percent")
+       fill = "Percent") +
+  theme_map()
 
 # Let's change the color to red and have darker red mean higher percent
 p + geom_polygon(color = "gray90",
@@ -982,7 +1001,8 @@ p + geom_polygon(color = "gray90",
   labs(title = "Trump vote",
        fill = "Percent") +
   scale_fill_gradient(low = "white", 
-                      high = "#CB454A")
+                      high = "#CB454A") +
+  theme_map()
 
 ```
 
@@ -1008,7 +1028,8 @@ p +
                        high = "blue",
                        breaks = c(-25, 0, 25, 50, 75)) +
   labs(title = "Winning margins",
-       fill = "Percent")
+       fill = "Percent") +
+  theme_map()
 
 # Remove D.C. since it is an outlier; gradient colors are enhanced
 # Note: earlier we used st to remove D.C., now we're using region
@@ -1029,12 +1050,276 @@ p +
                        high = "blue",
                        breaks = c(-25, 0, 25, 50, 75)) +
   labs(title = "Winning margins",
-       fill = "Percent")
+       fill = "Percent") +
+  theme_map()
 
 ```
 
 ### America's Ur-choropleths 
 
+Data can be mapped to counties as well, but it's important to remember the population distribution in the U.S. Choropleth maps of the U.S. tend to show population density more than anything else because there are concentrations of population in counties in the northeast and the west coast compared to the west. Note that the previous maps did not include Alaska or Hawaii. Now, we are going to add them using a county map dataset.
+
+```{r us-map-6}
+
+# Mapping dataset for U.S. counties
+county_map %>%
+  sample_n(5) # FIPS ID is used to identify the counties
+
+# County demographic data for U.S. Counties
+county_data %>%
+  select(id, name, state, pop_dens, pct_black) %>%
+  sample_n(5) # FIPS ID is used to identify the counties
+
+head(county_data) # ID 0 is for the entire U.S.; IDs with just the first two-digits is for the state
+
+# Put  the mapping data and demographic data together
+county_full <- left_join(county_map, county_data, by = "id")
+
+# Plot population density by county
+p <- ggplot(data = county_full,
+            mapping = aes(x = long, y = lat,
+                          fill = pop_dens,
+                          group = group))
+p +
+  geom_polygon(color = "gray90", size = 0.05) +
+  coord_equal() + # relative scale of map does not change, even if plot dimensions change
+  scale_fill_brewer(palette = "Blues",
+                    labels = c("0-10", "10-50", "50-100", "100-500",
+                               "500-1,000", "1,000-5,000", ">5,000")) +
+  labs(fill = "Population per\nsquare mile") +
+  theme_map() +
+  guides(fill = guide_legend(nrow = 1)) +
+  theme(legend.position = "bottom")
+
+# Plot percent of Black population by county
+
+p <- ggplot(data = county_full,
+            mapping = aes(x = long, y = lat,
+                          fill = pct_black,
+                          group = group)) 
+
+p + 
+  geom_polygon(color = "gray90",
+               size = 0.05) +
+  coord_equal() +
+  scale_fill_brewer(palette = "Greens") +
+  labs(fill = "US Population, Percent Black") +
+  theme_map() +
+  guides(fill = guide_legend(nrow = 1)) +
+  theme(legend.position = "bottom")
+
+```
+
+The population density and the percent of the population that is Black are confounding variables with many other county-level variables that we might want to examine, so it is important to keep the previous two plots in mind whenever plotting county-level data. To demonstrate this issue, we will make two more plots - one on gun-related suicides and one on binned population density. 
+
+```{r us-map-7}
+
+# Create the color palette
+# brewer.pal() produces evenly spaced color palettes
+orange_pal <- RColorBrewer::brewer.pal(n = 6, name = "Oranges")
+orange_pal
+
+# Reverse color palette
+orange_rev <- rev(orange_pal)
+orange_rev
+
+# Recreate a "poorly sourced by widely circulated county map of firearm-related suicide rates" (p. 186)
+gun_p <- ggplot(data = county_full,
+                mapping = aes(x = long, y = lat,
+                              fill = su_gun6,
+                              group = group))
+
+gun_p1 <- gun_p +
+  geom_polygon(color = "gray90",
+               size = 0.05) +
+  coord_equal()
+
+gun_p2 <- gun_p1 +
+  scale_fill_manual(values = orange_pal)
+
+gun_p2 + 
+  labs(title = "Gun-Related Suicides 1999-2015",
+       fill = "Rate per 100,000pop.") +
+  theme_map() +
+  theme(legend.position = "bottom")
+
+# Create the reverse-coded population density map
+pop_p <- ggplot(data = county_full,
+                mapping = aes(x = long, y = lat,
+                              fill = pop_dens6,
+                              group = group))
+
+pop_p1 <- pop_p +
+  geom_polygon(color = "gray90", size = 0.05) +
+  coord_equal()
+
+pop_p2 <- pop_p1 +
+  scale_fill_manual(values = orange_rev)
+
+pop_p2 + labs(title = "Reverse-coded Population Density",
+              fill = "People per square mile") +
+  theme_map() +
+  theme(legend.position = "bottom")
+
+```
+"Small differences in reporting, combined with coarse binning and miscoding, will produce spatially misleading and substantively mistaken results. It might seem that focusing on on the details of variable coding in this particular case is a little too much in the weeds for a genreal introduction. But it is exactly these details that can dramatically alter the appearance of any graph, and especially maps, in a way that can be hard to detect after the fact." (p. 189)
+
+### Statebins
+
+The `statebins` package is an alternative way to develop U.S. maps. The syntax is slightly different than `ggplot`; the `statebins` package has been updated since the writing of the book, so the code below is different than the code in the book.
+
+```{r statebins}
+
+# install.packages("statebins") # note statebins has not been previously installed
+
+library(statebins)
+
+# The statebins package has changed since this book was written
+
+# Continuous Data
+
+statebins(state_data = election,
+          state_col = "state",
+          value_col = "pct_trump",
+          round = FALSE) +
+  labs(fill = "Percent Trump") +
+  scale_fill_gradient(low = "#FEE5D9", 
+                      high = "#A50F15") +
+  theme_statebins() +
+  theme(legend.position = "top") 
+
+statebins(state_data = subset(election, st %nin% "DC"),
+          state_col = "state",
+          value_col = "pct_clinton",
+          round = FALSE) +
+  scale_fill_gradient(low = "#EFF3FF", 
+                      high = "#08519C") +
+  labs(fill = "Percent Clinton") +
+  theme_statebins() +
+  theme(legend.position = "top") 
+
+  
+# Categorical Data
+
+ggplot(data = election, 
+       mapping = aes(state = st,
+                     fill = party)) +
+  geom_statebins() +
+  scale_fill_manual(values = c("royalblue", "darkred"),
+                    labels = c("Clinton", "Trump")) +
+  labs(fill = "Winner") +
+  coord_equal() +
+  theme_statebins() +
+  theme(legend.position = "right") 
+
+# Binned Data
+
+ggplot(data = election, 
+       mapping = aes(state = st,
+                     fill = cut(pct_trump, 4))) +
+  geom_statebins() +
+  scale_fill_brewer(palette = "Reds",
+                    labels = c("4-21", "21-37", "37-53", "53-70")) +
+  labs(fill = "Percent Trump") +
+  coord_equal() +
+  theme_statebins() +
+  theme(legend.position = "top") 
+
+
+
+```
+
+### Small-Multiple Maps
+
+Use small-multiple maps to show geographic data over time. We will also use the `viridis` package to get good color palettes that are vibrant on both ends.
+
+```{r map-small-multiple}
+
+opiates # state-level death rate from optiate-related causes 1999-2014
+
+# lower-case the state name to match the us_states data (from the maps package)
+opiates$region <- tolower(opiates$state)
+
+# join with the us_states data
+opiates_map <- left_join(us_states, opiates)
+
+library(viridis)
+
+p0 <- ggplot(data = subset(opiates_map, year > 1999),
+             mapping = aes(x = long, y = lat,
+                           group = group,
+                           fill = adjusted))
+
+p1 <- p0 +
+  geom_polygon(color = "gray90",
+               size = 0.05) +
+  coord_map(projection = "albers",
+            lat0 = 39,
+            lat1 = 45)
+
+p2 <- p1 +
+  scale_fill_viridis_c(option = "plasma")
+
+p2 + 
+  theme_map() +
+  facet_wrap(~ year, ncol = 3) +
+  theme(legend.position = "bottom",
+        strip.background = element_blank()) +
+  labs(title = "Opiate Related Deaths by State, 2000-2014",
+       fill = "Death rate per 100,000 population")
+
+
+```
+
+But this might not be the best way to view this data due to the issues with population, demographics, and the difficulty in comparing things spatially. 
+
+### Is Your Data Really Spatial?
+
+We can make line plots of the opiates data over time, which may make it easier to make comparisons and draw conclusions.
+
+```{r line-plots-opiates}
+
+p <- ggplot(data = opiates,
+            mapping = aes(x = year,
+                          y = adjusted, 
+                          group = state))
+
+p + geom_line(color = "gray70") # But this is a little difficult to see since there are so many lines
+
+# Divide it up by census division
+
+p0 <- ggplot(data = drop_na(opiates, division_name), # remove rows with NA for division_name to leave out D.C.
+            mapping = aes(x = year, 
+                          y = adjusted))
+p1 <- p0 +
+  geom_line(color = "gray70",
+            mapping = aes(group = state)) # make line chart, one line per state
+
+p2 <- p1 + 
+  geom_smooth(mapping = aes(group = division_name),
+              se = FALSE) # make trend line by census division
+
+p3 <- p2 + # label only the end of the line with the state
+  geom_text_repel(data = subset(opiates, year == max(year) & abbr != "DC"),
+                  mapping = aes(x = year,
+                                y = adjusted,
+                                label = abbr),
+                  size = 1.8,
+                  segment.color = NA, # no line segment linking text to point
+                  nudge_x = 30) + # shift the label text to the right
+  # shift coordinate system so there's room for the labels
+  coord_cartesian(c(min(opiates$year), max(opiates$year))) 
+
+p3 + 
+  labs(x = "",
+       y = "Rate per 100,000 population",
+       title = "State-Level Opiate Death Rates by Census Division, 1999-2014") +
+  facet_wrap(~ reorder(division_name, -adjusted, na.rm = TRUE),
+              # put the divisions with highest rates first
+             nrow = 3)
+
+
+```
 
 
 
