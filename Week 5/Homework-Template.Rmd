@@ -1,0 +1,53 @@
+---
+title: "GRD 610A Data Visualization II"
+subtitle: "Homework #XX"
+author: "Jenn Schilling"
+date: "2021-02-24"
+output:
+ html_document:
+  theme: "simplex" # Theme Gallery: https://www.datadreaming.org/post/r-markdown-theme-gallery/
+---
+
+
+```{r setup, include=FALSE}
+
+## By default, show code for all chunks in the knitted document,
+## as well as the output. To override for a particular chunk
+## use echo = FALSE in its options.
+knitr::opts_chunk$set(echo = TRUE)
+
+## Set the default size of figures
+knitr::opts_chunk$set(fig.width=8, fig.height=5)  
+
+## Load the libraries you will be using 
+library(here)
+library(tidyverse)
+
+## Load the dataset you will be using
+
+```
+
+
+
+# Homework Assignment
+
+This is where you will put your R code and create your plots. Remember to comment your code.
+
+```{r first-plot}
+
+
+
+```
+
+```{r second-plot}
+
+
+
+```
+
+```{r third-plot}
+
+
+
+```
+
