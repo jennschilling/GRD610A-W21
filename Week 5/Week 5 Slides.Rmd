@@ -91,6 +91,11 @@ style_duo_accent(
 
 ]
 
+
+???
+
+"A model is an abstraction that describes, explains, or predicts something about the workings of nature" (p. 86) 
+
 --
 
 - What does it mean for one model to be "better" than another?
@@ -106,11 +111,6 @@ style_duo_accent(
 --
 
 - Why is it important to consider complexity, controls, and models in data visualization? 
-
-
-???
-
-"A model is an abstraction that describes, explains, or predicts something about the workings of nature" (p. 86)
 
 
 
@@ -256,6 +256,8 @@ Figure 5.1 (Healy, 2019, p.95)
 
 The pipe operator allows us to pass data from one step to another; in the diagram the yellow triangles represent the pipe operator. A pipeline of operations follows a sequence such as group, filter/select, mutate, then summarize. 
 
+We are creating calculated fields. 
+
 ---
 
 .center[
@@ -265,6 +267,10 @@ knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/raw
 ]
 
 .bottom-note[Artwork by @allison_horst]
+
+???
+
+Today we will be learning how to add columns and summarize data in our tables before we plot them using a package called dplyr and some functions. One of these functions is mutate, and it allows us to add columns to our data table.
 
 ---
 
@@ -416,7 +422,18 @@ class: center, middle, inverse
 
 ???
 
-Note na.rm option on p. 110
+Note na.rm option on p. 110  
+
+110-113 section, will want to start at the bottom of 109
+
+p. 111
+
+by_country <- organdata %>%
+  group_by(consent_law, country) %>%
+  summarize_if(is.numeric, 
+               list(mean = mean, sd = sd), # note funs is deprecated
+               na.rm = TRUE) %>% 
+  ungroup()
 
 ---
 
