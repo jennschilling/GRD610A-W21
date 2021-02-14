@@ -8,6 +8,17 @@
     <script src="Week-8-Slides_files/header-attrs/header-attrs.js"></script>
     <link href="Week-8-Slides_files/countdown/countdown.css" rel="stylesheet" />
     <script src="Week-8-Slides_files/countdown/countdown.js"></script>
+    <script src="Week-8-Slides_files/htmlwidgets/htmlwidgets.js"></script>
+    <script src="Week-8-Slides_files/jquery/jquery.min.js"></script>
+    <link href="Week-8-Slides_files/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="Week-8-Slides_files/datatables-binding/datatables.js"></script>
+    <link href="Week-8-Slides_files/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="Week-8-Slides_files/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="Week-8-Slides_files/dt-core/js/jquery.dataTables.min.js"></script>
+    <link href="Week-8-Slides_files/dt-ext-fixedcolumns/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+    <script src="Week-8-Slides_files/dt-ext-fixedcolumns/js/dataTables.fixedColumns.min.js"></script>
+    <link href="Week-8-Slides_files/crosstalk/css/crosstalk.css" rel="stylesheet" />
+    <script src="Week-8-Slides_files/crosstalk/js/crosstalk.min.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
     <link rel="stylesheet" href="bottom-note.css" type="text/css" />
   </head>
@@ -157,13 +168,13 @@ class: center, middle
 
 # 15 Minute Break
 
-<div class="countdown" id="timer_60209b9c" style="right:37%;bottom:25%;" data-warnwhen="60">
+<div class="countdown" id="timer_6029b9af" style="right:37%;bottom:25%;" data-warnwhen="60">
 <code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
 ---
 
-# Chapter 7: Draw Maps
+# New Dataset
 
 **2016 U.S. Presidential Election Data**
 
@@ -181,30 +192,6 @@ class: center, middle
  &lt;/thead&gt;
 &lt;tbody&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Rhode Island &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 464144 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -15.51 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 38.90 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Democratic &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Northeast &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Nebraska &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 844227 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 25.05 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 58.75 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Republican &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Midwest &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; North Carolina &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4741564 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.66 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 49.83 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Republican &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; South &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; New Jersey &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 3906723 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; -13.99 &lt;/td&gt;
@@ -213,12 +200,52 @@ class: center, middle
    &lt;td style="text-align:left;"&gt; Northeast &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Ohio &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 5536547 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 8.07 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 51.31 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Arizona &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2604657 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.50 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 48.08 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; Republican &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; West &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Minnesota &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2945233 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.51 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 44.93 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Democratic &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; Midwest &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Oregon &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2001336 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -10.98 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 39.09 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Democratic &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; West &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Utah &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1143601 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 17.88 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 45.05 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Republican &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; West &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Virginia &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3982752 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -5.32 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 44.43 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Democratic &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; South &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Florida &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9502747 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.19 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 48.60 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Republican &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; South &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; Indiana &lt;/td&gt;
@@ -229,41 +256,28 @@ class: center, middle
    &lt;td style="text-align:left;"&gt; Midwest &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; New Mexico &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 798319 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -8.22 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 40.04 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Maryland &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2781446 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -26.42 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33.91 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; Democratic &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; West &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; South &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Kansas &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1194755 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 20.42 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 56.16 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Idaho &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 690433 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 31.77 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 59.25 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; Republican &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Midwest &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Montana &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 501822 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 20.24 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 55.65 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Republican &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; West &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Oregon &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2001336 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -10.98 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 39.09 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; Democratic &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; West &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 ]
 
+???
+
+New dataset, note that we're only looking at some of the available columns
 
 ---
 
@@ -273,11 +287,10 @@ class: center, middle
 
 count: false
  
-# Building a Plot
+# Election Data Dot Plot
 .panel1-election-plot-auto[
 
 ```r
-# Set colors for Democratic and Republican parties
 *party_colors &lt;- c("#2E74C0", "#CB454A")
 ```
 ]
@@ -289,14 +302,11 @@ count: false
 ---
 count: false
  
-# Building a Plot
+# Election Data Dot Plot
 .panel1-election-plot-auto[
 
 ```r
-# Set colors for Democratic and Republican parties
 party_colors &lt;- c("#2E74C0", "#CB454A")
-
-# Create a plot of the elections data in a faceted dot plot
 
 *ggplot(data = subset(election, st %nin% "DC"),
 *            mapping = aes(x = r_points,
@@ -312,14 +322,11 @@ party_colors &lt;- c("#2E74C0", "#CB454A")
 ---
 count: false
  
-# Building a Plot
+# Election Data Dot Plot
 .panel1-election-plot-auto[
 
 ```r
-# Set colors for Democratic and Republican parties
 party_colors &lt;- c("#2E74C0", "#CB454A")
-
-# Create a plot of the elections data in a faceted dot plot
 
 ggplot(data = subset(election, st %nin% "DC"),
              mapping = aes(x = r_points,
@@ -336,14 +343,11 @@ ggplot(data = subset(election, st %nin% "DC"),
 ---
 count: false
  
-# Building a Plot
+# Election Data Dot Plot
 .panel1-election-plot-auto[
 
 ```r
-# Set colors for Democratic and Republican parties
 party_colors &lt;- c("#2E74C0", "#CB454A")
-
-# Create a plot of the elections data in a faceted dot plot
 
 ggplot(data = subset(election, st %nin% "DC"),
              mapping = aes(x = r_points,
@@ -361,14 +365,11 @@ ggplot(data = subset(election, st %nin% "DC"),
 ---
 count: false
  
-# Building a Plot
+# Election Data Dot Plot
 .panel1-election-plot-auto[
 
 ```r
-# Set colors for Democratic and Republican parties
 party_colors &lt;- c("#2E74C0", "#CB454A")
-
-# Create a plot of the elections data in a faceted dot plot
 
 ggplot(data = subset(election, st %nin% "DC"),
              mapping = aes(x = r_points,
@@ -387,14 +388,11 @@ ggplot(data = subset(election, st %nin% "DC"),
 ---
 count: false
  
-# Building a Plot
+# Election Data Dot Plot
 .panel1-election-plot-auto[
 
 ```r
-# Set colors for Democratic and Republican parties
 party_colors &lt;- c("#2E74C0", "#CB454A")
-
-# Create a plot of the elections data in a faceted dot plot
 
 ggplot(data = subset(election, st %nin% "DC"),
              mapping = aes(x = r_points,
@@ -418,14 +416,11 @@ ggplot(data = subset(election, st %nin% "DC"),
 ---
 count: false
  
-# Building a Plot
+# Election Data Dot Plot
 .panel1-election-plot-auto[
 
 ```r
-# Set colors for Democratic and Republican parties
 party_colors &lt;- c("#2E74C0", "#CB454A")
-
-# Create a plot of the elections data in a faceted dot plot
 
 ggplot(data = subset(election, st %nin% "DC"),
              mapping = aes(x = r_points,
@@ -450,14 +445,11 @@ ggplot(data = subset(election, st %nin% "DC"),
 ---
 count: false
  
-# Building a Plot
+# Election Data Dot Plot
 .panel1-election-plot-auto[
 
 ```r
-# Set colors for Democratic and Republican parties
 party_colors &lt;- c("#2E74C0", "#CB454A")
-
-# Create a plot of the elections data in a faceted dot plot
 
 ggplot(data = subset(election, st %nin% "DC"),
              mapping = aes(x = r_points,
@@ -483,14 +475,11 @@ ggplot(data = subset(election, st %nin% "DC"),
 ---
 count: false
  
-# Building a Plot
+# Election Data Dot Plot
 .panel1-election-plot-auto[
 
 ```r
-# Set colors for Democratic and Republican parties
 party_colors &lt;- c("#2E74C0", "#CB454A")
-
-# Create a plot of the elections data in a faceted dot plot
 
 ggplot(data = subset(election, st %nin% "DC"),
              mapping = aes(x = r_points,
@@ -518,14 +507,11 @@ ggplot(data = subset(election, st %nin% "DC"),
 ---
 count: false
  
-# Building a Plot
+# Election Data Dot Plot
 .panel1-election-plot-auto[
 
 ```r
-# Set colors for Democratic and Republican parties
 party_colors &lt;- c("#2E74C0", "#CB454A")
-
-# Create a plot of the elections data in a faceted dot plot
 
 ggplot(data = subset(election, st %nin% "DC"),
              mapping = aes(x = r_points,
@@ -554,14 +540,11 @@ ggplot(data = subset(election, st %nin% "DC"),
 ---
 count: false
  
-# Building a Plot
+# Election Data Dot Plot
 .panel1-election-plot-auto[
 
 ```r
-# Set colors for Democratic and Republican parties
 party_colors &lt;- c("#2E74C0", "#CB454A")
-
-# Create a plot of the elections data in a faceted dot plot
 
 ggplot(data = subset(election, st %nin% "DC"),
              mapping = aes(x = r_points,
@@ -591,14 +574,11 @@ ggplot(data = subset(election, st %nin% "DC"),
 ---
 count: false
  
-# Building a Plot
+# Election Data Dot Plot
 .panel1-election-plot-auto[
 
 ```r
-# Set colors for Democratic and Republican parties
 party_colors &lt;- c("#2E74C0", "#CB454A")
-
-# Create a plot of the elections data in a faceted dot plot
 
 ggplot(data = subset(election, st %nin% "DC"),
              mapping = aes(x = r_points,
@@ -654,10 +634,444 @@ ggplot(data = subset(election, st %nin% "DC"),
 
 
 
+???
+
+Set colors for Democratic and Republican parties
+
+Create a plot of the elections data in a faceted dot plot
 
 ---
 
-# NEED TO ADD MAP EXAMPLES
+# Mapping U.S. States
+
+**Get Data for Drawing the States**
+
+
+```r
+library(maps)
+
+us_states &lt;- map_data("state")
+```
+
+
+.center[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; long &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; lat &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; group &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; order &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; region &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; subregion &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; -87.46201 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 30.38968 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; alabama &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; NA &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; -87.48493 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 30.37249 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; alabama &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; NA &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; -87.52503 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 30.37249 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; alabama &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; NA &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; -87.53076 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 30.33239 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; alabama &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; NA &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; -87.57087 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 30.32665 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; alabama &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; NA &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; -87.58806 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 30.32665 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; alabama &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; NA &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+???
+
+states from the `map` package provides latitude and longitude information; region is the state name
+
+We'll see the same thing for U.S. county data later in Chapter 7
+
+---p
+
+
+
+count: false
+ 
+# Mapping U.S. States: Plot the States
+.panel1-plot-states-auto[
+
+```r
+*ggplot(data = us_states,
+*           mapping = aes(x = long,
+*                         y = lat,
+*                         group = group,
+*                         fill = region))
+```
+]
+ 
+.panel2-plot-states-auto[
+&lt;img src="Week-8-Slides_files/figure-html/plot-states_auto_01_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+# Mapping U.S. States: Plot the States
+.panel1-plot-states-auto[
+
+```r
+ggplot(data = us_states,
+            mapping = aes(x = long,
+                          y = lat,
+                          group = group,
+                          fill = region)) +
+* guides(fill = FALSE)
+```
+]
+ 
+.panel2-plot-states-auto[
+&lt;img src="Week-8-Slides_files/figure-html/plot-states_auto_02_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+# Mapping U.S. States: Plot the States
+.panel1-plot-states-auto[
+
+```r
+ggplot(data = us_states,
+            mapping = aes(x = long,
+                          y = lat,
+                          group = group,
+                          fill = region)) +
+  guides(fill = FALSE) +
+* geom_polygon(color = "gray90",
+*               size = 0.1)
+```
+]
+ 
+.panel2-plot-states-auto[
+&lt;img src="Week-8-Slides_files/figure-html/plot-states_auto_03_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+# Mapping U.S. States: Plot the States
+.panel1-plot-states-auto[
+
+```r
+ggplot(data = us_states,
+            mapping = aes(x = long,
+                          y = lat,
+                          group = group,
+                          fill = region)) +
+  guides(fill = FALSE) +
+  geom_polygon(color = "gray90",
+                size = 0.1) +
+* coord_map(projection = "albers",
+*           lat0 = 39,
+*           lat1 = 45)
+```
+]
+ 
+.panel2-plot-states-auto[
+&lt;img src="Week-8-Slides_files/figure-html/plot-states_auto_04_output-1.png" width="504" /&gt;
+]
+
+&lt;style&gt;
+.panel1-plot-states-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-plot-states-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-plot-states-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+---
+
+# Mapping U.S. States
+
+**Join State Data to Election Data**
+
+
+
+
+&lt;code class ='r hljs remark-code'&gt;election$region &lt;- tolower(election$state)&lt;br&gt;&lt;br&gt;us_states_elec &lt;- &lt;span style='background-color:#ffff7f'&gt;left_join&lt;/span&gt;(us_states, election, by = "region")&lt;/code&gt;
+
+.center[
+<div id="htmlwidget-b803fab99eadc5b99fdd" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b803fab99eadc5b99fdd">{"x":{"filter":"none","extensions":["FixedColumns"],"data":[["1","2","3","4","5","6"],[-87.4620056152344,-87.4849319458008,-87.525032043457,-87.53076171875,-87.5708694458008,-87.5880584716797],[30.3896808624268,30.3724918365479,30.3724918365479,30.3323860168457,30.3266544342041,30.3266544342041],[1,1,1,1,1,1],[1,2,3,4,5,6],["alabama","alabama","alabama","alabama","alabama","alabama"],[null,null,null,null,null,null],["Alabama","Alabama","Alabama","Alabama","Alabama","Alabama"],["AL","AL","AL","AL","AL","AL"],[1,1,1,1,1,1],[2123372,2123372,2123372,2123372,2123372,2123372],[588708,588708,588708,588708,588708,588708],["Trump","Trump","Trump","Trump","Trump","Trump"],["Republican","Republican","Republican","Republican","Republican","Republican"],[0.2773,0.2773,0.2773,0.2773,0.2773,0.2773],[27.72,27.72,27.72,27.72,27.72,27.72],[-27.72,-27.72,-27.72,-27.72,-27.72,-27.72],[34.36,34.36,34.36,34.36,34.36,34.36],[62.08,62.08,62.08,62.08,62.08,62.08],[2.09,2.09,2.09,2.09,2.09,2.09],[1.46,1.46,1.46,1.46,1.46,1.46],[729547,729547,729547,729547,729547,729547],[1318255,1318255,1318255,1318255,1318255,1318255],[44467,44467,44467,44467,44467,44467],[31103,31103,31103,31103,31103,31103],[0,0,0,0,0,0],[9,9,9,9,9,9],[0,0,0,0,0,0],["South","South","South","South","South","South"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>long<\/th>\n      <th>lat<\/th>\n      <th>group<\/th>\n      <th>order<\/th>\n      <th>region<\/th>\n      <th>subregion<\/th>\n      <th>state<\/th>\n      <th>st<\/th>\n      <th>fips<\/th>\n      <th>total_vote<\/th>\n      <th>vote_margin<\/th>\n      <th>winner<\/th>\n      <th>party<\/th>\n      <th>pct_margin<\/th>\n      <th>r_points<\/th>\n      <th>d_points<\/th>\n      <th>pct_clinton<\/th>\n      <th>pct_trump<\/th>\n      <th>pct_johnson<\/th>\n      <th>pct_other<\/th>\n      <th>clinton_vote<\/th>\n      <th>trump_vote<\/th>\n      <th>johnson_vote<\/th>\n      <th>other_vote<\/th>\n      <th>ev_dem<\/th>\n      <th>ev_rep<\/th>\n      <th>ev_oth<\/th>\n      <th>census<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","scrollX":true,"scrollCollapse":true,"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,9,10,11,14,15,16,17,18,19,20,21,22,23,24,25,26,27]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+]
+
+???
+
+Recall that we have a data table of election data and a data table of U.S. states
+
+First, we need to lowercase the state names and put them in a column called "region", to match the mapping data
+
+Now we can join the datasets together using the common region column
+
+---
+
+
+
+count: false
+ 
+#Election Data Map
+.panel1-plot-state-election-auto[
+
+```r
+*ggplot(data = us_states_elec,
+*      mapping = aes(x = long,
+*                    y = lat,
+*                    group = group,
+*                    fill = r_points))
+```
+]
+ 
+.panel2-plot-state-election-auto[
+&lt;img src="Week-8-Slides_files/figure-html/plot-state-election_auto_01_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Election Data Map
+.panel1-plot-state-election-auto[
+
+```r
+ggplot(data = us_states_elec,
+       mapping = aes(x = long,
+                     y = lat,
+                     group = group,
+                     fill = r_points)) +
+* geom_polygon(color = "gray90",
+*              size = 0.1)
+```
+]
+ 
+.panel2-plot-state-election-auto[
+&lt;img src="Week-8-Slides_files/figure-html/plot-state-election_auto_02_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Election Data Map
+.panel1-plot-state-election-auto[
+
+```r
+ggplot(data = us_states_elec,
+       mapping = aes(x = long,
+                     y = lat,
+                     group = group,
+                     fill = r_points)) +
+  geom_polygon(color = "gray90",
+               size = 0.1) +
+* coord_map(projection = "albers",
+*           lat0 = 39,
+*           lat1 = 45)
+```
+]
+ 
+.panel2-plot-state-election-auto[
+&lt;img src="Week-8-Slides_files/figure-html/plot-state-election_auto_03_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Election Data Map
+.panel1-plot-state-election-auto[
+
+```r
+ggplot(data = us_states_elec,
+       mapping = aes(x = long,
+                     y = lat,
+                     group = group,
+                     fill = r_points)) +
+  geom_polygon(color = "gray90",
+               size = 0.1) +
+  coord_map(projection = "albers",
+            lat0 = 39,
+            lat1 = 45) +
+* labs(title = "Election Results 2016",
+*      fill = "Point Margin")
+```
+]
+ 
+.panel2-plot-state-election-auto[
+&lt;img src="Week-8-Slides_files/figure-html/plot-state-election_auto_04_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Election Data Map
+.panel1-plot-state-election-auto[
+
+```r
+ggplot(data = us_states_elec,
+       mapping = aes(x = long,
+                     y = lat,
+                     group = group,
+                     fill = r_points)) +
+  geom_polygon(color = "gray90",
+               size = 0.1) +
+  coord_map(projection = "albers",
+            lat0 = 39,
+            lat1 = 45) +
+  labs(title = "Election Results 2016",
+       fill = "Point Margin")  +
+* theme_map()
+```
+]
+ 
+.panel2-plot-state-election-auto[
+&lt;img src="Week-8-Slides_files/figure-html/plot-state-election_auto_05_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Election Data Map
+.panel1-plot-state-election-auto[
+
+```r
+ggplot(data = us_states_elec,
+       mapping = aes(x = long,
+                     y = lat,
+                     group = group,
+                     fill = r_points)) +
+  geom_polygon(color = "gray90",
+               size = 0.1) +
+  coord_map(projection = "albers",
+            lat0 = 39,
+            lat1 = 45) +
+  labs(title = "Election Results 2016",
+       fill = "Point Margin")  +
+  theme_map() +
+* theme(legend.position = "bottom")
+```
+]
+ 
+.panel2-plot-state-election-auto[
+&lt;img src="Week-8-Slides_files/figure-html/plot-state-election_auto_06_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Election Data Map
+.panel1-plot-state-election-auto[
+
+```r
+ggplot(data = us_states_elec,
+       mapping = aes(x = long,
+                     y = lat,
+                     group = group,
+                     fill = r_points)) +
+  geom_polygon(color = "gray90",
+               size = 0.1) +
+  coord_map(projection = "albers",
+            lat0 = 39,
+            lat1 = 45) +
+  labs(title = "Election Results 2016",
+       fill = "Point Margin")  +
+  theme_map() +
+  theme(legend.position = "bottom")
+```
+]
+ 
+.panel2-plot-state-election-auto[
+&lt;img src="Week-8-Slides_files/figure-html/plot-state-election_auto_07_output-1.png" width="504" /&gt;
+]
+
+&lt;style&gt;
+.panel1-plot-state-election-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-plot-state-election-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-plot-state-election-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
 
 ---
 
@@ -667,6 +1081,11 @@ class: center, middle, inverse
 
 ### Chapter 7
 
+???
+
+Need to set theme_map() in setup chunk
+
+Section 7.3 Statebins - functions will not work
 
 
 ---
@@ -675,13 +1094,13 @@ class: center, middle, inverse
 
 **Task: ** Create 3 maps  
 
-**Due: ** March 3, 2021 
+**Due: ** March 17, 2021 
 
 [Rubric](https://bb.collegeforcreativestudies.edu/webapps/rubric/do/course/manageRubrics?dispatch=view&amp;context=course&amp;rubricId=_42755_1&amp;course_id=_35307_1)
 
 **Notes**
 
-- NOTES ABOUT DATA TO USE
+- Use data from Chapter 7 but be sure to create different maps
 
 - Use your resources: Healy, Google, Student Community BUT cite where you get code from if you copy it directly  
 

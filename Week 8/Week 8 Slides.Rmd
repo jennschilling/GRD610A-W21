@@ -32,6 +32,24 @@ library(flair)
 library(flipbookr)
 library(DT)
  
+# Theme Map
+theme_map <- function(base_size=9, base_family="") {
+    require(grid)
+    theme_bw(base_size=base_size, base_family=base_family) 
+        theme(axis.line=element_blank(),
+              axis.text=element_blank(),
+              axis.ticks=element_blank(),
+              axis.title=element_blank(),
+              panel.background=element_blank(),
+              panel.border=element_blank(),
+              panel.grid=element_blank(),
+              panel.spacing=unit(0, "lines"),
+              plot.background=element_blank(),
+              legend.justification = c(0,0),
+              legend.position = c(0,0)
+              )
+}
+
 ```
 
 ```{r xaringan-themer, include=FALSE, warning=FALSE}
@@ -188,35 +206,31 @@ countdown(minutes = 15, seconds = 0,
 
 ---
 
-# Chapter 7: Draw Maps
+# New Dataset
 
 **2016 U.S. Presidential Election Data**
 
 .center[
 ```{r elections data, echo = FALSE}
 
-# Election data - select columns of interest and view a sample of 5 rows
 election %>% 
   select(state, total_vote, r_points, pct_trump, party, census) %>%
   sample_n(10) %>%
   knitr::kable(format = "html")
 
-# FIPS code is a unique six-digit identifier for every U.S. county
-# The first two digits of a FIPS code represent the state
-
 ```
 ]
 
+???
+
+New dataset, note that we're only looking at some of the available columns
 
 ---
 
 
 ```{r election-plot, include = FALSE}
 
-# Set colors for Democratic and Republican parties
 party_colors <- c("#2E74C0", "#CB454A")
-
-# Create a plot of the elections data in a faceted dot plot
 
 ggplot(data = subset(election, st %nin% "DC"),
              mapping = aes(x = r_points,
@@ -240,12 +254,124 @@ ggplot(data = subset(election, st %nin% "DC"),
 ```
 
 
-`r chunk_reveal(chunk_name = "election-plot", title = "# Building a Plot", widths = c(50,50))`
+`r chunk_reveal(chunk_name = "election-plot", title = "# Election Data Dot Plot", widths = c(50,50))`
 
+???
+
+Set colors for Democratic and Republican parties
+
+Create a plot of the elections data in a faceted dot plot
 
 ---
 
-# NEED TO ADD MAP EXAMPLES
+# Mapping U.S. States
+
+**Get Data for Drawing the States**
+
+```{r states-data}
+library(maps)
+
+us_states <- map_data("state")
+```
+
+
+.center[
+```{r states-data-show, echo = FALSE}
+head(us_states) %>%
+  knitr::kable(format = "html")
+```
+]
+
+???
+
+states from the `map` package provides latitude and longitude information; region is the state name
+
+We'll see the same thing for U.S. county data later in Chapter 7
+
+---p
+
+```{r plot-states, include = FALSE}
+ggplot(data = us_states,
+            mapping = aes(x = long, 
+                          y = lat, 
+                          group = group, 
+                          fill = region)) + 
+  guides(fill = FALSE) +
+  geom_polygon(color = "gray90", 
+                size = 0.1) +
+  coord_map(projection = "albers", 
+            lat0 = 39, 
+            lat1 = 45) 
+```
+
+`r chunk_reveal(chunk_name = "plot-states", title = "# Mapping U.S. States: Plot the States", widths = c(50,50))`
+
+---
+
+# Mapping U.S. States
+
+**Join State Data to Election Data**
+
+```{r joining, include = FALSE}
+election$region <- tolower(election$state)
+
+us_states_elec <- left_join(us_states, election, by = "region")
+```
+
+```{r decorate-joining, echo = FALSE}
+
+decorate("joining", eval = FALSE) %>%
+flair("left_join") %>% 
+knit_print.with_flair()
+
+```
+
+.center[
+```{r states-elec-show, echo = FALSE}
+
+head(us_states_elec) %>%
+  datatable(
+    extensions = 'FixedColumns',
+    options = list(
+      dom = 't',
+      scrollX = TRUE,
+      scrollCollapse = TRUE
+      )) # Source: https://stackoverflow.com/questions/31085580/resize-datatables-to-fit-within-r-markdown
+
+```
+]
+
+???
+
+Recall that we have a data table of election data and a data table of U.S. states
+
+First, we need to lowercase the state names and put them in a column called "region", to match the mapping data
+
+Now we can join the datasets together using the common region column
+
+---
+
+```{r plot-state-election, include = FALSE}
+
+ggplot(data = us_states_elec,
+       mapping = aes(x = long,
+                     y = lat,
+                     group = group,
+                     fill = r_points)) +
+  geom_polygon(color = "gray90",
+               size = 0.1) +
+  coord_map(projection = "albers",
+            lat0 = 39,
+            lat1 = 45) +
+  labs(title = "Election Results 2016", 
+       fill = "Point Margin")  +
+  theme_map() +
+  theme(legend.position = "bottom")
+
+```
+
+`r chunk_reveal(chunk_name = "plot-state-election", title = "#Election Data Map", widths = c(50,50))`
+
 
 ---
 
@@ -255,6 +381,11 @@ class: center, middle, inverse
 
 ### Chapter 7
 
+???
+
+Need to set theme_map() in setup chunk
+
+Section 7.3 Statebins - functions will not work
 
 
 ---
@@ -263,13 +394,13 @@ class: center, middle, inverse
 
 **Task: ** Create 3 maps  
 
-**Due: ** March 3, 2021 
+**Due: ** March 17, 2021 
 
 [Rubric](https://bb.collegeforcreativestudies.edu/webapps/rubric/do/course/manageRubrics?dispatch=view&context=course&rubricId=_42755_1&course_id=_35307_1)
 
 **Notes**
 
-- NOTES ABOUT DATA TO USE
+- Use data from Chapter 7 but be sure to create different maps
 
 - Use your resources: Healy, Google, Student Community BUT cite where you get code from if you copy it directly  
 
