@@ -1,0 +1,1332 @@
+---
+title: "Data Visualization Notes"
+author: "Jenn Schilling"
+date: "2021-02-24"
+output:
+ html_document:
+  theme: "flatly" # Theme Gallery: https://www.datadreaming.org/post/r-markdown-theme-gallery/
+  toc: TRUE
+  toc_float: TRUE
+  code_download: TRUE
+---
+   
+## Data Visualization Notes
+
+These are my notes for **GRD 610A: Data Visualization II** in Winter 2021 at the College for Creative Studies. These notes are for my work in the book *Data Visualization* by Kieran Healy (Princeton University Press, 2019). 
+
+```{r setup, include=FALSE}
+
+## By default, show code for all chunks in the knitted document,
+## as well as the output. To override for a particular chunk
+## use echo = FALSE in its options.
+knitr::opts_chunk$set(echo = TRUE, message = FALSE) 
+
+## Set the default size of figures
+knitr::opts_chunk$set(fig.width=8, fig.height=5)  
+
+## Load the libraries we will be using
+library(gapminder)
+library(here)
+library(socviz)
+library(tidyverse)
+
+library(ggrepel)
+
+## Libraries: Install once per machine, load once per R session
+
+# Theme Map
+theme_map <- function(base_size=9, base_family="") {
+    require(grid)
+    theme_bw(base_size=base_size, base_family=base_family) 
+        theme(axis.line=element_blank(),
+              axis.text=element_blank(),
+              axis.ticks=element_blank(),
+              axis.title=element_blank(),
+              panel.background=element_blank(),
+              panel.border=element_blank(),
+              panel.grid=element_blank(),
+              panel.spacing=unit(0, "lines"),
+              plot.background=element_blank(),
+              legend.justification = c(0,0),
+              legend.position = c(0,0)
+              )
+}
+
+```
+
+
+## Get Started
+
+### Everything has a name
+Objects in R are created and referred to by their names. Certain names are not allowed because they are reserved words such as ``TRUE``, ``if``, ``mean()``, and ``NA``. Names also cannot start with a number or contain spaces. There are different naming conventions.  
+
+**Snake Case**  
+``my_data``  
+``this_is_snake_case``  
+
+**Camel Case**  
+``myData``  
+``thisIsCamelCase``
+
+**Pascal Case**  
+``MyData``  
+``ThisIsPascalCase``
+
+Pick one naming convention and stick with it. Be consistent; don't switch between conventions. I recommend snake case.
+
+```{r naming, error=TRUE}
+
+# This is a comment (it starts with #)
+
+my_data <- c(1, 2, 3, 4) # Assign using <- ; use ALT + - or OPTION + -
+
+My_Data  
+# Cannot be found because we called it my_data (lowercase)
+
+# Now we can see it
+my_data 
+
+```
+
+### Everything is an object; using functions
+Think of functions like a recipe. The arguments of the function are the ingredients and what happens within the function is the sequence of cooking steps. 
+```{r objects-functions}
+
+c(1, 2, 3, 1, 3, 5, 25) # c() is the combine function, it puts things together into a vector/list
+
+my_numbers <- c(1, 2, 3, 1, 3, 5, 25)
+your_numbers <- c(5, 31, 71, 1, 3, 21, 6)
+
+my_numbers
+
+mean(x = my_numbers)
+mean(my_numbers) # you don't have to specify the argument names, but order matters if you do not specify
+
+mean(x = your_numbers)
+
+my_summary <- summary(my_numbers)
+
+my_summary
+
+table(my_numbers)
+
+sd(my_numbers)
+
+my_numbers * 5
+
+my_numbers + 1
+
+my_numbers + my_numbers # How is this different than the last line?
+
+# If you're not sure what an object is, ask for its class or type
+
+class(my_numbers)
+
+class(my_summary)
+
+class(summary)
+
+my_new_vector <- c(my_numbers, "Apple") # What happens if we combine a word with numbers?
+
+my_new_vector
+
+class(my_new_vector)
+
+# Let's look at a new dataset
+
+titanic
+
+class(titanic) 
+
+# Titanic is a data frame, which is like a table
+# The $ operator can be used to access a column of a data frame by name
+
+titanic$percent
+
+# Tibbles are slightly different than data frames. They are also data tables, but they provide more information.
+
+titanic_tb <- as_tibble(titanic)
+
+titanic_tb # How is does this compare to titanic above?
+
+# To see inside an object, ask for its structure
+
+str(my_numbers)
+
+str(my_summary)
+
+```
+Programming in R can be challenging and it takes time to get used to. Be patient and take a break if you get stuck. Make sure parentheses are opened and closed. Complete your commands (look out for the + in the console). Take your time and lookout for typos. 
+
+### Get Data into R
+In this section, we will get data from a URL and make a quick figure.
+
+```{r get-data}
+
+# Data source
+url <- "https://cdn.rawgit.com/kjhealy/viz-organdata/master/organdonation.csv"
+
+# Read the CSV from the URL
+organs <- read_csv(file = url)
+
+# Take a quick look at the data
+glimpse(organs)
+
+# View(organs) # Run in RStudio
+
+```
+
+```{r make-figure}
+
+# Another way to view data 
+gapminder
+
+# Make a plot object
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap, 
+                          y = lifeExp))
+
+# Create a scatterplot
+p + geom_point()
+
+```
+
+
+## Make a Plot
+
+``ggplot2`` is an ``R`` library/package that allows us to map data to visual elements. Using it we can control the way the data appears in the plot and how each element of the plot will be displayed. **Aesthetic Mappings** make the connection between the data and how it is displayed on the plot (location, size, color, shape, etc.). **Geoms** define the type of plot (scatterplot, line plot, box plot, bar chart, etc.). Code is added together to make the plot using ``+`` the plus sign. More pieces can be added to the plot that define the scales, legend, labels, axes, style or theme of the plot, etc. Each part can be added using different functions with arguments specifying the look of the plot; the plot is built up piece by piece. 
+
+### Tidy Data
+In tidy data:  
+1. Each variable forms a column.  
+2. Each observation forms a row.  
+3. Each type of observational unit forms a table.  
+
+From Wickham, H. (2014). Tidy Data. *Journal of Statistical Software*, 59(10).
+
+### Mapping
+Build a plot layer by layer, starting with telling ggplot what data to use and how to map or link it  to parts of the plot, like the x and y axes. Then add on the type of ``geom``. 
+
+```{r ch-3-fig-1}
+
+p <- ggplot(data = gapminder,
+              mapping = aes(x = gdpPercap,
+                            y = lifeExp)) 
+
+  p + geom_point()
+
+```
+
+### Layer by Layer
+
+Trying different ``geom_`` functions.
+
+```{r ch-3-fig-2}
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp))
+
+p + geom_smooth()
+
+p + geom_point() + # add the points back into the plot 
+  geom_smooth() 
+
+p + geom_point() + 
+  geom_smooth(method = "lm") # use a linear model
+
+p + geom_point() +
+  geom_smooth(method = "gam") + # generalized additive model
+  scale_x_log10() # transform x-axis to log-10 scale
+
+p + geom_point() +
+  geom_smooth(method = "gam") +
+  scale_x_log10(labels = scales::dollar) # format x-axis in dollars
+
+```
+
+### Mapping Aesthetics
+
+Using the aesthetics mapping, different parts of the data can be encoded in different ways.  
+
+```{r ch3-fig-3}
+
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp,
+                          color = "purple")) # ggplot adds the value "purple" to all rows
+
+p + geom_point() +
+  geom_smooth(method = "loess") +
+  scale_x_log10()
+
+# To actually turn all of the points purple, we need to set the color property of the geom_ function
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp))
+
+p + geom_point(color = "purple") + # set point color to purple
+  geom_smooth(method = "loess") +
+  scale_x_log10()
+
+p + geom_point(alpha = 0.3) + # make points more transparent
+  geom_smooth(color = "orange", # make line orange
+              se = FALSE, # remove standard error band
+              size = 8, # increase thickness of the line
+              method = "lm") +
+  scale_x_log10()
+
+
+p + geom_point(alpha = 0.3) + # make points more transparent
+  geom_smooth(method = "gam") +
+  scale_x_log10(labels = scales::dollar) +
+  # Add title and labels
+  labs(x = "GDP per Capita", 
+       y = "Life Expectancy in Years",
+       title = "Economic Growth and Life Expectancy",
+       subtitle = "Data points are country-years",
+       caption = "Source: Gapminder")
+
+# Map data by continent
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp,
+                          color = continent))
+
+p + geom_point() +
+  geom_smooth(method = "loess") +
+  scale_x_log10()
+
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp,
+                          color = continent,
+                          fill = continent)) # now the error bands will also have the color
+
+p + geom_point() +
+  geom_smooth(method = "loess") +
+  scale_x_log10()
+
+```
+
+### Aesthetics by Geom
+
+```{r ch3-fig-4}
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp))
+
+p + geom_point(mapping = aes(color = continent)) + # points will be colored by continent
+  geom_smooth(method = "loess") + # the smoothed line will be for all data
+  scale_x_log10()
+
+p + geom_point(mapping = aes(color = log(pop))) + # points will be colored by population
+  scale_x_log10()
+
+
+```
+
+### Saving  
+Use ``here()`` to save plots in the current directory. This function can also be used to reference folders within the current directory. For this class, use ``.svg`` to save in vector format and embed in Adobe Illustrator. The function to save a plot is ``ggsave()`` which will automatically save the last plot and can also be provided a ``ggplot`` object to save. 
+
+### Where to Go Next  
+Pick at least two of the questions presented under the *Where to Go Next* section and answer them.
+
+## Show the Right Numbers  
+
+**"Code almost never works properly the first time you write it."** (p. 73)  
+
+### Grouping  
+
+```{r group-plot}
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = year,
+                          y = gdpPercap)) 
+
+p + geom_line() # Something is wrong, we didn't tell it how to group
+
+p + geom_line(aes(group = country)) # Now there is a line per country
+
+```
+
+
+### Faceting  
+
+Facet = small multiple (i.e. a separate graph for each value of the variable)  
+
+```{r facet-plots}
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = year,
+                          y = gdpPercap))
+
+p + geom_line(aes(group = country)) +
+  facet_wrap(~continent) # make a separate plot for each continent
+
+# Make it look a little nicer
+p + geom_line(color = "gray70",
+              aes(group = country)) +
+  geom_smooth(size = 1.1, method = "loess", se = FALSE) +
+  scale_y_log10(labels = scales::dollar) +
+  facet_wrap(~continent, ncol = 5) +
+  labs(x = "Year",
+       y = "GDP per capita",
+       title = "GDP per capita on Five Continents")
+
+# New dataset 2016 General Social Survey with more categorical data
+glimpse(gss_sm)
+
+# Practice using facet_grid() to facet between multiple variables
+p <- ggplot(data = gss_sm,
+            mapping = aes(x = age,
+                          y = childs))
+
+p + geom_point(alpha = 0.2) +
+  geom_smooth() +
+  facet_grid(sex ~ race)
+
+```
+
+
+### Transforming  
+
+Each ``geom_`` function has an associated ``stat_`` function that is used to plot the data. Sometimes this involves transforming the data in some way. 
+
+```{r transform-plot}
+
+p <- ggplot(data = gss_sm,
+            mapping = aes(x = bigregion))
+
+p + geom_bar() # makes a bar graph that counts the number of observations per region; count is computed for us
+
+p + geom_bar(mapping = aes(y = ..prop..)) # the prop statistic can show us proportions
+
+# But this is not right, each shows 100%
+
+# So, we need to fix the automatic grouping that is occurring by region
+p + geom_bar(mapping = aes(y = ..prop.., group = 1)) # using group = 1 is basically a placeholder that says all the data is in the same group
+
+# Look at a different variable
+table(gss_sm$religion)
+
+p <- ggplot(data = gss_sm,
+            mapping = aes(x = religion, color = religion))
+
+p + geom_bar() # only the outline has a color - we need to use fill
+
+p <- ggplot(data = gss_sm,
+            mapping = aes(x = religion, fill = religion))
+
+p + geom_bar()
+
+# Remove the legend
+p + geom_bar() +
+  guides(fill = FALSE)
+
+```
+```{r frequency-plots}
+
+# How can we look at two variables together
+p <- ggplot(data = gss_sm,
+            mapping = aes(x = bigregion,
+                          fill = religion))
+
+p + geom_bar() # Stacked bar chart of counts
+
+p + geom_bar(position = "fill") # Stacked bar chart of proportions
+
+p + geom_bar(position = "dodge") # Bar chart of counts side by side
+
+p + geom_bar(position = "dodge",
+             mapping = aes(y = ..prop..)) # Bar chart of proportions side by side
+
+# Not quite right - all are 100% 
+
+p + geom_bar(position = "dodge",
+             mapping = aes(y = ..prop..,
+                           group = religion)) # Bar chart of proportions side by side
+
+# The proportions sum to 1 by religion across the regions
+
+p <- ggplot(data = gss_sm,
+            mapping = aes(x = religion))
+
+p + geom_bar(position = "dodge",
+             mapping = aes(y = ..prop..,
+                           group = bigregion)) +
+  facet_wrap(~bigregion, ncol = 2)
+
+# Now the proportions sum to 1 by region across religions
+
+
+```
+Histograms create bins of numerical data and display the distribution of the data within those bins.  
+
+```{r histogram-density-plots}
+
+# A new dataset
+glimpse(midwest)
+
+p <- ggplot(data = midwest,
+            mapping = aes(x = area))
+
+p + geom_histogram() # count is computed automatically by the default stat function
+
+p + geom_histogram(bins = 10) # set 10 bins
+
+# Look at only two states
+oh_wi <- c("OH", "WI")
+
+p <- ggplot(data = subset(midwest, subset = state %in% oh_wi),
+            mapping = aes(x = percollege,
+                          fill = state))
+
+p + geom_histogram(alpha = 0.4, bins = 20) # Overlapping histograms
+
+# Density estimate of the underlying distribution - density plot
+p <- ggplot(data = midwest,
+            mapping = aes(x = area))
+
+p + geom_density()
+
+# Density by state
+p <- ggplot(data = midwest,
+            mapping = aes(x = area,
+                          fill = state,
+                          color = state))
+
+p + geom_density(alpha = 0.3)
+
+# Compare to geom_line(stat = "density")
+
+p + geom_line(stat = "density")
+
+# Scaled density
+p <- ggplot(data = subset(midwest, subset = state %in% oh_wi),
+            mapping = aes(x = percollege,
+                          fill = state,
+                          color = state))
+
+p + geom_density(alpha = 0.3,
+                 mapping = aes(y = ..scaled..))
+
+```
+Avoiding transformations - sometimes the data is already aggregated or summarized and we do not need a transformation.
+
+```{r no-transform-plots}
+
+titanic # this data is already summarized
+
+p <- ggplot(data = titanic,
+            mapping = aes(x = fate,
+                          y = percent,
+                          fill = sex))
+
+p + geom_bar(position = "dodge",
+             stat = "identity") + # plot values as provided, do not summarize/count/etc.
+  theme(legend.position = "top") # this puts the legend at the top of the graph
+
+oecd_sum # another dataset that is already summarized
+
+p <- ggplot(data = oecd_sum,
+            mapping = aes(x = year, 
+                          y = diff,
+                          fill = hi_lo))
+
+p + geom_col() + # this is the same as geom_bar with stat = "identity"
+  guides(fill = FALSE) + # no legend
+  labs(x = NULL, # no x-axis label
+       y = "Difference in Years",
+       title = "The US Life Expectancy Gap",
+       subtitle = "Difference between US and OECD average life expectancies, 1960-2015",
+       caption = "Data: OECD. After a chart by Christopher Ingraham, Washington Post, December 27th 2017")
+
+```
+
+### Where to Go Next  
+Pick at least two of the questions presented under the *Where to Go Next* section and answer them.
+
+
+## Graph Tables, Make Labels, Add Notes
+
+### Summarizing Data
+
+It is best practice to calculate the summary statistics first and then plot them, rather than using the `stat_` functions within `geom_` functions. This is because it makes the code easier to understand and read and allows us to double check the data and aggregations more easily.
+
+The pipe operator `%>%` from `dplyr` allows us to pass data from one operation or function to another. Usually there is a sequence of steps: group, filter/select, mutate, then summarize. 
+
+Within `group_by()`, grouping levels (left to right) go from outermost to innermost. Functions used to create new variables (such as `summarize()`) will be applied to the innermost group level first. 
+
+```{r summarize}
+
+# Create a tibble/datat table with the percent of each religion by region
+rel_by_region <- gss_sm %>%
+  group_by(bigregion, religion) %>%
+  summarize(N = n()) %>%
+  mutate(freq = N / sum(N),
+         pct = round((freq * 100), 0))
+
+# Check the percentages sum to 100 by region
+rel_by_region %>% 
+  group_by(bigregion) %>%
+  summarise(total = sum(pct))
+
+# Make a plot (note: Healy stops using the argument name)
+p <- ggplot(data = rel_by_region,
+            mapping = aes(x = bigregion,
+                          y = pct,
+                          fill = religion))
+
+p + 
+  geom_col(position = "dodge2") +
+  labs(x = "Region",
+       y = "Percent",
+       fill = "Reiligion") +
+  theme(legend.position = "top")
+
+# Let's rearrange it a little
+p <- ggplot(data = rel_by_region,
+            mapping = aes(x = religion,
+                          y = pct,
+                          fill = religion))
+
+p + 
+  geom_col(position = "dodge2") +
+  labs(x = NULL, # don't put a label on the axis
+       y = "Percent",
+       fill = "Religion") +
+  guides(fill = FALSE) +
+  coord_flip() + # switches the x and y axes after the plot is made
+  facet_grid(~ bigregion)
+
+```
+
+### Continuous Variables by Group or Category
+
+Will be revisited in Week 9, but we will look at some more `dplyr` examples here.
+
+```{r box-plots}
+
+# Get information about consent laws by country
+by_country <- organdata %>%
+  group_by(consent_law, country) %>%
+  summarize(donors_mean = mean(donors, na.rm = TRUE),
+            donors_sd = sd(donors, na.rm = TRUE),
+            gdp_mean = mean(gdp, na.rm = TRUE),
+            health_mean = mean(health, na.rm = TRUE),
+            roads_mean = mean(roads, na.rm = TRUE),
+            cerebvas_mean = mean(cerebvas, na.rm = TRUE))
+
+by_country
+
+# Another way to do this in a shorter step
+by_country <- organdata %>%
+  group_by(consent_law, country) %>%
+  summarize_if(is.numeric, 
+               list(mean = mean, sd = sd), # note funs is deprecated
+               na.rm = TRUE) %>% 
+  ungroup()
+
+
+# Make a simple plot of our summarized data
+p <- ggplot(data = by_country,
+            mapping = aes(x = donors_mean,
+                          y = reorder(country, donors_mean), # this puts the countries in order by donors_mean
+                          color = consent_law))
+
+p + 
+  geom_point(size = 3) +
+  labs(x = "Donor Procurement Rate",
+       y = "", # another way of putting no label on an axis
+       color = "Consent Law")
+
+```
+
+### Plot Text Directly
+
+`geom_text()` is used to plot labels on a graph. The argument `hjust` can be used to left or right justify the text. `hjust = 0` will left-justify; `hjust = 1` will right-justify.  
+
+```{r plot-text}
+
+p <- ggplot(data = by_country,
+            mapping = aes(x = roads_mean,
+                          y = donors_mean)) 
+
+p + 
+  geom_point() + # plot points
+  geom_text(mapping = aes(label = country)) # plot the labels
+
+# Text is right on top of the points, use hjust to move it
+p + 
+  geom_point() +
+  geom_text(mapping = aes(label = country),
+            hjust = 0)
+
+
+```
+The `ggrepepl` package provides two geoms that are more flexible for plotting labels.
+
+```{r ggrepel}
+
+library(ggrepel)
+
+# Switch datasets
+elections_historic %>% select(2:7)
+
+# Set titles and labels
+p_title <- "Presidential Elections: Popular & Electoral College Margins"
+p_subtitle <- "1824-2016"
+p_caption <- "Data for 2016 are provisional"
+x_label <- "Winner's share of Popular Vote"
+y_label <- "Winner's share of Electoral College Votes"
+
+p <- ggplot(data = elections_historic,
+            mapping = aes(x = popular_pct,
+                          y = ec_pct,
+                          label = winner_label))
+
+p + 
+  geom_hline(yintercept = 0.5,
+             size = 1.4,
+             color = "gray80") +
+  geom_vline(xintercept = 0.5,
+             size = 1.4,
+             color = "gray80") +
+  geom_point() +
+  geom_text_repel() +
+  scale_x_continuous(labels = scales::percent) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(x = x_label,
+       y = y_label,
+       title = p_title,
+       subtitle = p_subtitle,
+       caption = p_caption)
+
+
+```
+
+### Label Outliers
+
+To label specific points, we need to tell the geom which points to label using the `subset()` function rather than giving the geom the entire dataset.
+
+```{r label-outliers-1}
+
+p <- ggplot(data = by_country,
+            mapping = aes(x = gdp_mean,
+                          y = health_mean))
+
+p + 
+  geom_point() +
+  # Only label points with mean GDP greater than 25,000
+  geom_text_repel(data = subset(by_country, gdp_mean > 25000),
+                  mapping = aes(label = country)) 
+
+p +
+  geom_point() +
+  # Only label points with mean GDP greater than 25,000 OR 
+  # mean health less than 1,500 or Belgium
+  geom_text_repel(data = subset(by_country, 
+                                gdp_mean > 25000 |
+                                  health_mean < 1500 |
+                                  country %in% "Belgium"),
+                  mapping = aes(label = country))
+
+
+
+
+
+```
+
+An alternative to using `subset()` to filter the data is to add a variable that already has the conditions for labeling to the dataset.
+
+```{r label-outliers-2}
+
+# Add code/indicator variable to organ data
+organdata$ind <- organdata$ccode %in% c("Ita", "Spa") & organdata$year > 1998
+
+p <- ggplot(data = organdata,
+            mapping = aes(x = roads,
+                          y = donors,
+                          color = ind))
+
+p + 
+  geom_point() +
+  geom_text_repel(data = subset(organdata, ind),
+                  mapping = aes(label = ccode)) +
+  guides(label = FALSE,
+         color = FALSE) # removes legend
+
+```
+
+
+### Write and Draw in the Plot Area
+
+`annotate()` can be used to add annotations from different geoms to plots (text, shading, etc.)
+
+```{r annotate}
+
+p <- ggplot(data = organdata,
+            mapping = aes(x = roads,
+                          y = donors))
+
+p + 
+  geom_point() +
+  annotate(geom = "text", # a text annotation
+           x = 91, # x position for the annotation
+           y = 33, # y position for the annotation
+           label = "A surprisingly high \n recovery rate", # label for the annotation
+           hjust = 0) # left-align
+
+p + 
+  geom_point() +
+  annotate(geom = "rect", # a rectangular annotation
+           xmin = 125, xmax = 155, # x position for the annotation
+           ymin = 30, ymax = 35, # y position for the annotation
+           fill = "red", alpha = 0.2) + # color/fill properties for the annotation
+    annotate(geom = "text", # a text annotation
+           x = 91, # x position for the annotation
+           y = 33, # y position for the annotation
+           label = "A surprisingly high \n recovery rate", # label for the annotation
+           hjust = 0) 
+
+```
+
+
+### Understanding Scales, Guides, and Themes
+
+`scale_<MAPPING>_<KIND>()` functions can be used to adjust the axes and colors used in plots. The `guide()` function can be used to adjust the legend. The `theme()` function can be used to adjust the overall look of a plot.
+
+```{r scales}
+
+p <- ggplot(data = organdata,
+            mapping = aes(x = roads,
+                          y = donors, 
+                          color = world))
+
+# Adjust the x and y axes
+p + 
+  geom_point() +
+  scale_x_log10() +
+  scale_y_continuous(breaks = c(5, 15, 25),
+                     labels = c("Five", "Fifteen", "Twenty Five"))
+
+# Adjust the color legend
+p + 
+  geom_point() +
+  scale_color_discrete(labels = c("Corporatist", "Liberal", 
+                                  "Social Democrat", "Unclassified")) +
+  labs(x = "Road Deaths",
+       y = "Donor Procurement",
+       color = "Welfare State")
+
+```
+
+
+
+### Where to Go Next  
+Pick at least two of the questions presented under the *Where to Go Next* section and answer them.
+
+## Work with Models
+
+```{r}
+
+```
+
+## Draw Maps
+
+There are many different ways to represent data on a map; the designer needs to decide how fine the resolution of the representation should be, how to convey the weight of different data points, how to accurately represent spatial data, and the map type to use. 
+
+### Map U.S. State-Level Data
+
+```{r us-elections-1}
+
+# Election data - select columns of interest and view a sample of 5 rows
+election %>% 
+  select(state, total_vote, r_points, pct_trump, party, census) %>%
+  sample_n(5) 
+
+# FIPS code is a unique six-digit identifier for every U.S. county
+# The first two digits of a FIPS code represent the state
+
+# Set colors for Democratic and Republican parties
+party_colors <- c("#2E74C0", "#CB454A")
+
+# Create a plot of the elections data in a faceted dot plot
+
+p0 <- ggplot(data = subset(election, st %nin% "DC"),
+             mapping = aes(x = r_points,
+                           y = reorder(state, r_points),
+                           color = party))
+
+p1 <- p0 +
+  geom_vline(xintercept = 0, color = "gray30") +
+  geom_point(size = 2)
+
+p2 <- p1 + 
+  scale_color_manual(values = party_colors)
+
+p3 <- p2 + 
+  scale_x_continuous(breaks = c(-30, -20, -10, 0, 10, 20, 30, 40),
+                              labels = c("30\n(Clinton)",
+                                         "20", "10", "0", "10", "20", "30",
+                                         "40\n(Trump)"))
+
+p3 + 
+  facet_wrap(~ census, ncol = 1, scales = "free_y") +
+  guides(color = FALSE) +
+  labs(x = "Point Margin",
+       y = "") +
+  theme(axis.text = element_text(size = 8))
+
+```
+
+The `maps` library provides pre-drawn map data.
+
+```{r us-map-1}
+
+library(maps)
+
+# Get data for U.S. States
+us_states <- map_data("state")
+
+head(us_states) # it provides latitude and longitude information; region is the state name
+
+dim(us_states) # it's a large data frame
+
+# Make a map
+
+p <- ggplot(data = us_states,
+            mapping = aes(x = long, # Use latitude and longitude to plot states
+                          y = lat,
+                          group = group)) 
+
+p + 
+  geom_polygon(fill = "white",
+               color = "black") # Outline of a map of U.S. states
+
+
+p <- ggplot(data = us_states,
+            mapping = aes(x = long, 
+                          y = lat,
+                          group = group,
+                          fill = region)) # add color fill to the states
+
+p + 
+  geom_polygon(color = "gray90",
+                size = 0.1) +
+  guides(fill = FALSE)
+
+```
+
+Sometimes we will want to alter the map projection so that it looks more accurate. This can be done using the `coord_map()` function to select an alternate coordinate system (right now it is Cartesian). To use the Albers projection, we have to provide numbers for `lat0` and `lat1`.
+
+```{r us-map-2}
+
+p <- ggplot(data = us_states,
+            mapping = aes(x = long, 
+                          y = lat,
+                          group = group,
+                          fill = region)) 
+
+p + 
+  geom_polygon(color = "gray90",
+                size = 0.1) +
+  coord_map(projection = "albers",
+            lat0 = 39,
+            lat1 = 45) +
+  guides(fill = FALSE)
+
+```
+
+Now it is time to get our data onto the map. We have to merge the two datasets - one has the elections data and one has the data to draw the states on the map. We can use the `left_join()` function to do this. It is important for a column of data in each dataset to match exactly so that we can put the datasets together.
+
+```{r us-map-3}
+
+# First we need to lowercase the state names and put them in a column called "region", to match the mapping data
+election$region <- tolower(election$state)
+
+# Now we can join the datasets together using the common region column
+us_states_elec <- left_join(us_states, election)
+
+# We are now ready to plot
+p <- ggplot(data = us_states_elec,
+            mapping = aes(x = long,
+                          y = lat,
+                          group = group,
+                          fill = party))
+
+p + 
+  geom_polygon(color = "gray90",
+               size = 0.1) +
+  coord_map(projection = "albers",
+            lat0 = 39,
+            lat1 = 45) +
+  scale_fill_manual(values = party_colors) + # adjust the colors of the map
+  labs(title = "Election Results 2016", fill = NULL)  +
+  theme_map() # added in setup chunk
+
+```
+Mapping the data only to states is a little deceptive because there are differences in voting by county and certain areas of the country have larger populations than others.
+
+```{r us-map-4}
+
+# Put a continuous variable on the map fill
+
+p <- ggplot(data = us_states_elec,
+            mapping = aes(x = long,
+                          y = lat,
+                          group = group,
+                          fill = pct_trump))
+
+p + geom_polygon(color = "gray90",
+                 size = 0.1) +
+  coord_map(projection = "albers", 
+            lat0 = 39,
+            lat1 = 45) +
+  labs(title = "Trump vote",
+       fill = "Percent") +
+  theme_map()
+
+# Let's change the color to red and have darker red mean higher percent
+p + geom_polygon(color = "gray90",
+                 size = 0.1) +
+  coord_map(projection = "albers", 
+            lat0 = 39,
+            lat1 = 45) +
+  labs(title = "Trump vote",
+       fill = "Percent") +
+  scale_fill_gradient(low = "white", 
+                      high = "#CB454A") +
+  theme_map()
+
+```
+
+`scale_gradient2()` is a function that creates a diverging scale from a midpoint. 
+
+```{r us-map-5}
+
+p <- ggplot(data = us_states_elec,
+            mapping = aes(x = long,
+                          y = lat,
+                          group = group,
+                          fill = d_points))
+
+# Create a gradient fill for point margins
+p +
+  geom_polygon(color = "gray90",
+               size = 0.1) +
+  coord_map(projection = "albers",
+            lat0 = 39,
+            lat1 = 45) +
+  scale_fill_gradient2(low = "red",
+                       mid = scales::muted("purple"),
+                       high = "blue",
+                       breaks = c(-25, 0, 25, 50, 75)) +
+  labs(title = "Winning margins",
+       fill = "Percent") +
+  theme_map()
+
+# Remove D.C. since it is an outlier; gradient colors are enhanced
+# Note: earlier we used st to remove D.C., now we're using region
+p <- ggplot(data = subset(us_states_elec, 
+                          region %nin% "district of columbia"), 
+            mapping = aes(x = long,
+                          y = lat,
+                          group = group,
+                          fill = d_points))
+p +
+  geom_polygon(color = "gray90",
+               size = 0.1) +
+  coord_map(projection = "albers",
+            lat0 = 39,
+            lat1 = 45) +
+  scale_fill_gradient2(low = "red",
+                       mid = scales::muted("purple"),
+                       high = "blue",
+                       breaks = c(-25, 0, 25, 50, 75)) +
+  labs(title = "Winning margins",
+       fill = "Percent") +
+  theme_map()
+
+```
+
+### America's Ur-choropleths 
+
+Data can be mapped to counties as well, but it's important to remember the population distribution in the U.S. Choropleth maps of the U.S. tend to show population density more than anything else because there are concentrations of population in counties in the northeast and the west coast compared to the west. Note that the previous maps did not include Alaska or Hawaii. Now, we are going to add them using a county map dataset.
+
+```{r us-map-6}
+
+# Mapping dataset for U.S. counties
+county_map %>%
+  sample_n(5) # FIPS ID is used to identify the counties
+
+# County demographic data for U.S. Counties
+county_data %>%
+  select(id, name, state, pop_dens, pct_black) %>%
+  sample_n(5) # FIPS ID is used to identify the counties
+
+head(county_data) # ID 0 is for the entire U.S.; IDs with just the first two-digits is for the state
+
+# Put  the mapping data and demographic data together
+county_full <- left_join(county_map, county_data, by = "id")
+
+# Plot population density by county
+p <- ggplot(data = county_full,
+            mapping = aes(x = long, y = lat,
+                          fill = pop_dens,
+                          group = group))
+p +
+  geom_polygon(color = "gray90", size = 0.05) +
+  coord_equal() + # relative scale of map does not change, even if plot dimensions change
+  scale_fill_brewer(palette = "Blues",
+                    labels = c("0-10", "10-50", "50-100", "100-500",
+                               "500-1,000", "1,000-5,000", ">5,000")) +
+  labs(fill = "Population per\nsquare mile") +
+  theme_map() +
+  guides(fill = guide_legend(nrow = 1)) +
+  theme(legend.position = "bottom")
+
+# Plot percent of Black population by county
+
+p <- ggplot(data = county_full,
+            mapping = aes(x = long, y = lat,
+                          fill = pct_black,
+                          group = group)) 
+
+p + 
+  geom_polygon(color = "gray90",
+               size = 0.05) +
+  coord_equal() +
+  scale_fill_brewer(palette = "Greens") +
+  labs(fill = "US Population, Percent Black") +
+  theme_map() +
+  guides(fill = guide_legend(nrow = 1)) +
+  theme(legend.position = "bottom")
+
+```
+
+The population density and the percent of the population that is Black are confounding variables with many other county-level variables that we might want to examine, so it is important to keep the previous two plots in mind whenever plotting county-level data. To demonstrate this issue, we will make two more plots - one on gun-related suicides and one on binned population density. 
+
+```{r us-map-7}
+
+# Create the color palette
+# brewer.pal() produces evenly spaced color palettes
+orange_pal <- RColorBrewer::brewer.pal(n = 6, name = "Oranges")
+orange_pal
+
+# Reverse color palette
+orange_rev <- rev(orange_pal)
+orange_rev
+
+# Recreate a "poorly sourced by widely circulated county map of firearm-related suicide rates" (p. 186)
+gun_p <- ggplot(data = county_full,
+                mapping = aes(x = long, y = lat,
+                              fill = su_gun6,
+                              group = group))
+
+gun_p1 <- gun_p +
+  geom_polygon(color = "gray90",
+               size = 0.05) +
+  coord_equal()
+
+gun_p2 <- gun_p1 +
+  scale_fill_manual(values = orange_pal)
+
+gun_p2 + 
+  labs(title = "Gun-Related Suicides 1999-2015",
+       fill = "Rate per 100,000pop.") +
+  theme_map() +
+  theme(legend.position = "bottom")
+
+# Create the reverse-coded population density map
+pop_p <- ggplot(data = county_full,
+                mapping = aes(x = long, y = lat,
+                              fill = pop_dens6,
+                              group = group))
+
+pop_p1 <- pop_p +
+  geom_polygon(color = "gray90", size = 0.05) +
+  coord_equal()
+
+pop_p2 <- pop_p1 +
+  scale_fill_manual(values = orange_rev)
+
+pop_p2 + labs(title = "Reverse-coded Population Density",
+              fill = "People per square mile") +
+  theme_map() +
+  theme(legend.position = "bottom")
+
+```
+"Small differences in reporting, combined with coarse binning and miscoding, will produce spatially misleading and substantively mistaken results. It might seem that focusing on on the details of variable coding in this particular case is a little too much in the weeds for a genreal introduction. But it is exactly these details that can dramatically alter the appearance of any graph, and especially maps, in a way that can be hard to detect after the fact." (p. 189)
+
+### Statebins
+
+The `statebins` package is an alternative way to develop U.S. maps. The syntax is slightly different than `ggplot`; the `statebins` package has been updated since the writing of the book, so the code below is different than the code in the book.
+
+```{r statebins}
+
+# install.packages("statebins") # note statebins has not been previously installed
+
+library(statebins)
+
+# The statebins package has changed since this book was written
+
+# Continuous Data
+
+statebins(state_data = election,
+          state_col = "state",
+          value_col = "pct_trump",
+          round = FALSE) +
+  labs(fill = "Percent Trump") +
+  scale_fill_gradient(low = "#FEE5D9", 
+                      high = "#A50F15") +
+  theme_statebins() +
+  theme(legend.position = "top") 
+
+statebins(state_data = subset(election, st %nin% "DC"),
+          state_col = "state",
+          value_col = "pct_clinton",
+          round = FALSE) +
+  scale_fill_gradient(low = "#EFF3FF", 
+                      high = "#08519C") +
+  labs(fill = "Percent Clinton") +
+  theme_statebins() +
+  theme(legend.position = "top") 
+
+  
+# Categorical Data
+
+ggplot(data = election, 
+       mapping = aes(state = st,
+                     fill = party)) +
+  geom_statebins() +
+  scale_fill_manual(values = c("royalblue", "darkred"),
+                    labels = c("Clinton", "Trump")) +
+  labs(fill = "Winner") +
+  coord_equal() +
+  theme_statebins() +
+  theme(legend.position = "right") 
+
+# Binned Data
+
+ggplot(data = election, 
+       mapping = aes(state = st,
+                     fill = cut(pct_trump, 4))) +
+  geom_statebins() +
+  scale_fill_brewer(palette = "Reds",
+                    labels = c("4-21", "21-37", "37-53", "53-70")) +
+  labs(fill = "Percent Trump") +
+  coord_equal() +
+  theme_statebins() +
+  theme(legend.position = "top") 
+
+
+
+```
+
+### Small-Multiple Maps
+
+Use small-multiple maps to show geographic data over time. We will also use the `viridis` package to get good color palettes that are vibrant on both ends.
+
+```{r map-small-multiple}
+
+opiates # state-level death rate from optiate-related causes 1999-2014
+
+# lower-case the state name to match the us_states data (from the maps package)
+opiates$region <- tolower(opiates$state)
+
+# join with the us_states data
+opiates_map <- left_join(us_states, opiates)
+
+library(viridis)
+
+p0 <- ggplot(data = subset(opiates_map, year > 1999),
+             mapping = aes(x = long, y = lat,
+                           group = group,
+                           fill = adjusted))
+
+p1 <- p0 +
+  geom_polygon(color = "gray90",
+               size = 0.05) +
+  coord_map(projection = "albers",
+            lat0 = 39,
+            lat1 = 45)
+
+p2 <- p1 +
+  scale_fill_viridis_c(option = "plasma")
+
+p2 + 
+  theme_map() +
+  facet_wrap(~ year, ncol = 3) +
+  theme(legend.position = "bottom",
+        strip.background = element_blank()) +
+  labs(title = "Opiate Related Deaths by State, 2000-2014",
+       fill = "Death rate per 100,000 population")
+
+
+```
+
+But this might not be the best way to view this data due to the issues with population, demographics, and the difficulty in comparing things spatially. 
+
+### Is Your Data Really Spatial?
+
+We can make line plots of the opiates data over time, which may make it easier to make comparisons and draw conclusions.
+
+```{r line-plots-opiates}
+
+p <- ggplot(data = opiates,
+            mapping = aes(x = year,
+                          y = adjusted, 
+                          group = state))
+
+p + geom_line(color = "gray70") # But this is a little difficult to see since there are so many lines
+
+# Divide it up by census division
+
+p0 <- ggplot(data = drop_na(opiates, division_name), # remove rows with NA for division_name to leave out D.C.
+            mapping = aes(x = year, 
+                          y = adjusted))
+p1 <- p0 +
+  geom_line(color = "gray70",
+            mapping = aes(group = state)) # make line chart, one line per state
+
+p2 <- p1 + 
+  geom_smooth(mapping = aes(group = division_name),
+              se = FALSE) # make trend line by census division
+
+p3 <- p2 + # label only the end of the line with the state
+  geom_text_repel(data = subset(opiates, year == max(year) & abbr != "DC"),
+                  mapping = aes(x = year,
+                                y = adjusted,
+                                label = abbr),
+                  size = 1.8,
+                  segment.color = NA, # no line segment linking text to point
+                  nudge_x = 30) + # shift the label text to the right
+  # shift coordinate system so there's room for the labels
+  coord_cartesian(c(min(opiates$year), max(opiates$year))) 
+
+p3 + 
+  labs(x = "",
+       y = "Rate per 100,000 population",
+       title = "State-Level Opiate Death Rates by Census Division, 1999-2014") +
+  facet_wrap(~ reorder(division_name, -adjusted, na.rm = TRUE),
+              # put the divisions with highest rates first
+             nrow = 3)
+
+
+```
+
+
+
+## Refine your Plots
+
+```{r}
+
+```
+
+
