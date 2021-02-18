@@ -544,6 +544,52 @@ The pipe operator `%>%` from `dplyr` allows us to pass data from one operation o
 
 Within `group_by()`, grouping levels (left to right) go from outermost to innermost. Functions used to create new variables (such as `summarize()`) will be applied to the innermost group level first. 
 
+
+```{r}
+
+rel_by_region <- gss_sm %>%
+  group_by(bigregion, religion) %>%
+  summarize(N = n()) %>%
+  mutate(freq = N / sum(N),
+         pct = round((freq * 100), 0))
+
+rel_by_region %>%
+  group_by(bigregion) %>%
+  summarize(total = sum(pct))
+  
+
+p <- ggplot(data = rel_by_region,
+            mapping = aes(x = bigregion,
+                          y = pct,
+                          fill = religion))
+
+p + geom_col(position = "dodge2") +
+  labs(x = "Region",
+       y = "Percent") +
+  theme(legend.position = "top")
+
+p <- ggplot(data = rel_by_region,
+            mapping = aes(x = religion,
+                          y = pct,
+                          fill = religion))
+
+
+p + geom_col(position = "dodge2") +
+  labs(x = NULL,
+       y = "Percent",
+       fill = "Religion") +
+  guides(fill = FALSE) +
+  coord_flip() +
+  facet_grid(~ bigregion)
+  
+
+
+
+```
+
+
+
+
 ```{r summarize}
 
 # Create a tibble/data table with the percent of each religion by region
