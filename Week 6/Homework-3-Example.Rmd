@@ -1,0 +1,141 @@
+---
+title: "GRD 610A Data Visualization II"
+subtitle: "Homework #3"
+author: "Jenn Schilling"
+date: "2021-02-21"
+output:
+ html_document:
+  theme: "simplex" # Theme Gallery: https://www.datadreaming.org/post/r-markdown-theme-gallery/
+---
+
+
+```{r setup, include=FALSE}
+
+## By default, show code for all chunks in the knitted document,
+## as well as the output. To override for a particular chunk
+## use echo = FALSE in its options.
+knitr::opts_chunk$set(echo = TRUE)
+
+## Set the default size of figures
+knitr::opts_chunk$set(fig.width=8, fig.height=5)  
+
+## Load the libraries you will be using 
+library(here)
+library(tidyverse)
+library(ggrepel)
+library(ggforce)
+
+## Load the dataset you will be using
+library(palmerpenguins)
+
+```
+
+
+
+# Homework Assignment
+
+This is where you will put your R code and create your plots. Remember to comment your code.
+
+```{r explore-data}
+
+View(penguins)
+
+summary(penguins)
+
+table(penguins$species)
+
+table(penguins$island)
+
+table(penguins$year)
+
+```
+
+
+```{r first-plot}
+
+p1 <- ggplot(data = penguins,
+            mapping = aes(x = species,
+                          fill = species))
+
+p1 + 
+  geom_bar() +
+  facet_wrap(~island) +
+  labs(title = "Number of penguins of each species found on each island",
+       x = "",
+       y = "Number of Penguins",
+       caption = "Data from {palmerpenguins}") +
+  guides(fill = FALSE) +
+  geom_text(mapping = aes(label = species), stat = "count", vjust = -1) +
+  coord_cartesian(expand = FALSE,
+                  ylim = c(0, 135)) +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        plot.title.position = "plot",
+        plot.caption.position = "plot")
+
+
+```
+
+```{r second-plot}
+
+# Remove NAs
+penguins_clean <- penguins %>%
+  filter(!is.na(bill_length_mm)) %>%
+  filter(!is.na(bill_depth_mm))
+
+p2 <- ggplot(data = penguins_clean,
+             mapping = aes(x = bill_length_mm,
+                           y = bill_depth_mm,
+                           color = species))
+
+p2 + 
+  geom_mark_ellipse(aes(fill = species, label = species),
+                    alpha = 0.15, show.legend = FALSE) + 
+  geom_point() +
+  guides(color = FALSE) +
+  # adjust coordinate system to view labels and ellipse annotations 
+  coord_cartesian(xlim = c(25, 65), ylim = c(10, 25)) + 
+  labs(title = "Bill Dimensions of Penguins on Palmer Archipelgao Islands",
+       x = "Bill Length (mm)",
+       y = "Bill Depth (mm)",
+       caption = "Data from {palmerpenguins}") 
+
+
+```
+
+```{r third-plot}
+
+p3 <- ggplot(data = penguins,
+             mapping = aes(x = flipper_length_mm,
+                           y = body_mass_g,
+                           color = species))
+
+p3 + geom_point() +
+  geom_smooth(se = FALSE) +
+  scale_color_brewer(palette = "Dark2") +
+  annotate(geom = "text",
+           x = 215,
+           y = 6100,
+           label = "Gentoo",
+           color = "#7570b3") +
+  annotate(geom = "text",
+           x = 180,
+           y = 4500,
+           label = "Adelie",
+           color = "#1b9e77") +
+  annotate(geom = "text",
+           x = 200,
+           y = 3000,
+           label = "Chinstrap",
+           color = "#d95f02") +
+  labs(title = "Flipper Length and Body Mass of Penguins on Palmer Archipelgao Islands",
+       x = "Flipper Length (mm)",
+       y = "Body Mass (g)",
+       caption = "Data from {palmerpenguins}") +
+  guides(color = FALSE) +
+  theme(plot.title.position = "plot",
+        plot.caption.position = "plot")
+  
+
+```
+

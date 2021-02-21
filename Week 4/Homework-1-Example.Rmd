@@ -1,0 +1,113 @@
+---
+title: "GRD 610A Data Visualization II"
+subtitle: "Homework #1"
+author: "Jenn Schilling"
+date: "2021-02-21"
+output:
+ html_document:
+  theme: "simplex" # Theme Gallery: https://www.datadreaming.org/post/r-markdown-theme-gallery/
+---
+
+
+```{r setup, include=FALSE}
+
+## By default, show code for all chunks in the knitted document,
+## as well as the output. To override for a particular chunk
+## use echo = FALSE in its options.
+knitr::opts_chunk$set(echo = TRUE)
+
+## Set the default size of figures
+knitr::opts_chunk$set(fig.width=8, fig.height=5)  
+
+## Load the libraries you will be using 
+library(here)
+library(tidyverse)
+
+## Load the dataset you will be using
+library(palmerpenguins)
+
+```
+
+
+
+# Homework Assignment
+
+This is where you will put your R code and create your plots. Remember to comment your code.
+
+```{r explore-data}
+
+View(penguins)
+
+summary(penguins)
+
+table(penguins$species)
+
+table(penguins$island)
+
+table(penguins$year)
+
+```
+
+
+```{r first-plot}
+
+p1 <- ggplot(data = penguins,
+            mapping = aes(x = species,
+                          fill = species))
+
+p1 + 
+  geom_bar() +
+  facet_wrap(~island)
+
+
+```
+
+```{r second-plot}
+
+p2 <- ggplot(data = penguins,
+             mapping = aes(x = bill_length_mm,
+                           y = bill_depth_mm,
+                           color = species))
+
+p2 + 
+  geom_point()
+
+
+```
+
+```{r third-plot}
+
+p3 <- ggplot(data = penguins,
+             mapping = aes(x = flipper_length_mm,
+                           y = body_mass_g,
+                           color = species))
+
+p3 + 
+  geom_point() +
+  geom_smooth(se = FALSE)
+
+```
+
+
+
+```{r save-plot}
+
+p4 <- ggplot(data = penguins,
+             mapping = aes(x = flipper_length_mm,
+                           y = body_mass_g,
+                           color = species))
+
+p4_save <- p4 + geom_point() +
+  geom_smooth(se = FALSE) 
+
+ggsave(file = "test.svg", 
+       plot = p4_save, 
+       device = "svg",
+       width = 10, 
+       height = 8)
+
+# Might get this error: Error in loadNamespace(name) : there is no package called ‘svglite’
+# If so, need to run install.packages("svglite") 
+
+```
+
