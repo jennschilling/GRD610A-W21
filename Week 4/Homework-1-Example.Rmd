@@ -47,7 +47,7 @@ table(penguins$island)
 table(penguins$year)
 
 ```
-
+How many penguins of each species are on each island?
 
 ```{r first-plot}
 
@@ -62,6 +62,8 @@ p1 +
 
 ```
 
+Is there a difference between bill length and bill depth by penguin species?
+
 ```{r second-plot}
 
 p2 <- ggplot(data = penguins,
@@ -74,6 +76,8 @@ p2 +
 
 
 ```
+
+Is there a relationship between flipper length and body mass by penguin speices?
 
 ```{r third-plot}
 

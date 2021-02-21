@@ -72,7 +72,7 @@ p1 +
 
 avg_data <- penguins %>%
   group_by(species) %>%
-  summarise(avg_bill_length = mean(bill_length_mm, na.rm = TRUE),
+  summarise(avg_bill_length = mean(bill_length_mm, na.rm = TRUE), # na.rm needs to be TRUE to remove missing values and properly compute the average
             avg_bill_depth = mean(bill_depth_mm, na.rm = TRUE),
             .groups = "keep")
 

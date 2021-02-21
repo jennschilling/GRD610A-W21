@@ -59,7 +59,8 @@ p1 <- ggplot(data = penguins,
 
 p1 + 
   geom_bar() +
-  facet_wrap(~island) +
+  facet_wrap(~island,
+             scales = "free_x") +
   labs(title = "Number of penguins of each species found on each island",
        x = "",
        y = "Number of Penguins",
@@ -78,6 +79,8 @@ p1 +
 
 ```{r second-plot}
 
+# Source for geom_mark_ellipse(): https://z3tt.github.io/OutlierConf2021/
+
 # Remove NAs
 penguins_clean <- penguins %>%
   filter(!is.na(bill_length_mm)) %>%
@@ -89,7 +92,7 @@ p2 <- ggplot(data = penguins_clean,
                            color = species))
 
 p2 + 
-  geom_mark_ellipse(aes(fill = species, label = species),
+  geom_mark_ellipse(mapping = aes(fill = species, label = species),
                     alpha = 0.15, show.legend = FALSE) + 
   geom_point() +
   guides(color = FALSE) +
@@ -110,9 +113,9 @@ p3 <- ggplot(data = penguins,
                            y = body_mass_g,
                            color = species))
 
-p3 + geom_point() +
+p3_save <- p3 + geom_point() +
   geom_smooth(se = FALSE) +
-  scale_color_brewer(palette = "Dark2") +
+  scale_color_brewer(palette = "Dark2") + # https://colorbrewer2.org/#type=qualitative&scheme=Dark2&n=3
   annotate(geom = "text",
            x = 215,
            y = 6100,
@@ -138,7 +141,7 @@ p3 + geom_point() +
   
 # Save the plot
 ggsave(file = "plot_flipper_body_mass.svg", 
-       plot = , 
+       plot = p3_save, 
        device = "svg",
        width = 10, 
        height = 8)
