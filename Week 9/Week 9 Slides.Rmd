@@ -69,13 +69,91 @@ style_duo_accent(
 
 ---
 
-# Maps
+# Mapping Data
 
-**"How do you know that you have chosen the right graphic form to represent your data?"**
+**Main Attributes of a Map:**
+
+- Scale  
+- Projection  
+- Symbols 
 
 .bottom-note[
-(Cairo, 2016, pp. 121, 124-125)
+(Cairo, 2016, p. 263)
 ]
+
+???
+
+Large-scale map (close-up of a  town) versus small-scale map (entire Earth)
+
+Think about scale in relation to audience - how much do they know about the area and location?
+
+Projection: "The process of making a globe, or a portion of it, fit into a flat picture." (Cairo, 2016, p. 265)
+Some features will always be distorted (stretched or compressed) in the transformation
+
+
+---
+
+# Mapping Data
+
+**Projection:**
+
+- Developable surfaces   
+- Standard lines 
+
+**Distortions:**
+- Shape  
+- Area  
+- Angles  
+- Distance  
+- Direction  
+
+**Figure 10.4** shows and the text around it explains some differences in map projections
+
+**Figure 10.6** provides a series of questions and a suggestion of map projection
+
+.bottom-note[
+(Cairo, 2016, pp. 265-267)
+]
+
+???
+
+Developable surfaces - "the geometrical objects where the globe can be projected"
+
+Standard lines - tangent to the surface; "scale is only accurate along those lines"; move further away from the standard lines -> more distortion
+
+---
+
+# Mapping Data
+
+What were the key takeaways for you on mapping data?
+
+???
+
+Correctly sizing symbols is important
+
+Viewers won't be able to estimate shape sizes very well
+
+Symbol placement is important
+
+Never trust software defaults (p. 280)
+
+Take the time to set your own scale for color (p. 282-283)
+
+Use choropleth maps in combination with each other; add other charts/tables to go with choropleth maps
+
+Consider alternatives to area - circles or cartograms
+
+--
+
+Which maps did you find most engaging in this chapter? Why?
+
+--
+
+Which maps did you find least engaging in this chapter? Why?
+
+--
+
+What questions do you have?
 
 
 ---
@@ -124,13 +202,13 @@ class: center, middle, inverse
 
 **Task: ** Create 3 summary plots using data you have found  
 
-**Due: ** March 17, 2021 
+**Due: ** March 24, 2021 
 
 [Rubric](https://bb.collegeforcreativestudies.edu/webapps/rubric/do/course/manageRubrics?dispatch=view&context=course&rubricId=_42755_1&course_id=_35307_1)
 
 **Notes**
 
-- Use your own dataset (start looking for a dataset that you could use for the Final Project)
+- Use your own dataset (start looking for a dataset that you could use for the Final Project or go back to the dataset from the Midterm Project)
 
 - Use your resources: Healy, Google, Student Community BUT cite where you get code from if you copy it directly  
 
