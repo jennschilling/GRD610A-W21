@@ -136,6 +136,12 @@ p3 + geom_point() +
   theme(plot.title.position = "plot",
         plot.caption.position = "plot")
   
+# Save the plot
+ggsave(file = "plot_flipper_body_mass.svg", 
+       plot = , 
+       device = "svg",
+       width = 10, 
+       height = 8)
 
 ```
 
