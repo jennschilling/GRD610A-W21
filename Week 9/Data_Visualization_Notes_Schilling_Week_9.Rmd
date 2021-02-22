@@ -465,6 +465,9 @@ p + geom_bar(position = "dodge",
 
 
 ```
+
+### Histograms and Density Plots
+
 Histograms create bins of numerical data and display the distribution of the data within those bins.  
 
 ```{r histogram-density-plots}
@@ -472,6 +475,7 @@ Histograms create bins of numerical data and display the distribution of the dat
 # A new dataset
 glimpse(midwest)
 
+# Show distribution of the size of the counties in the Midwest
 p <- ggplot(data = midwest,
             mapping = aes(x = area))
 
@@ -516,6 +520,8 @@ p + geom_density(alpha = 0.3,
                  mapping = aes(y = ..scaled..))
 
 ```
+### Avoiding Transformation When Necessary
+
 Avoiding transformations - sometimes the data is already aggregated or summarized and we do not need a transformation.
 
 ```{r no-transform-plots}
@@ -608,9 +614,76 @@ p +
 
 ### Continuous Variables by Group or Category
 
-Will be revisited in Week 9, but we will look at some more `dplyr` examples here.
+In this section, we will learn how to use `geom_boxplot()`
 
 ```{r box-plots}
+
+# New Dataset on Organ Donations by country and year
+organdata %>% select(1:6) %>% sample_n(size = 10)
+
+# Graph some of the organ data without really looking at the dataset
+p <- ggplot(data = organdata,
+            mapping = aes(x = year, y = donors))
+
+p + geom_point() # get a warning about missing data; this graph doesn't make much sense
+
+# Plot the organ donations by country over time
+p <- ggplot(data = organdata,
+            mapping = aes(x = year, y = donors))
+
+p + geom_line(mapping = aes(group = country)) +
+  facet_wrap(~country) # automatically orders countries alphabetically
+
+# Make boxplots by country (using the data over the years)
+p <- ggplot(data = organdata,
+            mapping = aes(x = country, y = donors))
+
+p + geom_boxplot() +
+  coord_flip() # move country names to the y-axis
+
+# Let's reorder the boxplots by mean donation rate using the reorder function
+p <- ggplot(data = organdata,
+            mapping = aes(x = reorder(country, donors, na.rm = TRUE),
+                          y = donors))
+
+p + geom_boxplot() +
+  labs(x = NULL) + # no x-axis title
+  coord_flip()
+
+# Add color to the boxplots
+p <- ggplot(data = organdata,
+            mapping = aes(x = reorder(country, donors, na.rm = TRUE),
+                          y = donors,
+                          fill = world))
+
+p + geom_boxplot() +
+  labs(x = NULL) + # no x-axis title
+  coord_flip() +
+  theme(legend.position = "top")
+
+# Let's look at this data in point format
+p <- ggplot(data = organdata,
+            mapping = aes(x = reorder(country, donors, na.rm = TRUE),
+                          y = donors,
+                          color = world))
+
+p + geom_point() +
+  labs(x = NULL) +
+  coord_flip() +
+  theme(legend.position = "top")
+
+# Points are on top of each other, so use geom_jitter() to move them around a little
+p + geom_jitter() +
+  labs(x = NULL) +
+  coord_flip() +
+  theme(legend.position = "top")
+
+# Reduce the amount of spread in the points using position_jitter()
+p + geom_jitter(position = position_jitter(width = 0.15)) +
+  labs(x = NULL) +
+  coord_flip() +
+  theme(legend.position = "top")
+
 
 # Get information about consent laws by country
 by_country <- organdata %>%
@@ -633,7 +706,7 @@ by_country <- organdata %>%
   ungroup()
 
 
-# Make a simple plot of our summarized data
+# Make a simple plot of our summarized data (Cleaveland Dot Plot)
 p <- ggplot(data = by_country,
             mapping = aes(x = donors_mean,
                           y = reorder(country, donors_mean), # this puts the countries in order by donors_mean
@@ -643,8 +716,36 @@ p +
   geom_point(size = 3) +
   labs(x = "Donor Procurement Rate",
        y = "", # another way of putting no label on an axis
-       color = "Consent Law")
+       color = "Consent Law") +
+  theme(legend.position = "top")
 
+# Facet into two panels for the Cleaveland Dot Plot
+p <- ggplot(data = by_country,
+            mapping = aes(x = donors_mean,
+                          y = reorder(country, donors_mean)))
+
+p + 
+  geom_point(size = 3) +
+  facet_wrap(~ consent_law,
+             scales = "free_y", # allow the y-axis labels to be different on each facet
+             ncol = 1) # orient plot in a single columns
+  labs(x = "Donor Procurement Rate",
+       y = "") 
+
+# Plot the dots (which represent the mean) with the range of standard deviation using geom_pointrange()
+p <- ggplot(data = by_country,
+            mapping = aes(x = reorder(country, donors_mean),
+                          y = donors_mean))
+
+p + 
+  geom_pointrange(mapping = aes(ymin = donors_mean - donors_sd,
+                                ymax = donors_mean + donors_sd)) +
+  labs(x = "",
+       y = "Donor Procurement Rate") +
+  coord_flip() 
+# need to use coord_flip() because geom_pointrange() uses y, ymin, and ymax and we want to show this on the x-axis
+
+  
 ```
 
 ### Plot Text Directly
