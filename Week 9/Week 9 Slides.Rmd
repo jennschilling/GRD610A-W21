@@ -171,20 +171,243 @@ countdown(minutes = 15, seconds = 0,
 
 ---
 
-# New Dataset
-
-**2016 U.S. Presidential Election Data**
+# Data: `midwest`
 
 .center[
-```{r elections data, echo = FALSE}
+```{r midwest-data, echo = FALSE}
+sample_n(midwest %>% select(state, county, area, percollege), size = 10) %>%
+  knitr::kable(format = "html")
+```
+]
 
-election %>% 
-  select(state, total_vote, r_points, pct_trump, party, census) %>%
-  sample_n(10) %>%
+???
+
+Some of the columns from the `midwest` dataset
+
+percollege is percent college educated
+
+---
+
+# Histograms
+
+.pull-left[
+```{r histogram, include = FALSE}
+
+p <- ggplot(data = midwest,
+            mapping = aes(x = area))
+
+p + 
+  geom_histogram(bins = 10)
+
+```
+
+```{r decorate-histogram, echo = FALSE}
+
+decorate("histogram", eval = FALSE) %>%
+flair("geom_histogram") %>% 
+knit_print.with_flair()
+
+```
+]
+
+.pull-right[
+```{r output-histogram, ref.label = 'histogram', echo = FALSE}
+```
+]
+
+???
+
+This plot provides the distribution of the area of counties in the midwest
+
+---
+
+# Density Plots
+
+.pull-left[
+```{r density, include = FALSE}
+
+p <- ggplot(data = midwest,
+            mapping = aes(x = area))
+
+p + 
+  geom_density()
+
+```
+
+```{r decorate-density, echo = FALSE}
+
+decorate("density", eval = FALSE) %>%
+flair("geom_density") %>% 
+knit_print.with_flair()
+
+```
+]
+
+.pull-right[
+```{r output-density, ref.label = 'density', echo = FALSE}
+```
+]
+
+???
+
+`geom_density()` computes the kernel density estimate of the underlying distribution of the data
+
+Exact same mapping as above; note the difference in the y-axis range
+
+---
+
+# Density Plots
+
+.pull-left[
+```{r density-state, include = FALSE}
+
+p <- ggplot(data = midwest,
+            mapping = aes(x = area,
+                          fill = state,
+                          color = state))
+
+p + 
+  geom_density(alpha = 0.3)
+
+```
+
+```{r decorate-density-state, echo = FALSE}
+
+decorate("density-state", eval = FALSE) %>%
+flair("geom_density") %>% 
+knit_print.with_flair()
+
+```
+]
+
+.pull-right[
+```{r output-density-state, ref.label = 'density-state', echo = FALSE}
+```
+]
+
+???
+
+Can also fill density by state
+
+---
+
+# Data: `organdata`
+
+.center[
+```{r organ-data, echo = FALSE}
+sample_n(organdata %>% select(country, year, donors), size = 10) %>%
+  knitr::kable(format = "html")
+```
+]
+
+???
+
+Some of the columns from the `organdata` dataset
+
+
+---
+
+# Box Plots
+
+.pull-left[
+```{r organ-boxplot, include = FALSE}
+
+p <- ggplot(data = organdata,
+            mapping = 
+              aes(x = reorder(country,
+                              donors, 
+                              na.rm = TRUE),
+                  y = donors))
+
+
+p + geom_boxplot() +
+  labs(x = "") + 
+  coord_flip()
+
+```
+
+```{r decorate-organ-boxplot, echo = FALSE}
+
+decorate("organ-boxplot", eval = FALSE) %>%
+flair("reorder") %>%
+flair("geom_boxplot") %>% 
+knit_print.with_flair()
+
+```
+]
+
+.pull-right[
+```{r output-organ-boxplot, ref.label = 'organ-boxplot', echo = FALSE}
+```
+]
+
+---
+
+# Summarize Data
+
+```{r by-country}
+
+by_country <- organdata %>%
+  group_by(consent_law, country) %>%
+  summarize(donors_mean = mean(donors, na.rm = TRUE),
+            donors_sd = sd(donors, na.rm = TRUE))
+
+```
+
+.center[
+```{r by-country-display, echo = FALSE}
+
+head(by_country) %>%
   knitr::kable(format = "html")
 
 ```
 ]
+
+---
+
+# Point Range Plots
+
+.pull-left[
+```{r organ-pointrange, include = FALSE}
+
+p <- ggplot(data = by_country,
+            mapping = aes(x = reorder(country, 
+                                      donors_mean),
+                          y = donors_mean))
+
+p + 
+  geom_pointrange(
+    mapping = 
+      aes(ymin = donors_mean - donors_sd,
+          ymax = donors_mean + donors_sd)) +
+  labs(x = "",
+       y = "Donor Procurement Rate") +
+  coord_flip() 
+
+```
+
+```{r decorate-organ-pointrange, echo = FALSE}
+
+decorate("organ-pointrange", eval = FALSE) %>%
+flair("reorder") %>%
+flair("geom_pointrange") %>% 
+knit_print.with_flair()
+
+```
+]
+
+.pull-right[
+```{r output-organ-pointrange, ref.label = 'organ-pointrange', echo = FALSE}
+```
+]
+
+
+???
+
+Plot the dots (which represent the mean) with the range of standard deviation using `geom_pointrange()`
+
+Need to use `coord_flip()` because `geom_pointrange()` uses `y`, `ymin`, and `ymax` and we want to show this on the x-axis
+
 
 
 ---
