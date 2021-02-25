@@ -29,6 +29,7 @@ library(gapminder)
 library(here)
 library(socviz)
 library(tidyverse)
+library(ggrepel)
 
 ## Libraries: Install once per machine, load once per R session
 
@@ -546,7 +547,7 @@ Within `group_by()`, grouping levels (left to right) go from outermost to innerm
 
 ```{r summarize}
 
-# Create a tibble/datat table with the percent of each religion by region
+# Create a tibble/data table with the percent of each religion by region
 rel_by_region <- gss_sm %>%
   group_by(bigregion, religion) %>%
   summarize(N = n()) %>%
@@ -804,7 +805,7 @@ p +
                                   "Social Democrat", "Unclassified")) +
   labs(x = "Road Deaths",
        y = "Donor Procurement",
-       color = "Welfare State")
+       color = "Welfare State") 
 
 ```
 
