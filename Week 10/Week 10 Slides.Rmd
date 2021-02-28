@@ -62,7 +62,7 @@ style_duo_accent(
 - Discussion of Chapter 6: Exploring Data with Simple Charts in *The Truthful Art* (Cairo)  
 
 - Lab on Color palettes for visualization. Heat Maps. Drawing attention effectively in a visualization. 
-(??? of *Data Visualization* by Healy)  
+(Chapter 8 of *Data Visualization* by Healy)  
 
 - Homework Assignment #6
 
@@ -198,7 +198,7 @@ class: center, middle, inverse
 
 # Lab Time
 
-### XXXX
+### Sections 8.0 - 8.4
 
 
 ---
