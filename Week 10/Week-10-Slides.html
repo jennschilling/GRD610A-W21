@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>GRD 610A Data Visualization II</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Jenn Schilling" />
+    <meta name="date" content="2021-03-24" />
+    <script src="Week-10-Slides_files/header-attrs/header-attrs.js"></script>
+    <link href="Week-10-Slides_files/countdown/countdown.css" rel="stylesheet" />
+    <script src="Week-10-Slides_files/countdown/countdown.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="bottom-note.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# GRD 610A Data Visualization II
+## Effective Use of Color
+### Jenn Schilling
+### March 24, 2021
+
+---
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+
+.remark-code{line-height: 1.5; font-size: 80%} # smaller code font size
+
+&lt;/style&gt;
+
+# Today
+
+- Data Visualization of the Week  
+
+- Discussion of Chapter 6: Exploring Data with Simple Charts in *The Truthful Art* (Cairo)  
+
+- Lab on Color palettes for visualization. Heat Maps. Drawing attention effectively in a visualization. 
+(??? of *Data Visualization* by Healy)  
+
+- Homework Assignment #6
+
+
+---
+
+class: center, middle
+
+### "The greatest value of a picture is when it forces us to notice what we never expect to see."
+John W. Tukey, *Exploratory Data Analysis*
+
+.bottom-note[
+(Cairo, 2016, p. 151) 
+]
+
+???
+
+Tukey created **exploratory data analysis** and says that "before you can even being testing your ideas against evidence, it's essential to get a good feel for what your data look like."
+
+"the best way of doing so [getting a good feel for what you data look like] involves graphical displays, not just numerical summaries"
+
+(Cairo, 2016, p. 151)
+
+Cairo recommends finding data on a topic you're interested in and practicing with that
+
+---
+# Exploring Data with Simple Charts
+
+"The process of visually exploring data can be summarized in a single sentence: **find patterns and trends lurking in the data and then observe the deviations from those patterns**."
+
+.bottom-note[
+(Cairo, 2016, p. 152) 
+]
+
+
+--
+
+**Measures of Central Tendency**
+- Mode  
+- Median  
+- Mean
+- Weighted Mean
+
+???
+
+Mode: most frequent/common number
+Median: middle number/number that divides dataset in half
+Mean: average/sum divided be the number of numbers (sensitive to extreme values)
+
+Example: Salaries from UNC Chapel Hill w/ Michael Jordan (pp. 154-155)
+
+If Mean and Median are largely different, then that's a sign of skew
+
+Weighted mean (p. 156 - 157)
+
+--
+
+**Measures of Spread**
+- Range
+- Shape/Histogram
+- Plot
+
+???
+
+Spread gives us an idea how close the data is to the central measures
+Range: the difference between the maximum and minimum values
+Histogram: shows the frequency of each value or group of values; experiment with bin sizes
+Look for skew
+
+Making plots of the range and spread of data can help see trends
+
+---
+
+class: center, middle
+
+### "Finding stories is sometimes a matter of repeatedly asking ourselves what would happen if we plot our data in a different way."
+
+.bottom-note[
+(Cairo, 2016, p. 160) 
+]
+
+???
+
+The histogram/violin (Fig. 6.11), boxplots, pointrange (Fig. 6.9), and jitter plots (Fig. 6.10) we learned about in Week 9 are used in the figures in this section of the chapter.
+
+---
+
+class: center, middle
+
+### "a visualization designer should never rely on a single statistic or single chart or map when doing exploratory work"
+
+.bottom-note[
+(Cairo, 2016, p. 163) 
+]
+
+---
+
+# Exploring Data with Simple Charts
+
+- What is your main takeaway from this chapter?
+
+--
+
+- Which visual representations make the most sense to you?
+
+--
+
+- Why is this important?
+
+---
+
+class: center, middle
+
+# 15 Minute Break
+
+<div class="countdown" id="timer_603c0721" style="right:37%;bottom:25%;" data-warnwhen="60">
+<code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+---
+
+# Data: `midwest`
+
+
+
+
+---
+
+class: center, middle, inverse
+
+# Lab Time
+
+### XXXX
+
+
+---
+
+# Homework Assignment
+
+**Task: ** Create 3 visualizations that demonstrate effective color use  
+
+**Due: ** March 31, 2021 
+
+[Rubric](https://bb.collegeforcreativestudies.edu/webapps/rubric/do/course/manageRubrics?dispatch=view&amp;context=course&amp;rubricId=_42755_1&amp;course_id=_35307_1)
+
+**Notes**
+
+- Use your own dataset (start looking for a dataset that you could use for the Final Project or go back to the dataset from the Midterm Project)
+
+- Use your resources: Healy, Google, Student Community BUT cite where you get code from if you copy it directly  
+
+- See Blackboard assignment for a template `.Rmd` file
+
+---
+
+# Tasks to Complete
+
+- Reading (Cairo - CChapter 7: Visualizing Distributions)
+
+- Homework #6
+
+- Prepare for your Data Visualization of the Week
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"img_dir": "img",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

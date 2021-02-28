@@ -69,10 +69,108 @@ style_duo_accent(
 
 ---
 
+class: center, middle
+
+### "The greatest value of a picture is when it forces us to notice what we never expect to see."
+John W. Tukey, *Exploratory Data Analysis*
+
+.bottom-note[
+(Cairo, 2016, p. 151) 
+]
+
+???
+
+Tukey created **exploratory data analysis** and says that "before you can even being testing your ideas against evidence, it's essential to get a good feel for what your data look like."
+
+"the best way of doing so [getting a good feel for what you data look like] involves graphical displays, not just numerical summaries"
+
+(Cairo, 2016, p. 151)
+
+Cairo recommends finding data on a topic you're interested in and practicing with that
+
+---
 # Exploring Data with Simple Charts
 
+"The process of visually exploring data can be summarized in a single sentence: **find patterns and trends lurking in the data and then observe the deviations from those patterns**."
+
+.bottom-note[
+(Cairo, 2016, p. 152) 
+]
 
 
+--
+
+**Measures of Central Tendency**
+- Mode  
+- Median  
+- Mean
+- Weighted Mean
+
+???
+
+Mode: most frequent/common number
+Median: middle number/number that divides dataset in half
+Mean: average/sum divided be the number of numbers (sensitive to extreme values)
+
+Example: Salaries from UNC Chapel Hill w/ Michael Jordan (pp. 154-155)
+
+If Mean and Median are largely different, then that's a sign of skew
+
+Weighted mean (p. 156 - 157)
+
+--
+
+**Measures of Spread**
+- Range
+- Shape/Histogram
+- Plot
+
+???
+
+Spread gives us an idea how close the data is to the central measures
+Range: the difference between the maximum and minimum values
+Histogram: shows the frequency of each value or group of values; experiment with bin sizes
+Look for skew
+
+Making plots of the range and spread of data can help see trends
+
+---
+
+class: center, middle
+
+### "Finding stories is sometimes a matter of repeatedly asking ourselves what would happen if we plot our data in a different way."
+
+.bottom-note[
+(Cairo, 2016, p. 160) 
+]
+
+???
+
+The histogram/violin (Fig. 6.11), boxplots, pointrange (Fig. 6.9), and jitter plots (Fig. 6.10) we learned about in Week 9 are used in the figures in this section of the chapter.
+
+---
+
+class: center, middle
+
+### "a visualization designer should never rely on a single statistic or single chart or map when doing exploratory work"
+
+.bottom-note[
+(Cairo, 2016, p. 163) 
+]
+
+---
+
+# Exploring Data with Simple Charts
+
+- What is your main takeaway from this chapter?
+
+--
+
+- Which visual representations make the most sense to you?
+
+--
+
+- Why is this important?
 
 ---
 
