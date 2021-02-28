@@ -1,0 +1,136 @@
+---
+title: "GRD 610A Data Visualization II"
+subtitle: "Effective Use of Color"
+author: "Jenn Schilling"
+date: "March 24, 2021"
+output:
+  xaringan::moon_reader:
+    css: [xaringan-themer.css, bottom-note.css]
+    nature:
+      ratio: '16:9'
+      img_dir: img
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+
+options(htmltools.dir.version = FALSE)
+
+options(knitr.duplicate.label = "allow")
+
+knitr::opts_chunk$set(fig.retina = 3, warning = FALSE, message = FALSE)
+
+library(gapminder)
+library(here)
+library(socviz)
+library(tidyverse)
+library(countdown)
+library(xaringanthemer)
+library(flair)
+library(flipbookr)
+library(DT)
+
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+
+style_duo_accent(
+  primary_color = "#1c5253",
+  secondary_color = "#c8c8c8",
+  link_color = choose_dark_or_light("#FFFFFF", "#cf7270"),
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i"),
+  code_font_google   = google_font("Fira Mono"),
+  inverse_background_color = "#1c5253",
+  inverse_header_color = "#FFFFFF"
+)
+
+```
+
+```{css change-css-options, eval = TRUE, echo = FALSE}
+
+.remark-code{line-height: 1.5; font-size: 80%} # smaller code font size
+
+```
+
+# Today
+
+- Data Visualization of the Week  
+
+- Discussion of Chapter 6: Exploring Data with Simple Charts in *The Truthful Art* (Cairo)  
+
+- Lab on Color palettes for visualization. Heat Maps. Drawing attention effectively in a visualization. 
+(??? of *Data Visualization* by Healy)  
+
+- Homework Assignment #6
+
+
+---
+
+# Exploring Data with Simple Charts
+
+
+
+
+---
+
+class: center, middle
+
+# 15 Minute Break
+
+```{r break-countdown, echo = FALSE}
+countdown(minutes = 15, seconds = 0,
+          right = "37%",
+          bottom = "25%",
+          warn_when = 60)
+```
+
+---
+
+# Data: `midwest`
+
+
+
+
+---
+
+class: center, middle, inverse
+
+# Lab Time
+
+### XXXX
+
+
+---
+
+# Homework Assignment
+
+**Task: ** Create 3 visualizations that demonstrate effective color use  
+
+**Due: ** March 31, 2021 
+
+[Rubric](https://bb.collegeforcreativestudies.edu/webapps/rubric/do/course/manageRubrics?dispatch=view&context=course&rubricId=_42755_1&course_id=_35307_1)
+
+**Notes**
+
+- Use your own dataset (start looking for a dataset that you could use for the Final Project or go back to the dataset from the Midterm Project)
+
+- Use your resources: Healy, Google, Student Community BUT cite where you get code from if you copy it directly  
+
+- See Blackboard assignment for a template `.Rmd` file
+
+---
+
+# Tasks to Complete
+
+- Reading (Cairo - CChapter 7: Visualizing Distributions)
+
+- Homework #6
+
+- Prepare for your Data Visualization of the Week
+
+
+
+
