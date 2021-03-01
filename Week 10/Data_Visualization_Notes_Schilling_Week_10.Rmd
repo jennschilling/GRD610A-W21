@@ -1546,7 +1546,7 @@ p0 <- ggplot(data = subset(county_data,
 
 p1 <- p0 +
   geom_point(alpha = 0.15,
-            color = "gray50") +
+             color = "gray50") +
   scale_x_log10(labels = scales::comma) # log-scale for population
 
 p1
@@ -1754,7 +1754,7 @@ This section is not in the book as is taken from [Time Based Heatmaps in R](http
 ```{r heatmaps}
 
 # Data - 911 calls in Seattle
-incidents <-read_csv("https://raw.githubusercontent.com/lgellis/MiscTutorial/master/ggmap/i2Sample.csv") 
+incidents <- read_csv("https://raw.githubusercontent.com/lgellis/MiscTutorial/master/ggmap/i2Sample.csv") 
 
 # Assign color variables
 col1 = "#d8e1cf" 

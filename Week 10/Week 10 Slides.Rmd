@@ -31,6 +31,7 @@ library(xaringanthemer)
 library(flair)
 library(flipbookr)
 library(DT)
+library(ggrepel)
 
 ```
 
@@ -51,7 +52,7 @@ style_duo_accent(
 
 ```{css change-css-options, eval = TRUE, echo = FALSE}
 
-.remark-code{line-height: 1.5; font-size: 80%} # smaller code font size
+.remark-code{line-height: 1.5; font-size: 70%} # smaller code font size
 
 ```
 
@@ -61,8 +62,7 @@ style_duo_accent(
 
 - Discussion of Chapter 6: Exploring Data with Simple Charts in *The Truthful Art* (Cairo)  
 
-- Lab on Color palettes for visualization. Heat Maps. Drawing attention effectively in a visualization. 
-(Chapter 8 of *Data Visualization* by Healy)  
+- Lab on color palettes for visualization, heat maps, and drawing attention effectively in a visualization. 
 
 - Homework Assignment #6
 
@@ -187,10 +187,301 @@ countdown(minutes = 15, seconds = 0,
 
 ---
 
-# Data: `midwest`
+# Data: `county_data`
+
+.center[
+```{r midwest-data, echo = FALSE}
+sample_n(county_data %>% select(state, name, pop, black, flipped, partywinner16), size = 10) %>%
+  knitr::kable(format = "html")
+```
+]
+
+???
+
+Lab today is about adding highlights and color/text effectively as well as changing theme elements and making heat maps
+
+---
+```{r plot-county-election, include = FALSE}
+
+party_colors <- c("#2E74C0", "#CB454A")
+
+ggplot(data = subset(county_data,
+                           flipped == "No"),
+             mapping = aes(x = pop,
+                           y = black / 100)) +
+  geom_point(alpha = 0.15,
+             color = "gray50") +
+  scale_x_log10(labels = scales::comma) +
+  geom_point(data = subset(county_data,
+                           flipped == "Yes"),
+             mapping = aes(x = pop,
+                           y = black / 100,
+                           color = partywinner16)) +
+  scale_color_manual(values = party_colors) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(color = "County flipped to...",
+       x = "County Population (log scale)",
+       y = "Percent Black Population",
+       title = "Flipped counties, 2016",
+       caption = "Counties in gray did not flip.") +
+  geom_text_repel(data = subset(county_data,
+                                flipped == "Yes" & black > 25),
+                  mapping = aes(x = pop,
+                                y = black / 100,
+                                label = state),
+                  size = 2,
+                  seed = 1234) +
+  theme_minimal() +
+  theme(legend.position = "top")
+
+```
+
+`r chunk_reveal(chunk_name = "plot-county-election", title = "#2016 Election Flipped Counties", widths = c(50,50))`
+
+???
+Initial plot - points for each county that did not flip  
+x-axis is the population  
+y-axis is the percent of the population that is Black  
+Add a second layer of points for the counties that did flip  
+color by party that won  
+set y-axis and scales  
+Label counties with high percentage of Black residents that flipped  
+Add a minimal theme and put the legend at the top  
 
 
 
+```{r make-plot, include = FALSE}
+# Democrat Blue and Republican Red - create color palette
+party_colors <- c("#2E74C0", "#CB454A")
+
+# Initial plot - points for each county that did not flip
+# x-axis is the population
+# y-axis is the percent of the population that is Black
+p0 <- ggplot(data = subset(county_data,
+                           flipped == "No"),
+             mapping = aes(x = pop,
+                           y = black / 100))
+p1 <- p0 +
+  geom_point(alpha = 0.15,
+             color = "gray50") +
+  scale_x_log10(labels = scales::comma) # log-scale for population
+
+# Add a second layer of points for the counties that did flip
+# color by party that won
+p2 <- p1 +
+  geom_point(data = subset(county_data,
+                           flipped == "Yes"),
+             mapping = aes(x = pop,
+                           y = black / 100,
+                           color = partywinner16)) +
+  scale_color_manual(values = party_colors)
+
+# Set the y-axis scale and labels
+p3 <- p2 +
+  scale_y_continuous(labels = scales::percent) +
+  labs(color = "County flipped to...",
+       x = "County Population (log scale)",
+       y = "Percent Black Population",
+       title = "Flipped counties, 2016",
+       caption = "Counties in gray did not flip.")
+
+# Label counties with high percentage of Black residents that flipped
+p4 <- p3 +
+  geom_text_repel(data = subset(county_data,
+                                flipped == "Yes" & black > 25),
+                  mapping = aes(x = pop,
+                                y = black / 100,
+                                label = state),
+                  size = 2)
+
+```
+
+---
+
+# Changing Themes
+
+.pull-left[
+```{r theme-bw, eval = FALSE}
+
+p4 + 
+theme_bw() + #<<
+theme(legend.position = "top")
+
+```
+]
+.pull-right[
+```{r output-theme-bw, ref.label = 'theme-bw', echo = FALSE}
+```
+]
+
+???
+
+Note: The book uses `theme_set()` which allows you to set the theme for all plots in a session. I'm going to use + `theme_xx()` because I don't want to set the theme for all the plots
+
+---
+
+# Changing Themes
+
+.pull-left[
+```{r theme-dark, eval = FALSE}
+
+p4 + 
+theme_dark() + #<<
+theme(legend.position = "top")
+
+```
+]
+.pull-right[
+```{r output-theme-dark, ref.label = 'theme-dark', echo = FALSE}
+```
+]
+
+
+---
+
+# Changing Themes
+
+.pull-left[
+```{r theme-econ, eval = FALSE}
+
+library(ggthemes) #<<
+
+p4 + 
+theme_economist() + #<<
+theme(legend.position = "top")
+
+```
+]
+.pull-right[
+```{r output-theme-econ, ref.label = 'theme-econ', echo = FALSE}
+```
+]
+
+---
+
+# Changing Themes
+
+.pull-left[
+```{r theme-wsj, eval = FALSE}
+
+library(ggthemes) #<<
+
+p4 + 
+theme_wsj() + #<<
+theme(plot.title = element_text(size = rel(0.6)),
+      legend.title = element_text(size = rel(0.35)),
+      plot.caption = element_text(size = rel(0.35)),
+      legend.position = "top")
+
+```
+]
+.pull-right[
+```{r output-theme-wsj, ref.label = 'theme-wsj', echo = FALSE}
+```
+]
+
+???
+
+Text sizes are quite large on this theme, so set them in the theme() function to be smaller
+
+---
+
+# Changing Themes
+
+.pull-left[
+```{r theme-custom, eval = FALSE}
+
+p4 + 
+theme(legend.position = "top",
+      plot.title = element_text(size=rel(2),
+                                lineheight=.5,
+                                family="serif",
+                                face="bold.italic",
+                                colour="orange"),
+      axis.text.x = element_text(size=rel(1.1),
+                                 family="mono",
+                                 face="bold",
+                                 color="purple"))
+
+```
+]
+.pull-right[
+```{r output-theme-custom, ref.label = 'theme-custom', echo = FALSE}
+```
+]
+
+???
+
+Make a custom theme  
+Warnings - font family not found in Windows font database  
+Needed to update the family names  
+
+---
+
+# Heat Map - Data
+
+```{r hm-data, include = FALSE}
+
+incidents <- read_csv("https://raw.githubusercontent.com/lgellis/MiscTutorial/master/ggmap/i2Sample.csv") 
+
+# Prepare data - get month/year/day/etc. using lubridate package
+incidents$ymd <-lubridate::mdy_hms(incidents$Event.Clearance.Date)
+incidents$month <- lubridate::month(incidents$ymd, label = TRUE)
+incidents$year <- lubridate::year(incidents$ymd)
+incidents$wday <- lubridate::wday(incidents$ymd, label = TRUE)
+incidents$hour <- lubridate::hour(incidents$ymd)
+
+```
+
+```{r hm-create-summary, include = FALSE}
+
+# Create a summary table that has the number of incidents by hour and day
+dayHour <- incidents %>%
+  group_by(hour, wday) %>%
+  summarise(N = n())
+
+# Order by weekday in reverse
+dayHour$wday <- factor(dayHour$wday, levels = rev(levels(dayHour$wday)))
+
+# Remove NAs
+dayHour <- dayHour %>% na.omit()
+
+```
+
+.center[
+```{r heatmap-data, echo = FALSE}
+dayHour[1:10,] %>%
+  knitr::kable(format = "html")
+```
+]
+
+---
+
+```{r heatmap, include = FALSE}
+ggplot(data = dayHour, 
+       mapping = aes(x = hour, 
+                     y = wday)) + 
+  geom_tile(aes(fill = N), 
+            colour = "white") + 
+  scale_fill_gradient(low = "#d8e1cf",  
+                      high = "#438484") +  
+  theme_minimal() + 
+  labs(title = "Heat Map of Seattle Incidents by Day of Week and Hour",
+       x = "Incidents Per Hour", 
+       y = "Day of Week",
+       fill = "Total Incidents") +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank())
+
+```
+
+`r chunk_reveal(chunk_name = "heatmap", title = "#Heat Map", widths = c(50,50))`
+
+
+???
+
+Source: https://www.littlemissdata.com/blog/heatmaps
+Code adapted slightly from the source to match dpylr usage and things we've learned in class
 
 ---
 
@@ -199,7 +490,7 @@ class: center, middle, inverse
 # Lab Time
 
 ### Sections 8.0 - 8.4
-
+### <a href="https://rpubs.com/jennschilling/grd610a_w21_w10_notes" style="color:#d8f1f2">Heat Maps</a>
 
 ---
 
@@ -223,7 +514,7 @@ class: center, middle, inverse
 
 # Tasks to Complete
 
-- Reading (Cairo - CChapter 7: Visualizing Distributions)
+- Reading (Cairo - Chapter 7: Visualizing Distributions)
 
 - Homework #6
 

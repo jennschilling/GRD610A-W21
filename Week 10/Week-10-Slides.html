@@ -29,7 +29,7 @@ class: center, middle, inverse, title-slide
 
 &lt;style type="text/css"&gt;
 
-.remark-code{line-height: 1.5; font-size: 80%} # smaller code font size
+.remark-code{line-height: 1.5; font-size: 70%} # smaller code font size
 
 &lt;/style&gt;
 
@@ -39,8 +39,7 @@ class: center, middle, inverse, title-slide
 
 - Discussion of Chapter 6: Exploring Data with Simple Charts in *The Truthful Art* (Cairo)  
 
-- Lab on Color palettes for visualization. Heat Maps. Drawing attention effectively in a visualization. 
-(??? of *Data Visualization* by Healy)  
+- Lab on color palettes for visualization, heat maps, and drawing attention effectively in a visualization. 
 
 - Homework Assignment #6
 
@@ -156,16 +155,915 @@ class: center, middle
 
 # 15 Minute Break
 
-<div class="countdown" id="timer_603c0721" style="right:37%;bottom:25%;" data-warnwhen="60">
+<div class="countdown" id="timer_603c382c" style="right:37%;bottom:25%;" data-warnwhen="60">
 <code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
 ---
 
-# Data: `midwest`
+# Data: `county_data`
+
+.center[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; state &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; name &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; pop &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; black &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; flipped &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; partywinner16 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; AZ &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6731484 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.6 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; NA &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; PA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Butler County &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 185943 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; No &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Republican &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; KY &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Monroe County &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10704 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.4 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; No &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Republican &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; PA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Pike County &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 56191 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; No &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Republican &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; WV &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Preston County &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33788 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.3 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; No &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Republican &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; WI &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Menominee County &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4522 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.8 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; No &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Democrat &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; ID &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Gem County &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16866 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; No &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Republican &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; KY &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Harrison County &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 18592 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; No &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Republican &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; OK &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Texas County &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21853 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.3 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; No &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Republican &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; ID &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Cassia County &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 23540 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.6 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; No &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Republican &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+???
+
+Lab today is about adding highlights and color/text effectively as well as changing theme elements and making heat maps
+
+---
+
+
+count: false
+ 
+#2016 Election Flipped Counties
+.panel1-plot-county-election-auto[
+
+```r
+*party_colors &lt;- c("#2E74C0", "#CB454A")
+```
+]
+ 
+.panel2-plot-county-election-auto[
+
+]
+
+---
+count: false
+ 
+#2016 Election Flipped Counties
+.panel1-plot-county-election-auto[
+
+```r
+party_colors &lt;- c("#2E74C0", "#CB454A")
+
+*ggplot(data = subset(county_data,
+*                          flipped == "No"),
+*            mapping = aes(x = pop,
+*                          y = black / 100))
+```
+]
+ 
+.panel2-plot-county-election-auto[
+&lt;img src="Week-10-Slides_files/figure-html/plot-county-election_auto_02_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#2016 Election Flipped Counties
+.panel1-plot-county-election-auto[
+
+```r
+party_colors &lt;- c("#2E74C0", "#CB454A")
+
+ggplot(data = subset(county_data,
+                           flipped == "No"),
+             mapping = aes(x = pop,
+                           y = black / 100)) +
+* geom_point(alpha = 0.15,
+*            color = "gray50")
+```
+]
+ 
+.panel2-plot-county-election-auto[
+&lt;img src="Week-10-Slides_files/figure-html/plot-county-election_auto_03_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#2016 Election Flipped Counties
+.panel1-plot-county-election-auto[
+
+```r
+party_colors &lt;- c("#2E74C0", "#CB454A")
+
+ggplot(data = subset(county_data,
+                           flipped == "No"),
+             mapping = aes(x = pop,
+                           y = black / 100)) +
+  geom_point(alpha = 0.15,
+             color = "gray50") +
+* scale_x_log10(labels = scales::comma)
+```
+]
+ 
+.panel2-plot-county-election-auto[
+&lt;img src="Week-10-Slides_files/figure-html/plot-county-election_auto_04_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#2016 Election Flipped Counties
+.panel1-plot-county-election-auto[
+
+```r
+party_colors &lt;- c("#2E74C0", "#CB454A")
+
+ggplot(data = subset(county_data,
+                           flipped == "No"),
+             mapping = aes(x = pop,
+                           y = black / 100)) +
+  geom_point(alpha = 0.15,
+             color = "gray50") +
+  scale_x_log10(labels = scales::comma) +
+* geom_point(data = subset(county_data,
+*                          flipped == "Yes"),
+*            mapping = aes(x = pop,
+*                          y = black / 100,
+*                          color = partywinner16))
+```
+]
+ 
+.panel2-plot-county-election-auto[
+&lt;img src="Week-10-Slides_files/figure-html/plot-county-election_auto_05_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#2016 Election Flipped Counties
+.panel1-plot-county-election-auto[
+
+```r
+party_colors &lt;- c("#2E74C0", "#CB454A")
+
+ggplot(data = subset(county_data,
+                           flipped == "No"),
+             mapping = aes(x = pop,
+                           y = black / 100)) +
+  geom_point(alpha = 0.15,
+             color = "gray50") +
+  scale_x_log10(labels = scales::comma) +
+  geom_point(data = subset(county_data,
+                           flipped == "Yes"),
+             mapping = aes(x = pop,
+                           y = black / 100,
+                           color = partywinner16)) +
+* scale_color_manual(values = party_colors)
+```
+]
+ 
+.panel2-plot-county-election-auto[
+&lt;img src="Week-10-Slides_files/figure-html/plot-county-election_auto_06_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#2016 Election Flipped Counties
+.panel1-plot-county-election-auto[
+
+```r
+party_colors &lt;- c("#2E74C0", "#CB454A")
+
+ggplot(data = subset(county_data,
+                           flipped == "No"),
+             mapping = aes(x = pop,
+                           y = black / 100)) +
+  geom_point(alpha = 0.15,
+             color = "gray50") +
+  scale_x_log10(labels = scales::comma) +
+  geom_point(data = subset(county_data,
+                           flipped == "Yes"),
+             mapping = aes(x = pop,
+                           y = black / 100,
+                           color = partywinner16)) +
+  scale_color_manual(values = party_colors) +
+* scale_y_continuous(labels = scales::percent)
+```
+]
+ 
+.panel2-plot-county-election-auto[
+&lt;img src="Week-10-Slides_files/figure-html/plot-county-election_auto_07_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#2016 Election Flipped Counties
+.panel1-plot-county-election-auto[
+
+```r
+party_colors &lt;- c("#2E74C0", "#CB454A")
+
+ggplot(data = subset(county_data,
+                           flipped == "No"),
+             mapping = aes(x = pop,
+                           y = black / 100)) +
+  geom_point(alpha = 0.15,
+             color = "gray50") +
+  scale_x_log10(labels = scales::comma) +
+  geom_point(data = subset(county_data,
+                           flipped == "Yes"),
+             mapping = aes(x = pop,
+                           y = black / 100,
+                           color = partywinner16)) +
+  scale_color_manual(values = party_colors) +
+  scale_y_continuous(labels = scales::percent) +
+* labs(color = "County flipped to...",
+*      x = "County Population (log scale)",
+*      y = "Percent Black Population",
+*      title = "Flipped counties, 2016",
+*      caption = "Counties in gray did not flip.")
+```
+]
+ 
+.panel2-plot-county-election-auto[
+&lt;img src="Week-10-Slides_files/figure-html/plot-county-election_auto_08_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#2016 Election Flipped Counties
+.panel1-plot-county-election-auto[
+
+```r
+party_colors &lt;- c("#2E74C0", "#CB454A")
+
+ggplot(data = subset(county_data,
+                           flipped == "No"),
+             mapping = aes(x = pop,
+                           y = black / 100)) +
+  geom_point(alpha = 0.15,
+             color = "gray50") +
+  scale_x_log10(labels = scales::comma) +
+  geom_point(data = subset(county_data,
+                           flipped == "Yes"),
+             mapping = aes(x = pop,
+                           y = black / 100,
+                           color = partywinner16)) +
+  scale_color_manual(values = party_colors) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(color = "County flipped to...",
+       x = "County Population (log scale)",
+       y = "Percent Black Population",
+       title = "Flipped counties, 2016",
+       caption = "Counties in gray did not flip.") +
+* geom_text_repel(data = subset(county_data,
+*                               flipped == "Yes" &amp; black &gt; 25),
+*                 mapping = aes(x = pop,
+*                               y = black / 100,
+*                               label = state),
+*                 size = 2,
+*                 seed = 1234)
+```
+]
+ 
+.panel2-plot-county-election-auto[
+&lt;img src="Week-10-Slides_files/figure-html/plot-county-election_auto_09_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#2016 Election Flipped Counties
+.panel1-plot-county-election-auto[
+
+```r
+party_colors &lt;- c("#2E74C0", "#CB454A")
+
+ggplot(data = subset(county_data,
+                           flipped == "No"),
+             mapping = aes(x = pop,
+                           y = black / 100)) +
+  geom_point(alpha = 0.15,
+             color = "gray50") +
+  scale_x_log10(labels = scales::comma) +
+  geom_point(data = subset(county_data,
+                           flipped == "Yes"),
+             mapping = aes(x = pop,
+                           y = black / 100,
+                           color = partywinner16)) +
+  scale_color_manual(values = party_colors) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(color = "County flipped to...",
+       x = "County Population (log scale)",
+       y = "Percent Black Population",
+       title = "Flipped counties, 2016",
+       caption = "Counties in gray did not flip.") +
+  geom_text_repel(data = subset(county_data,
+                                flipped == "Yes" &amp; black &gt; 25),
+                  mapping = aes(x = pop,
+                                y = black / 100,
+                                label = state),
+                  size = 2,
+                  seed = 1234) +
+* theme_minimal()
+```
+]
+ 
+.panel2-plot-county-election-auto[
+&lt;img src="Week-10-Slides_files/figure-html/plot-county-election_auto_10_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#2016 Election Flipped Counties
+.panel1-plot-county-election-auto[
+
+```r
+party_colors &lt;- c("#2E74C0", "#CB454A")
+
+ggplot(data = subset(county_data,
+                           flipped == "No"),
+             mapping = aes(x = pop,
+                           y = black / 100)) +
+  geom_point(alpha = 0.15,
+             color = "gray50") +
+  scale_x_log10(labels = scales::comma) +
+  geom_point(data = subset(county_data,
+                           flipped == "Yes"),
+             mapping = aes(x = pop,
+                           y = black / 100,
+                           color = partywinner16)) +
+  scale_color_manual(values = party_colors) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(color = "County flipped to...",
+       x = "County Population (log scale)",
+       y = "Percent Black Population",
+       title = "Flipped counties, 2016",
+       caption = "Counties in gray did not flip.") +
+  geom_text_repel(data = subset(county_data,
+                                flipped == "Yes" &amp; black &gt; 25),
+                  mapping = aes(x = pop,
+                                y = black / 100,
+                                label = state),
+                  size = 2,
+                  seed = 1234) +
+  theme_minimal() +
+* theme(legend.position = "top")
+```
+]
+ 
+.panel2-plot-county-election-auto[
+&lt;img src="Week-10-Slides_files/figure-html/plot-county-election_auto_11_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#2016 Election Flipped Counties
+.panel1-plot-county-election-auto[
+
+```r
+party_colors &lt;- c("#2E74C0", "#CB454A")
+
+ggplot(data = subset(county_data,
+                           flipped == "No"),
+             mapping = aes(x = pop,
+                           y = black / 100)) +
+  geom_point(alpha = 0.15,
+             color = "gray50") +
+  scale_x_log10(labels = scales::comma) +
+  geom_point(data = subset(county_data,
+                           flipped == "Yes"),
+             mapping = aes(x = pop,
+                           y = black / 100,
+                           color = partywinner16)) +
+  scale_color_manual(values = party_colors) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(color = "County flipped to...",
+       x = "County Population (log scale)",
+       y = "Percent Black Population",
+       title = "Flipped counties, 2016",
+       caption = "Counties in gray did not flip.") +
+  geom_text_repel(data = subset(county_data,
+                                flipped == "Yes" &amp; black &gt; 25),
+                  mapping = aes(x = pop,
+                                y = black / 100,
+                                label = state),
+                  size = 2,
+                  seed = 1234) +
+  theme_minimal() +
+  theme(legend.position = "top")
+```
+]
+ 
+.panel2-plot-county-election-auto[
+&lt;img src="Week-10-Slides_files/figure-html/plot-county-election_auto_12_output-1.png" width="504" /&gt;
+]
+
+&lt;style&gt;
+.panel1-plot-county-election-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-plot-county-election-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-plot-county-election-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
 
 
 
+???
+Initial plot - points for each county that did not flip  
+x-axis is the population  
+y-axis is the percent of the population that is Black  
+Add a second layer of points for the counties that did flip  
+color by party that won  
+set y-axis and scales  
+Label counties with high percentage of Black residents that flipped  
+Add a minimal theme and put the legend at the top  
+
+
+
+
+
+---
+
+# Changing Themes
+
+.pull-left[
+
+```r
+p4 + 
+*theme_bw() +
+theme(legend.position = "top")
+```
+]
+.pull-right[
+&lt;img src="Week-10-Slides_files/figure-html/output-theme-bw-1.png" width="504" /&gt;
+]
+
+???
+
+Note: The book uses `theme_set()` which allows you to set the theme for all plots in a session. I'm going to use + `theme_xx()` because I don't want to set the theme for all the plots
+
+---
+
+# Changing Themes
+
+.pull-left[
+
+```r
+p4 + 
+*theme_dark() +
+theme(legend.position = "top")
+```
+]
+.pull-right[
+&lt;img src="Week-10-Slides_files/figure-html/output-theme-dark-1.png" width="504" /&gt;
+]
+
+
+---
+
+# Changing Themes
+
+.pull-left[
+
+```r
+*library(ggthemes)
+
+p4 + 
+*theme_economist() +
+theme(legend.position = "top")
+```
+]
+.pull-right[
+&lt;img src="Week-10-Slides_files/figure-html/output-theme-econ-1.png" width="504" /&gt;
+]
+
+---
+
+# Changing Themes
+
+.pull-left[
+
+```r
+*library(ggthemes)
+
+p4 + 
+*theme_wsj() +
+theme(plot.title = element_text(size = rel(0.6)),
+      legend.title = element_text(size = rel(0.35)),
+      plot.caption = element_text(size = rel(0.35)),
+      legend.position = "top")
+```
+]
+.pull-right[
+&lt;img src="Week-10-Slides_files/figure-html/output-theme-wsj-1.png" width="504" /&gt;
+]
+
+???
+
+Text sizes are quite large on this theme, so set them in the theme() function to be smaller
+
+---
+
+# Changing Themes
+
+.pull-left[
+
+```r
+p4 + 
+theme(legend.position = "top",
+      plot.title = element_text(size=rel(2),
+                                lineheight=.5,
+                                family="serif",
+                                face="bold.italic",
+                                colour="orange"),
+      axis.text.x = element_text(size=rel(1.1),
+                                 family="mono",
+                                 face="bold",
+                                 color="purple"))
+```
+]
+.pull-right[
+&lt;img src="Week-10-Slides_files/figure-html/output-theme-custom-1.png" width="504" /&gt;
+]
+
+???
+
+Make a custom theme  
+Warnings - font family not found in Windows font database  
+Needed to update the family names  
+
+---
+
+# Heat Map - Data
+
+
+
+
+
+.center[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; hour &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; wday &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; N &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Sun &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 395 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Mon &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 298 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Tue &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 300 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Wed &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 282 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Thu &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 289 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Fri &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 316 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Sat &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 411 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Sun &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 348 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Mon &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 247 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Tue &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 269 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+---
+
+
+
+count: false
+ 
+#Heat Map
+.panel1-heatmap-auto[
+
+```r
+*ggplot(data = dayHour,
+*      mapping = aes(x = hour,
+*                    y = wday))
+```
+]
+ 
+.panel2-heatmap-auto[
+&lt;img src="Week-10-Slides_files/figure-html/heatmap_auto_01_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Heat Map
+.panel1-heatmap-auto[
+
+```r
+ggplot(data = dayHour,
+       mapping = aes(x = hour,
+                     y = wday)) +
+* geom_tile(aes(fill = N),
+*           colour = "white")
+```
+]
+ 
+.panel2-heatmap-auto[
+&lt;img src="Week-10-Slides_files/figure-html/heatmap_auto_02_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Heat Map
+.panel1-heatmap-auto[
+
+```r
+ggplot(data = dayHour,
+       mapping = aes(x = hour,
+                     y = wday)) +
+  geom_tile(aes(fill = N),
+            colour = "white") +
+* scale_fill_gradient(low = "#d8e1cf",
+*                     high = "#438484")
+```
+]
+ 
+.panel2-heatmap-auto[
+&lt;img src="Week-10-Slides_files/figure-html/heatmap_auto_03_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Heat Map
+.panel1-heatmap-auto[
+
+```r
+ggplot(data = dayHour,
+       mapping = aes(x = hour,
+                     y = wday)) +
+  geom_tile(aes(fill = N),
+            colour = "white") +
+  scale_fill_gradient(low = "#d8e1cf",
+                      high = "#438484") +
+* theme_minimal()
+```
+]
+ 
+.panel2-heatmap-auto[
+&lt;img src="Week-10-Slides_files/figure-html/heatmap_auto_04_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Heat Map
+.panel1-heatmap-auto[
+
+```r
+ggplot(data = dayHour,
+       mapping = aes(x = hour,
+                     y = wday)) +
+  geom_tile(aes(fill = N),
+            colour = "white") +
+  scale_fill_gradient(low = "#d8e1cf",
+                      high = "#438484") +
+  theme_minimal() +
+* labs(title = "Heat Map of Seattle Incidents by Day of Week and Hour",
+*      x = "Incidents Per Hour",
+*      y = "Day of Week",
+*      fill = "Total Incidents")
+```
+]
+ 
+.panel2-heatmap-auto[
+&lt;img src="Week-10-Slides_files/figure-html/heatmap_auto_05_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Heat Map
+.panel1-heatmap-auto[
+
+```r
+ggplot(data = dayHour,
+       mapping = aes(x = hour,
+                     y = wday)) +
+  geom_tile(aes(fill = N),
+            colour = "white") +
+  scale_fill_gradient(low = "#d8e1cf",
+                      high = "#438484") +
+  theme_minimal() +
+  labs(title = "Heat Map of Seattle Incidents by Day of Week and Hour",
+       x = "Incidents Per Hour",
+       y = "Day of Week",
+       fill = "Total Incidents") +
+* theme(panel.grid.major = element_blank(),
+*       panel.grid.minor = element_blank())
+```
+]
+ 
+.panel2-heatmap-auto[
+&lt;img src="Week-10-Slides_files/figure-html/heatmap_auto_06_output-1.png" width="504" /&gt;
+]
+
+---
+count: false
+ 
+#Heat Map
+.panel1-heatmap-auto[
+
+```r
+ggplot(data = dayHour,
+       mapping = aes(x = hour,
+                     y = wday)) +
+  geom_tile(aes(fill = N),
+            colour = "white") +
+  scale_fill_gradient(low = "#d8e1cf",
+                      high = "#438484") +
+  theme_minimal() +
+  labs(title = "Heat Map of Seattle Incidents by Day of Week and Hour",
+       x = "Incidents Per Hour",
+       y = "Day of Week",
+       fill = "Total Incidents") +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
+```
+]
+ 
+.panel2-heatmap-auto[
+&lt;img src="Week-10-Slides_files/figure-html/heatmap_auto_07_output-1.png" width="504" /&gt;
+]
+
+&lt;style&gt;
+.panel1-heatmap-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-heatmap-auto {
+  color: black;
+  width: 49%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-heatmap-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+
+???
+
+Source: https://www.littlemissdata.com/blog/heatmaps
+Code adapted slightly from the source to match dpylr usage and things we've learned in class
 
 ---
 
@@ -173,8 +1071,8 @@ class: center, middle, inverse
 
 # Lab Time
 
-### XXXX
-
+### Sections 8.0 - 8.4
+### &lt;a href="https://rpubs.com/jennschilling/grd610a_w21_w10_notes" style="color:#d8f1f2"&gt;Heat Maps&lt;/a&gt;
 
 ---
 
@@ -198,7 +1096,7 @@ class: center, middle, inverse
 
 # Tasks to Complete
 
-- Reading (Cairo - CChapter 7: Visualizing Distributions)
+- Reading (Cairo - Chapter 7: Visualizing Distributions)
 
 - Homework #6
 
