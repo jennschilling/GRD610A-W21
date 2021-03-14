@@ -1,0 +1,136 @@
+---
+title: "GRD 610A Data Visualization II"
+subtitle: "Case Studies"
+author: "Jenn Schilling"
+date: "March 31, 2021"
+output:
+  xaringan::moon_reader:
+    css: [xaringan-themer.css, bottom-note.css]
+    nature:
+      ratio: '16:9'
+      img_dir: img
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+
+options(htmltools.dir.version = FALSE)
+
+options(knitr.duplicate.label = "allow")
+
+knitr::opts_chunk$set(fig.retina = 3, warning = FALSE, message = FALSE)
+
+library(gapminder)
+library(here)
+library(socviz)
+library(tidyverse)
+library(countdown)
+library(xaringanthemer)
+library(flair)
+library(flipbookr)
+library(DT)
+library(ggrepel)
+
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+
+style_duo_accent(
+  primary_color = "#1c5253",
+  secondary_color = "#c8c8c8",
+  link_color = choose_dark_or_light("#FFFFFF", "#cf7270"),
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "300", "300i"),
+  code_font_google   = google_font("Fira Mono"),
+  inverse_background_color = "#1c5253",
+  inverse_header_color = "#FFFFFF"
+)
+
+```
+
+```{css change-css-options, eval = TRUE, echo = FALSE}
+
+.remark-code{line-height: 1.5; font-size: 70%} # smaller code font size
+
+```
+
+# Today
+
+- Data Visualization of the Week  
+
+- Discussion of Chapter 7: Visualizing Distributions in *The Truthful Art* (Cairo)  
+
+- Lab on the analysis and building of a few visualizations; additional plot types. 
+
+- Homework Assignment #7
+
+
+
+---
+# Exploring Data with Simple Charts
+
+"The process of visually exploring data can be summarized in a single sentence: **find patterns and trends lurking in the data and then observe the deviations from those patterns**."
+
+.bottom-note[
+(Cairo, 2016, p. 152) 
+]
+
+
+
+
+---
+
+class: center, middle
+
+# 15 Minute Break
+
+```{r break-countdown, echo = FALSE}
+countdown(minutes = 15, seconds = 0,
+          right = "37%",
+          bottom = "25%",
+          warn_when = 60)
+```
+
+
+
+---
+
+class: center, middle, inverse
+
+# Lab Time
+
+### Sections 8.0 - 8.4
+
+---
+
+# Homework Assignment
+
+**Task: ** Create 3 charts using the new plot types from class 
+
+**Due: ** April 7, 2021 
+
+[Rubric](https://bb.collegeforcreativestudies.edu/webapps/rubric/do/course/manageRubrics?dispatch=view&context=course&rubricId=_42755_1&course_id=_35307_1)
+
+**Notes**
+
+- Use your own dataset (start looking for a dataset that you could use for the Final Project or go back to the dataset from the Midterm Project)
+
+- Use your resources: Healy, Google, Student Community BUT cite where you get code from if you copy it directly  
+
+- See Blackboard assignment for a template `.Rmd` file
+
+---
+
+# Tasks to Complete
+
+- Reading (Cairo - Chapter 8: Revealing Change)
+
+- Homework #7
+
+- Prepare for your Data Visualization of the Week
+
+
+
+
