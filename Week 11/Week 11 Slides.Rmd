@@ -41,7 +41,7 @@ style_duo_accent(
   primary_color = "#1c5253",
   secondary_color = "#c8c8c8",
   link_color = choose_dark_or_light("#FFFFFF", "#cf7270"),
-  header_font_google = google_font("Josefin Sans"),
+  header_font_google = google_font("Montserrat"),
   text_font_google   = google_font("Montserrat", "300", "300i"),
   code_font_google   = google_font("Fira Mono"),
   inverse_background_color = "#1c5253",
@@ -69,15 +69,116 @@ style_duo_accent(
 
 
 ---
-# Exploring Data with Simple Charts
+# Visualizing Distributions
 
-"The process of visually exploring data can be summarized in a single sentence: **find patterns and trends lurking in the data and then observe the deviations from those patterns**."
+**Why visualize distributions?**
+--
 
-.bottom-note[
-(Cairo, 2016, p. 152) 
-]
+- A central measure does not usually represent the data
+
+- A distribution gives the viewer a better perspective and understanding of the underlying data.
+
+--
+
+- *"Lesson learned, again: Never trust just one statistic. Always plot your data."* (Cairo, 2016, p. 175)
+
+???
+
+The previous chapter covered measures of central tendency; this chapter covers measures of spread
+
+Distributions can be visualized with box plots, histograms, and density plots; as we learned during the lab in Week 9
+
+---
+# Terms
+
+**Variance** - a statistic that measures the spread of a dataset; a statistic that measures the distance between a set of numbers and their mean value  
 
 
+**Standard Deviation** - a statistic that measures the spread of a dataset; the square root of the variance; has the same units as the data  
+
+
+**z-score** - a measure of the number of standard deviations between a data point and the mean  
+
+
+**Standardization** - putting data on the same scale to compare it; calculating z-scores or rates per 100,000 are examples of standardization
+
+
+---
+# Visualizing Distribution/Frequency
+
+- Histograms (Figure 7.11)  
+- Bar graphs (Figure 7.12)  
+- Strip plot (Figures 7.10, 7.13)  
+- Maps (Figure 7.13)  
+- Network graphs (Figure 7.14)  
+
+What other ways can you think of?
+
+---
+# An Important Note
+
+**Small population => more variation** 
+
+When there are fewer people/samples, there is more variation in the values and more values towards the extremes
+
+???
+
+When there is a larger population, there is less variation and the data is more reliable  
+
+Be careful when calculating rates (or drawing conclusions) from a small population  
+
+---
+# Normal Distribution
+
+**Properties**
+- Mean, Median, and Mode are the same  
+- Symmetrical (50% below the mean; 50% above the mean)  
+- The percentage of scores between certain standard deviations from the mean are known (i.e. 95.4% are within 2 standard deviations)
+
+**Why does this matter?**  
+Many metrics follow approximately normal distributions, which makes it possible to calculate the probability of any data point, given the mean and standard deviation.
+
+---
+# Percentiles
+
+- Another way to measure spread of a dataset
+
+- The median is the 50th percentile of a dataset; it is in the middle of the distribution.  
+
+- The median and other percentiles are **resistant** statistics, meaning they are not affected by outliers or extreme values (as the mean and standard deviation are).  
+
+- **Quartiles** divide a dataset into quarters (25th, 50th, and 75th percentiles)  
+
+- Visualize quartiles using **box-and-whisker plots**
+
+- **Interquartile Range** - the distance/difference between the 25th and 75th percentiles (first and third quartiles); used to compute the whiskers on a box-and-whisker plot (each whisker extends 1.5 times the interquartile range below the first quartile or above the third quartile)
+
+- Why use box-and-whisker plots?
+
+???
+
+Use box-and-whisker plots because:  
+- shows less detail than a histogram/dot plot/etc. and are less likely to obscure important information  
+- uses quartiles which means we can see portions of equal size (each is 25% of the data)  
+- highlights outliers  
+- makes it easier to compare distributions  
+
+---
+# Discussion
+
+- Why examine measures of central tendency, spread, and shape?
+
+--
+
+- What stood out to you in this chapter?
+
+--
+
+- What can you apply from this chapter when creating data visualizations?
+
+--
+
+- What questions do you have?
 
 
 ---

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>GRD 610A Data Visualization II</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Jenn Schilling" />
+    <meta name="date" content="2021-03-31" />
+    <script src="Week-11-Slides_files/header-attrs/header-attrs.js"></script>
+    <link href="Week-11-Slides_files/countdown/countdown.css" rel="stylesheet" />
+    <script src="Week-11-Slides_files/countdown/countdown.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="bottom-note.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# GRD 610A Data Visualization II
+## Case Studies
+### Jenn Schilling
+### March 31, 2021
+
+---
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+
+.remark-code{line-height: 1.5; font-size: 70%} # smaller code font size
+
+&lt;/style&gt;
+
+# Today
+
+- Data Visualization of the Week  
+
+- Discussion of Chapter 7: Visualizing Distributions in *The Truthful Art* (Cairo)  
+
+- Lab on the analysis and building of a few visualizations; additional plot types. 
+
+- Homework Assignment #7
+
+
+
+---
+# Visualizing Distributions
+
+**Why visualize distributions?**
+--
+
+- A central measure does not usually represent the data
+
+- A distribution gives the viewer a better perspective and understanding of the underlying data.
+
+--
+
+- *"Lesson learned, again: Never trust just one statistic. Always plot your data."* (Cairo, 2016, p. 175)
+
+???
+
+The previous chapter covered measures of central tendency; this chapter covers measures of spread
+
+Distributions can be visualized with box plots, histograms, and density plots; as we learned during the lab in Week 9
+
+---
+# Terms
+
+**Variance** - a statistic that measures the spread of a dataset; a statistic that measures the distance between a set of numbers and their mean value  
+
+
+**Standard Deviation** - a statistic that measures the spread of a dataset; the square root of the variance; has the same units as the data  
+
+
+**z-score** - a measure of the number of standard deviations between a data point and the mean  
+
+
+**Standardization** - putting data on the same scale to compare it; calculating z-scores or rates per 100,000 are examples of standardization
+
+
+---
+# Visualizing Distribution/Frequency
+
+- Histograms (Figure 7.11)  
+- Bar graphs (Figure 7.12)  
+- Strip plot (Figures 7.10, 7.13)  
+- Maps (Figure 7.13)  
+- Network graphs (Figure 7.14)  
+
+What other ways can you think of?
+
+---
+# An Important Note
+
+**Small population =&gt; more variation** 
+
+When there are fewer people/samples, there is more variation in the values and more values towards the extremes
+
+???
+
+When there is a larger population, there is less variation and the data is more reliable  
+
+Be careful when calculating rates (or drawing conclusions) from a small population  
+
+---
+# Normal Distribution
+
+**Properties**
+- Mean, Median, and Mode are the same  
+- Symmetrical (50% below the mean; 50% above the mean)  
+- The percentage of scores between certain standard deviations from the mean are known (i.e. 95.4% are within 2 standard deviations)
+
+**Why does this matter?**  
+Many metrics follow approximately normal distributions, which makes it possible to calculate the probability of any data point, given the mean and standard deviation.
+
+---
+# Percentiles
+
+- Another way to measure spread of a dataset
+
+- The median is the 50th percentile of a dataset; it is in the middle of the distribution.  
+
+- The median and other percentiles are **resistant** statistics, meaning they are not affected by outliers or extreme values (as the mean and standard deviation are).  
+
+- **Quartiles** divide a dataset into quarters (25th, 50th, and 75th percentiles)  
+
+- Visualize quartiles using **box-and-whisker plots**
+
+- **Interquartile Range** - the distance/difference between the 25th and 75th percentiles (first and third quartiles); used to compute the whiskers on a box-and-whisker plot (each whisker extends 1.5 times the interquartile range below the first quartile or above the third quartile)
+
+- Why use box-and-whisker plots?
+
+???
+
+Use box-and-whisker plots because:  
+- shows less detail than a histogram/dot plot/etc. and are less likely to obscure important information  
+- uses quartiles which means we can see portions of equal size (each is 25% of the data)  
+- highlights outliers  
+- makes it easier to compare distributions  
+
+---
+# Discussion
+
+- Why examine measures of central tendency, spread, and shape?
+
+--
+
+- What stood out to you in this chapter?
+
+--
+
+- What can you apply from this chapter when creating data visualizations?
+
+--
+
+- What questions do you have?
+
+
+---
+
+class: center, middle
+
+# 15 Minute Break
+
+<div class="countdown" id="timer_604e8980" style="right:37%;bottom:25%;" data-warnwhen="60">
+<code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+
+
+---
+
+class: center, middle, inverse
+
+# Lab Time
+
+### Sections 8.0 - 8.4
+
+---
+
+# Homework Assignment
+
+**Task: ** Create 3 charts using the new plot types from class 
+
+**Due: ** April 7, 2021 
+
+[Rubric](https://bb.collegeforcreativestudies.edu/webapps/rubric/do/course/manageRubrics?dispatch=view&amp;context=course&amp;rubricId=_42755_1&amp;course_id=_35307_1)
+
+**Notes**
+
+- Use your own dataset (start looking for a dataset that you could use for the Final Project or go back to the dataset from the Midterm Project)
+
+- Use your resources: Healy, Google, Student Community BUT cite where you get code from if you copy it directly  
+
+- See Blackboard assignment for a template `.Rmd` file
+
+---
+
+# Tasks to Complete
+
+- Reading (Cairo - Chapter 8: Revealing Change)
+
+- Homework #7
+
+- Prepare for your Data Visualization of the Week
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"img_dir": "img",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
