@@ -1742,7 +1742,187 @@ p + geom_density_ridges(alpha = 0.6,
 ```
 
 ### Case Studies
-Will be covered in Week 11
+
+#### Two Y-Axes
+
+General rule: avoid creating dual-axis charts, particularly with time series data
+
+```{r two-y-axes}
+
+# dataset of monetary base and S&P 500 over time with indexed scores
+head(fredts) 
+
+# Put data into long format to create tidy data
+fredts_m <- fredts %>%
+  select(date, sp500_i, monbase_i) %>% 
+  gather(key = series,
+         value = score,
+         sp500_i:monbase_i)
+
+# Line plot of the indexed data
+p <- ggplot(data = fredts_m,
+            mapping = aes(x = date, 
+                         y = score,
+                         group = series,
+                         color = series))
+
+p1 <- p + geom_line() +
+  theme(legend.position = "top") +
+  labs(x = "Date",
+       y = "Index",
+       color = "Series")
+
+# Line plot of difference between the indexed series
+# Note use of wide dataset to compute the difference
+p <- ggplot(data = fredts,
+            mapping = aes(x = date,
+                          y = sp500_i - monbase_i))
+
+p2 <- p + geom_line() +
+  labs(x = "Date",
+       y = "Difference")
+
+# Put the plots together use cowplot
+cowplot::plot_grid(p1, 
+                   p2, 
+                   nrow = 2, 
+                   rel_heights = c(0.75, 0.25), # show p1 on 75%, p2 on 25%
+                   align = "v")
+     
+```
+
+#### Redrawing a Bad Slide
+
+```{r bad-slide}
+
+# The dataset - revenue and employees at Yahoo by year; binary Mayer as CEO
+head(yahoo)
+
+# Trajectory of employees vs revenue over time
+p <- ggplot(data = yahoo,
+            mapping = aes(x = Employees,
+                          y = Revenue))
+
+p + geom_path(color = "gray80") +
+  geom_text(aes(color = Mayer, label = Year),
+            size = 3,
+            fontface = "bold") +
+  labs(color = "Mayer is CEO",
+       x = "Employees",
+       y = "Revenue (Millions)",
+       title = "Yahoo Employees vs. Revenues, 2004-2014") +
+  scale_y_continuous(labels = scales::dollar) +
+  scale_x_continuous(labels = scales::comma) +
+  theme_bw() +
+  theme(legend.position = "bottom") 
+
+# Compute the ratio of revenue to employees and make a line graph
+p <- ggplot(data = yahoo,
+            mapping = aes(x = Year,
+                          y = Revenue / Employees)) 
+
+p + geom_vline(xintercept = 2012) + # mark when Mayer became CEO
+  geom_line(color = "gray60",
+            size = 2) +
+  annotate("text",
+           x = 2013,
+           y = 0.44,
+           label = "Mayer becomes CEO",
+           size = 2.5) +
+  labs(x = "Year\n",
+       y = "Revenue/Employees",
+       title = "Yahoo Revenue to Employees Ratio, 2004-2014") +
+  theme_bw()
+
+```
+
+### Saying No to Pie
+
+```{r no-pie}
+
+# Dataset - student debt comparisons
+head(studebt)
+
+# Redraw the pie charts to compare the distributions
+
+# Labels
+p_xlab <- "Amount Owed, in thousands of Dollars"
+p_title <- "Oustanding Student Loans"
+p_subtitle <- "44 million borrowers ow a total of $1.3 trillion"
+p_caption <- "Source: FRB NY"
+
+# Facet labels
+f_labs <- c(`Borrowers` = "Percent of all Borrowers",
+            `Balances` = "Percent of all Balances")
+
+# Create faceted horizontal bar plot
+p <- ggplot(data = studebt,
+            mapping = aes(x = Debt,
+                          y = pct/100, # make percents decimals
+                          fill = type))
+
+p + geom_bar(stat = "identity") + # could have also used geom_col()
+  scale_fill_brewer(type = "qual", palette = "Dark2") +
+  scale_y_continuous(labels = scales::percent) +
+  guides(fill = FALSE) + # don't include the legend
+  labs(y = "",
+       x = p_xlab,
+       caption = p_caption,
+       title = p_title,
+       subtitle = p_subtitle) +
+  facet_grid(~type, labeller = as_labeller(f_labs)) +
+  coord_flip() +
+  theme_bw() +
+  theme(
+    # bold the facet labels and left-align them
+    strip.text.x = element_text(face = "bold", hjust = 0),
+    # remove the background from the facet labels
+    strip.background.x = element_blank()) 
+
+# Redraw the pie charts as stacked bar graphs
+
+library(viridis) # for the color palette
+
+# Add line break to labels
+f_labs <- c(`Borrowers` = "Percent of \nall Borrowers",
+            `Balances` = "Percent of \nall Balances")
+
+# By changing the mapping, we can make a stacked bar plot
+p <- ggplot(data = studebt,
+            mapping = aes(y = pct/100,
+                          x = type,
+                          fill = Debtrc)) 
+
+p + geom_bar(stat = "identity", 
+             color = "grey80") + # outline the bars in light gray
+  scale_x_discrete(labels = as_labeller(f_labs)) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_viridis(discrete = TRUE) + # color palette
+  # Custom formatting of the legend; align lightest colors to smallest values
+  guides(fill = guide_legend(reverse = TRUE,
+                             title.position = "top",
+                             label.position = "bottom",
+                             keywidth = 3,
+                             nrow = 1)) +
+  labs(x = "",
+       y = "",
+       fill = p_xlab,
+       caption = p_caption,
+       title = p_title,
+       subtitle = p_subtitle) +
+  coord_flip() +
+  theme_bw() +
+  theme(legend.position = "top",
+        # Format y-axis text (bold, right-align, size 12)
+        axis.text.y = element_text(face = "bold", hjust = 1, size = 12),
+        # Remove axis ticks
+        axis.ticks.length = unit(0, "cm"),
+        # Remove y gridlines
+        panel.grid.major.y = element_blank()) 
+
+```
+
+
 
 ### Where to Go Next  
 Pick at least two of the questions presented under the *Where to Go Next* section and answer them.
