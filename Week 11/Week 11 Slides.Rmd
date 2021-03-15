@@ -33,6 +33,8 @@ library(flipbookr)
 library(DT)
 library(ggrepel)
 
+sales <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-09-29/sales.csv') %>% mutate(country = ifelse(country == "WW", "World", country))
+
 ```
 
 ```{r xaringan-themer, include=FALSE, warning=FALSE}
@@ -194,7 +196,311 @@ countdown(minutes = 15, seconds = 0,
           warn_when = 60)
 ```
 
+---
+# Putting Plots Together
 
+.pull-left[
+**P1**
+
+```{r plot-1, , fig.height = 5, fig.width = 5, echo = FALSE, eval = TRUE}
+
+# Put data into long format to create tidy data
+fredts_m <- fredts %>%
+  select(date, sp500_i, monbase_i) %>% 
+  gather(key = series,
+         value = score,
+         sp500_i:monbase_i)
+
+# Line plot of the indexed data
+p <- ggplot(data = fredts_m,
+            mapping = aes(x = date, 
+                         y = score,
+                         group = series,
+                         color = series))
+
+p1 <- p + geom_line() +
+  theme(legend.position = "top") +
+  labs(x = "Date",
+       y = "Index",
+       color = "Series")
+
+p1
+
+```
+]
+
+.pull-right[
+**P2**
+
+```{r plot-2, fig.height = 5, fig.width = 5, echo = FALSE, eval = TRUE}
+
+# Line plot of difference between the indexed series
+# Note use of wide dataset to compute the difference
+p <- ggplot(data = fredts,
+            mapping = aes(x = date,
+                          y = sp500_i - monbase_i))
+
+p2 <- p + geom_line() +
+  labs(x = "Date",
+       y = "Difference")
+
+p2
+
+```
+]
+
+---
+# Putting Plots Together `cowplot`
+
+.pull-left[
+```{r cowplot, eval = FALSE}
+
+cowplot::plot_grid(p1, 
+                   p2, 
+                   nrow = 2, 
+                   rel_heights = c(0.75, 0.25), 
+                   align = "v")
+
+```
+]
+
+.pull-right[
+```{r output-cowplot, ref.label = 'cowplot', echo = FALSE, fig.height = 6, fig.width = 6}
+```
+]
+
+.bottom-note[
+[More about cowplot](https://wilkelab.org/cowplot/index.html)
+]
+
+---
+# Putting Plots Together `patchwork`
+
+.pull-left[
+```{r patchwork, eval = FALSE}
+
+library(patchwork)
+
+p1 / p2 +
+  plot_layout(nrow = 2,
+              heights = c(0.75, 0.25))
+
+```
+]
+
+.pull-right[
+```{r output-patchwork, ref.label = 'patchwork', echo = FALSE, fig.height = 6, fig.width = 6}
+```
+]
+
+.bottom-note[
+[More about patchwork](https://patchwork.data-imaginist.com/)
+]
+
+---
+# Move Axis Labels
+
+.pull-left[
+**Initial Plot**
+
+```{r bar-plot-1, echo = FALSE, eval = TRUE, fig.width = 7, fig.height = 5}
+
+xlabs <- c(0, 5, 10)
+
+sales %>%
+  filter(country == "World") %>%
+  mutate(released = gsub("\\s*\\([^\\)]+\\)\\[[^\\)]+\\]", "", released)) %>%
+  mutate(year = substr(released, nchar(released) - 3, nchar(released))) %>%
+  ggplot(.) +
+  geom_bar(aes(y = reorder(paste(title, paste0("(", year, ")"), sep = "\n"), 
+                           sales), 
+               x = sales,
+               fill = artist), 
+           stat = "identity") + 
+  scale_fill_manual(values = c("#D4AF37", "red"),
+                    guide = FALSE) +
+  facet_wrap(~artist, scales = "free_y") +
+  scale_x_continuous(labels = paste0("$", xlabs, "M"),
+                     breaks = 1000000 * xlabs ) +
+  labs(x = "",
+       y = "",
+       title = "Worldwide Album Sales") +
+  theme_bw() +
+  theme(strip.background = element_blank(),
+        strip.text = element_text(size = 12, hjust = 0),
+        plot.title.position = "plot")
+
+```
+]
+
+.pull-right[
+`coord_cartesian(expand = FALSE)`
+
+```{r bar-plot-2, echo = FALSE, eval = TRUE, fig.width = 7, fig.height = 5}
+
+sales %>%
+  filter(country == "World") %>%
+  mutate(released = gsub("\\s*\\([^\\)]+\\)\\[[^\\)]+\\]", "", released)) %>%
+  mutate(year = substr(released, nchar(released) - 3, nchar(released))) %>%
+  ggplot(.) +
+  geom_bar(aes(y = reorder(paste(title, paste0("(", year, ")"), sep = "\n"), 
+                           sales), 
+               x = sales,
+               fill = artist), 
+           stat = "identity") + 
+  scale_fill_manual(values = c("#D4AF37", "red"),
+                    guide = FALSE) +
+  facet_wrap(~artist, scales = "free_y") +
+  scale_x_continuous(labels = paste0("$", xlabs, "M"),
+                     breaks = 1000000 * xlabs ) +
+  labs(x = "",
+       y = "",
+       title = "Worldwide Album Sales") +
+  theme_bw() +
+  coord_cartesian(expand = FALSE) +
+  theme(strip.background = element_blank(),
+        strip.text = element_text(size = 12, hjust = 0),
+        plot.title.position = "plot")
+
+
+```
+]
+
+---
+# Move Axis Labels
+
+.pull-left[
+**Initial Plot**
+
+```{r show-bar-plot-1, ref.label = 'bar-plot-1', echo = FALSE, eval = TRUE, fig.width = 7, fig.height = 5}
+
+
+```
+]
+
+.pull-right[
+`scale_x_continuous(expand = c(0, 0))`
+
+```{r bar-plot-2a, echo = FALSE, eval = TRUE, fig.width = 7, fig.height = 5}
+
+sales %>%
+  filter(country == "World") %>%
+  mutate(released = gsub("\\s*\\([^\\)]+\\)\\[[^\\)]+\\]", "", released)) %>%
+  mutate(year = substr(released, nchar(released) - 3, nchar(released))) %>%
+  ggplot(.) +
+  geom_bar(aes(y = reorder(paste(title, paste0("(", year, ")"), sep = "\n"), 
+                           sales), 
+               x = sales,
+               fill = artist), 
+           stat = "identity") + 
+  scale_fill_manual(values = c("#D4AF37", "red"),
+                    guide = FALSE) +
+  facet_wrap(~artist, scales = "free_y") +
+  scale_x_continuous(labels = paste0("$", xlabs, "M"),
+                     breaks = 1000000 * xlabs,
+                     expand = c(0, 0)) +
+  labs(x = "",
+       y = "",
+       title = "Worldwide Album Sales") +
+  theme_bw() +
+  theme(strip.background = element_blank(),
+        strip.text = element_text(size = 12, hjust = 0),
+        plot.title.position = "plot")
+
+
+```
+]
+
+---
+
+```{r data-prep, include = FALSE}
+sales_dat <- sales %>%
+  filter(country == "World") %>%
+  mutate(released = gsub("\\s*\\([^\\)]+\\)\\[[^\\)]+\\]", "", released)) %>%
+  mutate(year = substr(released, nchar(released) - 3, nchar(released))) %>%
+  mutate(title_label = reorder(paste(title, paste0("(", year, ")"), sep = "\n"), 
+                           sales))
+```
+
+
+# Gradient For Discrete Values
+
+.pull-left[
+```{r gradient-discrete, eval = FALSE}
+  ggplot(data = subset(sales_dat, 
+                       artist == "Taylor Swift"),
+         mapping = aes(y = title_label,
+                       x = sales,
+                       fill = title_label)) +
+  geom_bar(stat = "identity") + 
+  scale_fill_brewer(palette = "RdPu", #<<
+                    guide = FALSE) +
+  facet_wrap(~artist, scales = "free_y") +
+  scale_x_continuous(labels = paste0("$", xlabs, "M"),
+                     breaks = 1000000 * xlabs,
+                     expand = c(0, 0)) +
+  labs(x = "",
+       y = "",
+       title = "Worldwide Album Sales") +
+  theme_bw() +
+  theme(strip.background = element_blank(),
+        strip.text = element_text(size = 12, hjust = 0),
+        plot.title.position = "plot")
+```
+]
+
+.pull-right[
+```{r output-graident-discrete, ref.label = 'gradient-discrete', echo = FALSE, fig.height = 6, fig.width = 6}
+```
+]
+
+.bottom-note[
+[More about Color Brewer](https://colorbrewer2.org/)
+]
+
+---
+# Manually Set Factor Order
+
+.pull-left[
+```{r factor-set}
+
+sales_dat_ts <- sales_dat %>%
+  filter(artist == "Taylor Swift") %>%
+  mutate(title_label = 
+           factor(title_label,
+                  levels = c("Fearless\n(2008)",
+                             "Speak Now\n(2010)",
+                             "Red\n(2012)",
+                             "1989\n(2014)",
+                             "Reputation\n(2017)",
+                             "Lover\n(2019)")))
+ 
+```
+]
+
+.pull-right[
+```{r plot-factor-set, echo = FALSE, fig.height = 6, fig.width = 6}
+  ggplot(data = sales_dat_ts,
+         mapping = aes(y = title_label,
+                       x = sales,
+                       fill = title_label)) +
+  geom_bar(stat = "identity") + 
+  scale_fill_brewer(palette = "RdPu", #<<
+                    guide = FALSE) +
+  facet_wrap(~artist, scales = "free_y") +
+  scale_x_continuous(labels = paste0("$", xlabs, "M"),
+                     breaks = 1000000 * xlabs,
+                     expand = c(0, 0)) +
+  labs(x = "",
+       y = "",
+       title = "Worldwide Album Sales") +
+  theme_bw() +
+  theme(strip.background = element_blank(),
+        strip.text = element_text(size = 12, hjust = 0),
+        plot.title.position = "plot")
+
+```
+]
 
 ---
 
@@ -202,13 +508,15 @@ class: center, middle, inverse
 
 # Lab Time
 
-### Sections 8.0 - 8.4
+### Section 8.5
+
+### [R Graph Gallery](https://www.r-graph-gallery.com/)
 
 ---
 
 # Homework Assignment
 
-**Task: ** Create 3 charts using the new plot types from class 
+**Task: ** Create 3 charts using the new plot types
 
 **Due: ** April 7, 2021 
 
