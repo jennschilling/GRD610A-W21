@@ -441,7 +441,7 @@ class: center, middle, inverse
 
 # Tasks to Complete
 
-- Reading (Cairo - Chapter 16: Exploring Data with Simple Charts)
+- Reading (Cairo - Chapter 6: Exploring Data with Simple Charts)
 
 - Homework #5
 
