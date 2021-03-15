@@ -1,0 +1,10 @@
+name: Publish Document
+title:
+username:
+account: rpubs
+server: rpubs.com
+hostUrl: rpubs.com
+appId: https://api.rpubs.com/api/v1/document/738924/324c684efee441bf988d3924ecaf7874
+bundleId: https://api.rpubs.com/api/v1/document/738924/324c684efee441bf988d3924ecaf7874
+url: http://rpubs.com/jennschilling/738924
+when: 1615768969.5141

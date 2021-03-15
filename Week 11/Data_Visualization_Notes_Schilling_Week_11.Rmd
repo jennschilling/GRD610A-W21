@@ -1836,7 +1836,7 @@ p + geom_vline(xintercept = 2012) + # mark when Mayer became CEO
 
 ```
 
-### Saying No to Pie
+#### Saying No to Pie
 
 ```{r no-pie}
 
@@ -1929,7 +1929,7 @@ Pick at least two of the questions presented under the *Where to Go Next* sectio
 
 ## Heat Maps
 
-This section is not in the book as is taken from [Time Based Heatmaps in R](https://www.littlemissdata.com/blog/heatmaps). `geom_tile()` can be used to create heat maps.
+This section is not in the book and is taken from [Time Based Heatmaps in R](https://www.littlemissdata.com/blog/heatmaps). `geom_tile()` can be used to create heat maps.
 
 ```{r heatmaps}
 
