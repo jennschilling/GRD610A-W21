@@ -520,6 +520,7 @@ p + geom_density(alpha = 0.3,
                  mapping = aes(y = ..scaled..))
 
 ```
+
 ### Avoiding Transformation When Necessary
 
 Avoiding transformations - sometimes the data is already aggregated or summarized and we do not need a transformation.
