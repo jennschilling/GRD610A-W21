@@ -41,7 +41,7 @@ style_duo_accent(
   primary_color = "#1c5253",
   secondary_color = "#c8c8c8",
   link_color = choose_dark_or_light("#FFFFFF", "#cf7270"),
-  header_font_google = google_font("Josefin Sans"),
+  header_font_google = google_font("Montserrat"),
   text_font_google   = google_font("Montserrat", "300", "300i"),
   code_font_google   = google_font("Fira Mono"),
   inverse_background_color = "#1c5253",
@@ -397,7 +397,7 @@ theme(legend.position = "top",
                                 lineheight=.5,
                                 family="serif",
                                 face="bold.italic",
-                                colour="orange"),
+                                color="orange"),
       axis.text.x = element_text(size=rel(1.1),
                                  family="mono",
                                  face="bold",
@@ -490,7 +490,7 @@ class: center, middle, inverse
 # Lab Time
 
 ### Sections 8.0 - 8.4
-### <a href="https://rpubs.com/jennschilling/grd610a_w21_w10_notes" style="color:#d8f1f2">Heat Maps</a>
+### <a href="https://rpubs.com/jennschilling/grd610a_w21_w10_notes" style="color:#cf7270">Heat Maps</a>
 
 ---
 
