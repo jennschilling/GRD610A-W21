@@ -172,6 +172,10 @@ class: center, middle
 
 - Why is this important?
 
+--
+
+- What questions do you have?
+
 ---
 
 class: center, middle
