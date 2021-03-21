@@ -9,7 +9,7 @@ output:
    
 
 Data: https://www.census.gov/data/tables/2020/demo/income-poverty/p60-270.html
-Download Table A-1
+Download Table A-1 as an Excel; do some processing of the column names and then save to a CSV
 
 ```{r setup}
 
