@@ -1,0 +1,72 @@
+---
+title: "Data Processing Example"
+author: "Jenn Schilling"
+date: "2021-03-24"
+output:
+ html_document:
+  theme: "flatly" # Theme Gallery: https://www.datadreaming.org/post/r-markdown-theme-gallery/
+---
+   
+
+Data: https://www.census.gov/data/tables/2020/demo/income-poverty/p60-270.html
+Download Table A-1
+
+```{r setup}
+
+library(tidyverse)
+library(janitor)
+library(here)
+
+# Read the data
+data <- read_csv("TableA1.csv")
+
+```
+```{r data-cleanup}
+
+# Clean the names and remove the * from percent_change_median
+data_clean <- data %>%
+  clean_names() %>%
+  mutate(percent_change_median = parse_number(percent_change_median))
+
+# Change the format of the data so that there is a row for each characteristic and year
+data_long <- data_clean %>%
+  # Transform the data to long format with a row for every measure
+  pivot_longer(count_thousands_2018:error_income_2019,
+               names_to = "names",
+               values_to = "values") %>%
+  # Separate out the year from the measure name
+  separate(names, into = c("type1", "type2", "year"), sep = "_") %>%
+  # Put the measure name back together without the year
+  mutate(col_name = paste(type1, type2, sep = "_")) %>%
+  # Drop the two components of the measure name because they are no longer needed
+  select(-type1, -type2) %>%
+  # Transform the data wide by measure name
+  pivot_wider(names_from = col_name,
+              values_from = values) %>%
+  # Keep only the columns/measures of interest
+  select(year, characteristic, count_thousands, median_income)
+
+
+```
+
+```{r plot}
+
+# Get data for the age brackets only
+data_long_sub <- data_long %>%
+  filter(characteristic %in% c("15 to 24 years",
+                               "25 to 34 years",
+                               "35 to 44 years", 
+                               "45 to 54 years",
+                               "55 to 64 years",
+                               "65 years and older"))
+
+# Make a line plot to show median income by year for each age bracket
+ggplot(data = data_long_sub,
+       mapping = aes(x = year,
+                     y = median_income,
+                     color = characteristic,
+                     group = characteristic)) +
+  geom_line()
+
+```
+
