@@ -44,14 +44,83 @@ class: center, middle, inverse, title-slide
 
 
 ---
-# Visualizing Distributions
+# Time Series
 
+Components of a Time Series:
+- Trend 
+- Seasonality
+- Noise
 
+Time series can be broken into their components in order to allow for better comparison and understanding.
+
+???
+
+- Trend: Do the variables go up, down, or stay the same during the time period?
+- Seasonality: Do the variables show consistent/periodic fluctuations?
+- Noise: Are the variations random changes?
+
+The first section of the chapter is all about decomposing a time series of employment data in Spain from 2002 - 2014. By the end of the section, we are comparing the population enrolled in Social Security by month over the years. 
+
+---
+# Time Series Indexes
+
+**Zero-based indexing** - compute the percentage change from an origin point or average
+ 
+
+```r
+index_origin &lt;- 63750
+
+index_data &lt;- data %&gt;%
+  mutate(pct_chg = ((score - index_origin) / index_origin) * 100)
+```
+
+---
+# From Ratios to Logs
+
+- Rates of change or ratios can be used to compare time periods  
+`change rate = new period / previous peroid`
+
+- Logarithmic scales transform the data to reveal patterns  
+`log10 - each increase in 1 is really a ten times the previous value`
+
+---
+# How Time Series Charts Mislead
+
+- How can time series charts be misleading?
+
+???
+- Ignoring gaps
+- Unequal spacing of the x-axis (time)
+- Paradoxes and mix effects (p. 219)
+
+---
+
+class: center, middle
+
+### "Aesthetics, playfulness, and the exquisite care for typography, color, and composition are as important in artistic visualization as they are in the presentation of analytic results."
+
+.bottom-note[
+(Cairo, 2016, p. 221) 
+]
+
+???
+
+The last section of the chapter explores a number of visualizations by Jorge Camões that present data over time in small multiples and a connected scatter plot.
 
 ---
 # Discussion
 
+- What stood out to you in this chapter?
 
+--
+
+- What can you apply from this chapter when creating data visualizations?
+
+--
+
+- What is your main takeaway from this chapter?
+
+--
 
 - What questions do you have?
 
@@ -62,7 +131,7 @@ class: center, middle
 
 # 15 Minute Break
 
-<div class="countdown" id="timer_6057b6f3" style="right:37%;bottom:25%;" data-warnwhen="60">
+<div class="countdown" id="timer_6057c154" style="right:37%;bottom:25%;" data-warnwhen="60">
 <code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -84,7 +153,7 @@ class: center, middle
 
 - Output the visuals to `.svg` and import them into Adobe Illustrator to create an infographic that includes a narrative, the visuals from R, and other graphics.  
 
-- Turn in your R code as an `.Rmd` file (including comments about what you did and why), your data file, **and** the final infographic. 
+- Turn in your R code as an `.Rmd` file (including comments about what you did and why), your data file, and the final infographic. 
 
 - In class on **April 28**, be prepared to share information about your dataset, your visuals, what they show, and the choices you made in their design. You will share both your code and the final infographic.
 
