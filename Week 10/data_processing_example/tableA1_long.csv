@@ -1,0 +1,65 @@
+﻿Characteristic,Year,Count Thousands,Median Income
+All households,2018,128579,64324
+Family households,2018,83482,82124
+Married-couple,2018,61959,95351
+"Female householder, no spouse present",2018,15043,45946
+"Male householder, no spouse present",2018,6480,62632
+Nonfamily households,2018,45096,38813
+Female householder,2018,23515,32587
+Male householder,2018,21582,46583
+White,2018,100528,68156
+"White, not Hispanic",2018,84727,71922
+Black,2018,17167,42110
+Asian,2018,6981,88774
+Hispanic (any race),2018,17758,52382
+Under 65 years,2018,94423,72958
+15 to 24 years,2018,6199,44320
+25 to 34 years,2018,20611,67084
+35 to 44 years,2018,21370,82206
+45 to 54 years,2018,22071,85994
+55 to 64 years,2018,24172,70200
+65 years and older,2018,34156,44487
+Native-born,2018,108560,65407
+Foreign-born,2018,20019,59841
+Naturalized citizen,2018,11043,66707
+Not a citizen,2018,8976,52885
+Northeast,2018,22054,71383
+Midwest,2018,27686,65230
+South,2018,49743,58337
+West,2018,29096,70779
+Inside metropolitan statistical areas,2018,110789,67363
+Inside principal cities,2018,42983,60434
+Outside principal cities,2018,67806,72213
+Outside metropolitan statistical areas,2018,17790,50771
+All households,2019,"128,451","68,703"
+Family households,2019,"83,677","88,149"
+Married-couple,2019,"62,342","102,308"
+"Female householder, no spouse present",2019,"14,832","48,098"
+"Male householder, no spouse present",2019,"6,503","69,244"
+Nonfamily households,2019,"44,774","41,232"
+Female householder,2019,"23,470","34,612"
+Male householder,2019,"21,304","48,496"
+White,2019,"100,568","72,204"
+"White, not Hispanic",2019,"84,868","76,057"
+Black,2019,"17,054","45,438"
+Asian,2019,"6,853","98,174"
+Hispanic (any race),2019,"17,667","56,113"
+Under 65 years,2019,"93,524","77,873"
+15 to 24 years,2019,"5,406","47,934"
+25 to 34 years,2019,"20,424","70,283"
+35 to 44 years,2019,"21,432","88,858"
+45 to 54 years,2019,"21,659","92,221"
+55 to 64 years,2019,"24,603","75,686"
+65 years and older,2019,"34,927","47,357"
+Native-born,2019,"108,851","69,474"
+Foreign-born,2019,"19,600","64,900"
+Naturalized citizen,2019,"11,208","71,538"
+Not a citizen,2019,"8,392","57,668"
+Northeast,2019,"22,031","76,221"
+Midwest,2019,"27,757","68,354"
+South,2019,"49,486","61,884"
+West,2019,"29,177","75,769"
+Inside metropolitan statistical areas,2019,"110,679","71,961"
+Inside principal cities,2019,"42,992","63,745"
+Outside principal cities,2019,"67,687","77,170"
+Outside metropolitan statistical areas,2019,"17,772","52,100"

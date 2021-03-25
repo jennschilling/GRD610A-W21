@@ -1626,16 +1626,19 @@ theme_set(theme())
 # Needed to update the family names
 # Added hjust to left-align title
 p4 + theme(legend.position = "top",
-           plot.title = element_text(size=rel(2),
-                                     lineheight=.5,
-                                     family="serif",
-                                     face="bold.italic",
-                                     colour="orange",
+           plot.title = element_text(size = rel(2),
+                                     lineheight = .5,
+                                     family = "serif",
+                                     face = "bold.italic",
+                                     color = "orange",
                                      hjust = 0),
-           axis.text.x = element_text(size=rel(1.1),
-                                      family="mono",
-                                      face="bold",
-                                      color="purple"))
+           axis.text.x = element_text(size = rel(1.1),
+                                      family = "mono",
+                                      face = "bold",
+                                      color = "purple"),
+           panel.background = element_blank(),
+           panel.grid.major = element_line(color = "gray90"),
+           legend.key = element_blank())
 
 
 ```

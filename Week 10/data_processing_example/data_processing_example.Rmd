@@ -20,7 +20,12 @@ library(here)
 # Read the data
 data <- read_csv("TableA1.csv")
 
+data_long <- read_csv("TableA1_long.csv") %>%
+  clean_names()
+
 ```
+
+
 ```{r data-cleanup}
 
 # Clean the names and remove the * from percent_change_median
@@ -29,7 +34,7 @@ data_clean <- data %>%
   mutate(percent_change_median = parse_number(percent_change_median))
 
 # Change the format of the data so that there is a row for each characteristic and year
-data_long <- data_clean %>%
+data_long_2 <- data_clean %>%
   # Transform the data to long format with a row for every measure
   pivot_longer(count_thousands_2018:error_income_2019,
                names_to = "names",
@@ -49,6 +54,7 @@ data_long <- data_clean %>%
 
 ```
 
+
 ```{r plot}
 
 # Get data for the age brackets only
@@ -62,11 +68,20 @@ data_long_sub <- data_long %>%
 
 # Make a line plot to show median income by year for each age bracket
 ggplot(data = data_long_sub,
-       mapping = aes(x = year,
+       mapping = aes(x = as.factor(year), # Limit year values to 2018 and 2019 by making year a factor
                      y = median_income,
                      color = characteristic,
                      group = characteristic)) +
   geom_line()
+
+
+ggplot(data = data_long_sub,
+       mapping = aes(x = year,
+                     y = median_income,
+                     color = characteristic,
+                     group = characteristic)) +
+  geom_line() +
+  scale_x_continuous(breaks = c(2018, 2019)) # Set the tick marks/labels for the x-axis to only label 2018 and 2019
 
 ```
 
