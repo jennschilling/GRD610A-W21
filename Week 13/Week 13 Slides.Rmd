@@ -1,8 +1,8 @@
 ---
 title: "GRD 610A Data Visualization II"
-subtitle: "Final Project 1"
+subtitle: "Final Project 2"
 author: "Jenn Schilling"
-date: "April 7, 2021"
+date: "April 14, 2021"
 output:
   xaringan::moon_reader:
     css: [xaringan-themer.css, bottom-note.css]
@@ -68,37 +68,116 @@ style_duo_accent(
 
 
 ---
-# 
+# Correlation
 
+- "two variables are related when changes in one of them are accompanied by changes on the other one"
 
+.bottom-note[
+(Cairo, 2016, p. 236)
+]
 
+--
+
+- **Correlation** is a measurement the strength of a *linear* association or relationship between two variables
+
+--
+
+- The **correlation coefficient (`r`)** is a numeric value between -1.0 and 1.0 that measures the strength of the relationship
+
+--
+
+- Correlation is **non-resistant**, meaning it is sensitive to outliers (like the mean)
+
+--
+
+- General Guidelines:
+  - 0.1-0.3 modest correlation  
+  - 0.3-0.5 moderate correlation  
+  - 0.5-0.8 strong correlation  
+  - 0.8-0.9 very strong correlation  
 
 ---
 
-class: center, middle
+# Relationships Between Variables
 
-### "Aesthetics, playfulness, and the exquisite care for typography, color, and composition are as important in artistic visualization as they are in the presentation of analytic results."
+- When the relationship is non-linear or when there are multiple groups, a curve can be computed to examine the relationship
+
+--
+
+- We've seen this in `R` using `geom_smooth()` and the `loess` method (which is slightly different than the LOWESS described in the book, but the premise is the same)
+
+
+--
+
+- Scatter plot matrices (and heat maps) are useful visualizations for examining relationships between multiple variables at the same time 
+
+???
+
+Review how to read a scatter plot matrix using Figure 9. 14; heat maps are appropriate only for linear relationships (because they show the correlation coefficient)  
+
+Recall that lurking variables could be an underlying cause of the relationship, but correlation can at least tell us there could be a relationship 
+
+---
+# Correlation for Commnication
+
+- Which chart in this section was your favorite? Why? (Figures 9.16 - 9.22)
+
+---
+# Regression
+
+- **Regression**: a statistical relationship between an *explanatory* variable and a *response* variable
+
+--
+
+- **Explanatory Variable**: an input or predictor variable (X)
+
+- **Response Variable**: the output or outcome variable (Y)
+
+--
+
+- Y = Intercept + Slope * X
+
+???
+
+Intercept - "the value of Y at which the regression line crosses the 0 point on the x-axis"
+
+Slope - "the rate at which values of Y vary when values of X change"
+
+Regression models can be used to predict values of Y based on values of X.
+
+"Inferences from data should only be done at the same level of aggregation as the data". For example, do not use a regression model built from state-level data to make predictions or inferences on school-level data.
+
+(Cairo, 2016, p. 258-259)
+
+--
+
+- **Coefficient of Determination (r<sup>2</sup>)**: "a measure of how much of the variation in a response variable (Y) depends on the explanatory variable (X)"
 
 .bottom-note[
-(Cairo, 2016, p. 221) 
+(Cairo, 2016, p. 259)
 ]
 
 ???
 
-The last section of the chapter explores a number of visualizations by Jorge Camões that present data over time in small multiples and a connected scatter plot.
+Page 259 provides a good example of the meaning of the correlation coefficient 
+
+---
+# From Correlation to Causation
+
+- It is important not to assume causation (that the changes in one variable *causes* the changes in another) just because there is a correlation or regression relationship 
+
+- Correlations **does not** imply causation  
+
+- To confirm causation, technically an experiment is needed, but there are some guidelines by Moore and McCabe provided on page 260 to confirm causation without an experiment
 
 ---
 # Discussion
 
-- What stood out to you in this chapter?
+- What is your main takeaway from this chapter?
 
 --
 
 - What can you apply from this chapter when creating data visualizations?
-
---
-
-- What is your main takeaway from this chapter?
 
 --
 
