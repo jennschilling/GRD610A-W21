@@ -1,0 +1,160 @@
+---
+title: "GRD 610A Data Visualization II"
+subtitle: "Final Project 1"
+author: "Jenn Schilling"
+date: "April 7, 2021"
+output:
+  xaringan::moon_reader:
+    css: [xaringan-themer.css, bottom-note.css]
+    nature:
+      ratio: '16:9'
+      img_dir: img
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+
+options(htmltools.dir.version = FALSE)
+
+options(knitr.duplicate.label = "allow")
+
+knitr::opts_chunk$set(fig.retina = 3, warning = FALSE, message = FALSE)
+
+library(gapminder)
+library(here)
+library(socviz)
+library(tidyverse)
+library(countdown)
+library(xaringanthemer)
+library(flair)
+library(flipbookr)
+library(DT)
+library(ggrepel)
+
+
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+
+style_duo_accent(
+  primary_color = "#1c5253",
+  secondary_color = "#c8c8c8",
+  link_color = choose_dark_or_light("#FFFFFF", "#cf7270"),
+  header_font_google = google_font("Montserrat"),
+  text_font_google   = google_font("Montserrat", "300", "300i"),
+  code_font_google   = google_font("Fira Mono"),
+  inverse_background_color = "#1c5253",
+  inverse_header_color = "#FFFFFF"
+)
+
+```
+
+```{css change-css-options, eval = TRUE, echo = FALSE}
+
+.remark-code{line-height: 1.5; font-size: 70%} # smaller code font size
+
+```
+
+# Today
+
+- Data Visualization of the Week  
+
+- Discussion of Chapter 9: Seeing Relationships in *The Truthful Art* (Cairo)  
+
+- Final Project
+
+
+
+---
+# 
+
+
+
+
+---
+
+class: center, middle
+
+### "Aesthetics, playfulness, and the exquisite care for typography, color, and composition are as important in artistic visualization as they are in the presentation of analytic results."
+
+.bottom-note[
+(Cairo, 2016, p. 221) 
+]
+
+???
+
+The last section of the chapter explores a number of visualizations by Jorge Camões that present data over time in small multiples and a connected scatter plot.
+
+---
+# Discussion
+
+- What stood out to you in this chapter?
+
+--
+
+- What can you apply from this chapter when creating data visualizations?
+
+--
+
+- What is your main takeaway from this chapter?
+
+--
+
+- What questions do you have?
+
+
+---
+
+class: center, middle
+
+# 15 Minute Break
+
+```{r break-countdown, echo = FALSE}
+countdown(minutes = 15, seconds = 0,
+          right = "37%",
+          bottom = "25%",
+          warn_when = 60)
+```
+
+---
+
+# Final Project
+
+**Task: ** Using R and an approved dataset, create a polished infographic that contains at least 5 different charts.  
+
+**Due: ** May 5, 2021
+
+[Rubric](https://bb.collegeforcreativestudies.edu/webapps/rubric/do/course/manageRubrics?dispatch=view&context=course&rubricId=_42757_1&course_id=_35307_1)
+
+- Pick a dataset using one of the resources available on Blackboard. The dataset must be approved; email Jenn a link to the dataset for approval prior to **March 31**.  
+
+- Create summary statistics and 5-7 polished visuals based on the dataset using **only R**. 
+
+- The visuals created in R must include: titles, axis labels, data labels and legends (as needed), your name and the data source (as footnotes/captions)  
+
+- Output the visuals to `.svg` and import them into Adobe Illustrator to create an infographic that includes a narrative, the visuals from R, and other graphics.  
+
+- Turn in your R code as an `.Rmd` file (including comments about what you did and why), your data file, and the final infographic. 
+
+- In class on **April 28**, be prepared to share information about your dataset, your visuals, what they show, and the choices you made in their design. You will share both your code and the final infographic.
+
+???
+
+In class on April 28, we will be sharing critiques of each others work. 
+
+Presentation to the class: share your .Rmd file and be prepared to explain your data (what is it about, what does it tell you, what messages did you find in it), your visualizations (how did you create them, why did you create them, what design choices you made); share your infographic (what design choices did you make and why, what story or message does the infographic show)
+
+---
+
+# Tasks to Complete
+
+- Reading (Cairo - Chapter 11: Uncertainty and significance)
+
+- Prepare for your Data Visualization of the Week  
+
+- Work on Final Project
+
+
+
