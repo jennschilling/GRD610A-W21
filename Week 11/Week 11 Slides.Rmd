@@ -516,7 +516,7 @@ class: center, middle, inverse
 
 # Homework Assignment
 
-**Task: ** Create 3 charts using the new plot types
+**Task: ** Create 3 charts using new plot types
 
 **Due: ** April 7, 2021 
 
@@ -524,7 +524,7 @@ class: center, middle, inverse
 
 **Notes**
 
-- Use your own dataset (start looking for a dataset that you could use for the Final Project or go back to the dataset from the Midterm Project)
+- Use your own dataset (Final Project dataset)
 
 - Use your resources: Healy, Google, Student Community BUT cite where you get code from if you copy it directly  
 
