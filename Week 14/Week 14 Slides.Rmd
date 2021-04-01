@@ -71,15 +71,36 @@ style_duo_accent(
 # Recall From Prior Chapters
 
 - Hypothesis
+
 - Mean
+
 - Standard deviation
-- Standaradized scores (z-scores)
+
+- Standardized scores (z-scores)
+
 - Normal Distribution
 
 ---
 # Terms
 
-- **Standard Error** 
+- **Standard Error** - measures how far the mean of the sample might be from the mean of the population; calculated by dividing the standard deviation by the square root of the sample size 
+
+- **Confidence Interval** - the uncertainty around a statistic, based on a confidence level (i.e. 95%); calculated using the point estimate, critical value, and standard error
+
+- **Critical Value** - a number based on the confidence level and either the normal distribution or a t-distribution, depending on sample size 
+
+
+???
+
+Sample size - (number of samples - 1)
+
+Confidence interval - we are 95% confident that the values fall within this range i.e. 95 out of 100 times we will get a mean within this range
+
+Figure 11.6 for confidence intervals and paragraph at bottom of p. 309 for critical value
+
+Figure 11.7 for t-values
+
+Figure 11.9 shows how to calculate confidence intervals for percentages
 
 
 ---
