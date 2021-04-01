@@ -59,35 +59,132 @@ style_duo_accent(
 
 # Today
 
-- Data Visualization of the Week  
-
 - Discussion of Chapter 12: On Creativity and Innovation in *The Truthful Art* (Cairo)  
+
+- Class Review
 
 - Final Project
 
 
 
 ---
-# 
+# Things to Remember
 
+- "Visualization is not meant just to be *seen*...but to be *read*"
+
+.bottom-note[
+(Cairo, 2016, p. 333)
+]
+
+--
+
+- We can help our audience read a visualization by adding explanations
+
+--
+
+- Don't be afraid to use novel charts (and don't assume your audience will not understand them)
+
+--
+
+- Re-design and constructive critiques should be part of the data visualization design process
+
+--
+
+- There are many opportunities and topics for data visualization
 
 ---
 # Discussion
 
-- What is your main takeaway from this chapter?
+- What are your top takeaways from this chapter?
 
 --
 
-- Which figures stood out to you? Why?
-
---
-
-- How will you use the information in this chapter when creating data visualizations?
+- Which visualizations stood out to you? Why?
 
 --
 
 - What questions do you have?
 
+--
+
+[The Five Qualities of Great Visualizations](https://padlet.com/jschilling_ccs/zmlnjzhiexx3kf14)
+
+---
+
+.center[.middle[
+```{r ggplot, echo = FALSE, out.width = "75%"}
+knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/ggplot2_masterpiece.png")
+```
+]]
+
+.bottom-note[Artwork by @allison_horst]
+
+---
+exclude: true
+
+.center[.middle[
+```{r parse_num, echo = FALSE, out.width = "65%"}
+knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/parse_number.png")
+```
+]]
+
+.bottom-note[Artwork by @allison_horst]
+
+---
+exclude: true
+
+.center[.middle[
+```{r clean_names, echo = FALSE, out.width = "80%"}
+knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/janitor_clean_names.png")
+```
+]]
+
+.bottom-note[Artwork by @allison_horst]
+
+
+---
+exclude: true
+
+.center[.middle[
+```{r patchwork, echo = FALSE, out.width = "75%"}
+knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/patchwork_1.jpg")
+```
+]]
+
+.bottom-note[Artwork by @allison_horst]
+
+---
+
+.center[.middle[
+```{r first_then, echo = FALSE, out.width = "50%"}
+knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/r_first_then.png")
+```
+]]
+
+.bottom-note[Artwork by @allison_horst]
+
+
+
+---
+# Class Review
+
+- What worked well in this class?
+
+--
+
+- What did not work well?
+
+--
+
+- What suggestions do you have for improving the class?
+
+--
+
+- Anything else?
+
+--
+
+**Thank you! :)**
 
 ---
 
@@ -140,7 +237,7 @@ class: center, middle, inverse
 
 # Tasks to Complete
 
-- Work on Final Project
+- Submit Final Project
 
 
 
