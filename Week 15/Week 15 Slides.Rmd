@@ -240,4 +240,9 @@ class: center, middle, inverse
 - Submit Final Project
 
 
+---
+
+class: center, middle, inverse
+
+# THANK YOU!!
 
