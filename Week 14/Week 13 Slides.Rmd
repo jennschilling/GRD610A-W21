@@ -1,0 +1,239 @@
+---
+title: "GRD 610A Data Visualization II"
+subtitle: "Final Project 2"
+author: "Jenn Schilling"
+date: "April 14, 2021"
+output:
+  xaringan::moon_reader:
+    css: [xaringan-themer.css, bottom-note.css]
+    nature:
+      ratio: '16:9'
+      img_dir: img
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+
+options(htmltools.dir.version = FALSE)
+
+options(knitr.duplicate.label = "allow")
+
+knitr::opts_chunk$set(fig.retina = 3, warning = FALSE, message = FALSE)
+
+library(gapminder)
+library(here)
+library(socviz)
+library(tidyverse)
+library(countdown)
+library(xaringanthemer)
+library(flair)
+library(flipbookr)
+library(DT)
+library(ggrepel)
+
+
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+
+style_duo_accent(
+  primary_color = "#1c5253",
+  secondary_color = "#c8c8c8",
+  link_color = choose_dark_or_light("#FFFFFF", "#cf7270"),
+  header_font_google = google_font("Montserrat"),
+  text_font_google   = google_font("Montserrat", "300", "300i"),
+  code_font_google   = google_font("Fira Mono"),
+  inverse_background_color = "#1c5253",
+  inverse_header_color = "#FFFFFF"
+)
+
+```
+
+```{css change-css-options, eval = TRUE, echo = FALSE}
+
+.remark-code{line-height: 1.5; font-size: 70%} # smaller code font size
+
+```
+
+# Today
+
+- Data Visualization of the Week  
+
+- Discussion of Chapter 9: Seeing Relationships in *The Truthful Art* (Cairo)  
+
+- Final Project
+
+
+
+---
+# Correlation
+
+- "two variables are related when changes in one of them are accompanied by changes on the other one"
+
+.bottom-note[
+(Cairo, 2016, p. 236)
+]
+
+--
+
+- **Correlation** is a measurement the strength of a *linear* association or relationship between two variables
+
+--
+
+- The **correlation coefficient (`r`)** is a numeric value between -1.0 and 1.0 that measures the strength of the relationship
+
+--
+
+- Correlation is **non-resistant**, meaning it is sensitive to outliers (like the mean)
+
+--
+
+- General Guidelines:
+  - 0.1-0.3 modest correlation  
+  - 0.3-0.5 moderate correlation  
+  - 0.5-0.8 strong correlation  
+  - 0.8-0.9 very strong correlation  
+
+---
+
+# Relationships Between Variables
+
+- When the relationship is non-linear or when there are multiple groups, a curve can be computed to examine the relationship
+
+--
+
+- We've seen this in `R` using `geom_smooth()` and the `loess` method (which is slightly different than the LOWESS described in the book, but the premise is the same)
+
+
+--
+
+- Scatter plot matrices (and heat maps) are useful visualizations for examining relationships between multiple variables at the same time 
+
+???
+
+Review how to read a scatter plot matrix using Figure 9. 14; heat maps are appropriate only for linear relationships (because they show the correlation coefficient)  
+
+Recall that lurking variables could be an underlying cause of the relationship, but correlation can at least tell us there could be a relationship 
+
+---
+# Correlation for Commnication
+
+- Which chart in this section was your favorite? Why? (Figures 9.16 - 9.22)
+
+---
+# Regression
+
+- **Regression**: a statistical relationship between an *explanatory* variable and a *response* variable
+
+--
+
+- **Explanatory Variable**: an input or predictor variable (X)
+
+- **Response Variable**: the output or outcome variable (Y)
+
+--
+
+- Y = Intercept + Slope * X
+
+???
+
+Intercept - "the value of Y at which the regression line crosses the 0 point on the x-axis"
+
+Slope - "the rate at which values of Y vary when values of X change"
+
+Regression models can be used to predict values of Y based on values of X.
+
+"Inferences from data should only be done at the same level of aggregation as the data". For example, do not use a regression model built from state-level data to make predictions or inferences on school-level data.
+
+(Cairo, 2016, p. 258-259)
+
+--
+
+- **Coefficient of Determination (r<sup>2</sup>)**: "a measure of how much of the variation in a response variable (Y) depends on the explanatory variable (X)"
+
+.bottom-note[
+(Cairo, 2016, p. 259)
+]
+
+???
+
+Page 259 provides a good example of the meaning of the correlation coefficient 
+
+---
+# From Correlation to Causation
+
+- It is important not to assume causation (that the changes in one variable *causes* the changes in another) just because there is a correlation or regression relationship 
+
+- Correlations **does not** imply causation  
+
+- To confirm causation, technically an experiment is needed, but there are some guidelines by Moore and McCabe provided on page 260 to confirm causation without an experiment
+
+---
+# Discussion
+
+- What is your main takeaway from this chapter?
+
+--
+
+- What can you apply from this chapter when creating data visualizations?
+
+--
+
+- What questions do you have?
+
+
+---
+
+class: center, middle
+
+# 15 Minute Break
+
+```{r break-countdown, echo = FALSE}
+countdown(minutes = 15, seconds = 0,
+          right = "37%",
+          bottom = "25%",
+          warn_when = 60)
+```
+
+---
+
+# Final Project
+
+**Task: ** Using R and an approved dataset, create a polished infographic that contains at least 5 different charts.  
+
+**Due: ** May 5, 2021
+
+[Rubric](https://bb.collegeforcreativestudies.edu/webapps/rubric/do/course/manageRubrics?dispatch=view&context=course&rubricId=_42757_1&course_id=_35307_1)
+
+- Pick a dataset using one of the resources available on Blackboard. The dataset must be approved; email Jenn a link to the dataset for approval prior to **March 31**.  
+
+- Create summary statistics and 5-7 polished visuals based on the dataset using **only R**. 
+
+- The visuals created in R must include: titles, axis labels, data labels and legends (as needed), your name and the data source (as footnotes/captions)  
+
+- Output the visuals to `.svg` and import them into Adobe Illustrator to create an infographic that includes a narrative, the visuals from R, and other graphics.  
+
+- Turn in your R code as an `.Rmd` file (including comments about what you did and why), your data file, and the final infographic. 
+
+- In class on **April 28**, be prepared to share information about your dataset, your visuals, what they show, and the choices you made in their design. You will share both your code and the final infographic.
+
+???
+
+In class on April 28, we will be sharing critiques of each others work. 
+
+Presentation to the class: share your .Rmd file and be prepared to explain your data (what is it about, what does it tell you, what messages did you find in it), your visualizations (how did you create them, why did you create them, what design choices you made); share your infographic (what design choices did you make and why, what story or message does the infographic show)
+
+---
+
+# Tasks to Complete
+
+- Reading (Cairo - Chapter 11: Uncertainty and significance)
+
+- Prepare for your Data Visualization of the Week  
+
+- Work on Final Project
+
+
+
