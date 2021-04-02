@@ -95,7 +95,7 @@ style_duo_accent(
 ---
 # Discussion
 
-- What are your top takeaways from this chapter?
+- What are your top takeaways from this chapter? What do you want to remember?
 
 --
 
@@ -107,7 +107,7 @@ style_duo_accent(
 
 --
 
-[The Five Qualities of Great Visualizations](https://padlet.com/jschilling_ccs/zmlnjzhiexx3kf14)
+- [The Five Qualities of Great Visualizations](https://padlet.com/jschilling_ccs/zmlnjzhiexx3kf14)
 
 ---
 
@@ -168,19 +168,17 @@ knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/raw
 ---
 # Class Review
 
+[Start, Stop, Continue](https://padlet.com/jschilling_ccs/7gvqqkmmarewt30c)
+
 - What worked well in this class?
 
---
-
 - What did not work well?
-
---
 
 - What suggestions do you have for improving the class?
 
 --
 
-- Anything else?
+Anything else?
 
 --
 
