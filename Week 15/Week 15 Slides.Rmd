@@ -168,21 +168,24 @@ knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/raw
 ---
 # Class Review
 
-[Start, Stop, Continue](https://padlet.com/jschilling_ccs/7gvqqkmmarewt30c)
+[Feedback Survey](https://forms.gle/ZkqrtkYVopZFKxK77)
 
-- What worked well in this class?
-
-- What did not work well?
-
-- What suggestions do you have for improving the class?
-
---
-
-Anything else?
-
---
+Learning Outcomes:
+-	Apply the basics of programming and data manipulation in R
+-	Communicate analyses with charts and plots using R visualization tools
+-	Design and evaluate information visualizations and other forms of visual presentation
+-	Apply a workflow for moving from a dataset to a fully designed static visualization
 
 **Thank you! :)**
+
+.center[
+```{r survey-countdown, echo = FALSE}
+countdown(minutes = 10, seconds = 0,
+          right = "37%",
+          bottom = "20%",
+          warn_when = 60) 
+```
+]
 
 ---
 
