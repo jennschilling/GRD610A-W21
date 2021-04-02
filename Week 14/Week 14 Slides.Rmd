@@ -225,5 +225,6 @@ Presentation to the class: share your .Rmd file and be prepared to explain your 
 
 - Work on Final Project
 
+- Think about course feedback ([survey](https://forms.gle/ZkqrtkYVopZFKxK77) to be completed in class next week)
 
 
