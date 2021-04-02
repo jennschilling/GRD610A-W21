@@ -201,5 +201,7 @@ Presentation to the class: share your .Rmd file and be prepared to explain your 
 
 - Work on Final Project
 
+- Class observations on 4/14 and 4/28
+
 
 
