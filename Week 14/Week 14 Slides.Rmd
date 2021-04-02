@@ -85,7 +85,11 @@ style_duo_accent(
 
 - **Standard Error** - measures how far the mean of the sample might be from the mean of the population; calculated by dividing the standard deviation by the square root of the sample size 
 
+--
+
 - **Confidence Interval** - the uncertainty around a statistic, based on a confidence level (i.e. 95%); calculated using the point estimate, critical value, and standard error
+
+--
 
 - **Critical Value** - a number based on the confidence level and either the normal distribution or a t-distribution, depending on sample size 
 
@@ -144,17 +148,31 @@ From Heather Krause:
 
 - **p-value** - the probability of obtaining the data or more extreme given that the null hypothesis is true
 
+--
+
 - **Null Hypothesis** - there is no effect or difference
+
+--
 
 - **Experimental Group** - subset of the sample who receive the treatment
 
+--
+
 - **Control Group** - subset of the sample who do not receive the treatment (stays the same)
+
+--
 
 - **Statistically Significant** - the result is unlikely to occur just by chance
 
+--
+
 - **Effect Size** - measures the strength of the relationship between two variables
 
-- **Statistical Power** - the probability of observing an effect of a certain size 
+--
+
+- **Statistical Power** - the probability of observing an effect of a certain size
+
+--
 
 **Key takeaway:** When trying to understand or draw a conclusion based on data, be sure to look at more than just the significance. 
 
