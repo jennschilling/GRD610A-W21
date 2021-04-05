@@ -106,7 +106,13 @@ index_data <- data %>%
 `change rate = new period / previous peroid`
 
 - Logarithmic scales transform the data to reveal patterns  
-`log10 - each increase in 1 is really a ten times the previous value`
+`log10 - each increase in 1 is really ten times the previous value`
+
+???
+
+Logarithmic scales are useful when there are large differences in the values, or when there are a few outliers with large values and you'd like to be able to compare the smaller values more easily (without removing the outliers).
+
+Each value on a logarithmic scale is an exponential increase from the previous value
 
 ---
 # How Time Series Charts Mislead
