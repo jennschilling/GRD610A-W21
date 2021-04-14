@@ -76,25 +76,85 @@ style_duo_accent(
 (Cairo, 2016, p. 236)
 ]
 
---
+???
+
+This chapter begins with correlation. Here is the definition of correlation, as given in the book. Cairo provides some examples of spurious correlations, or correlations that are not meaningful. For example, the number of Noble prize winners versus that amount of chocolate consumption by country. Even though that is not a causal relationship, we can get the idea of correlation from this example by seeing that as the amount of chocolate consumed increases, the number of Nobel prize winners also increases. As stated in the book, this is an example of spurious correlation because there's a lurking value of a country's wealth underlying both of these variables. 
+
+---
+# Correlation
+
+- "two variables are related when changes in one of them are accompanied by changes on the other one"
+
+.bottom-note[
+(Cairo, 2016, p. 236)
+]
 
 - **Correlation** is a measurement the strength of a *linear* association or relationship between two variables
 
---
+???
+
+It's important to note that correlation is a linear relationship. Which means that there is a constant rate of change. If the value of one variable increases by a certain amount then there will be a certain amount of increase or decrease in the other variable. The relationship forms a line rather than a curve.
+
+---
+# Correlation
+
+- "two variables are related when changes in one of them are accompanied by changes on the other one"
+
+.bottom-note[
+(Cairo, 2016, p. 236)
+]
+
+- **Correlation** is a measurement the strength of a *linear* association or relationship between two variables
 
 - The **correlation coefficient (`r`)** is a numeric value between -1.0 and 1.0 that measures the strength of the relationship
 
---
+???
+
+There is a metric called the correlation coefficient, which measures the strength of the relationship between two variables. The closer it is to 1 or -1, the stronger the relationship.
+
+---
+# Correlation
+
+- "two variables are related when changes in one of them are accompanied by changes on the other one"
+
+.bottom-note[
+(Cairo, 2016, p. 236)
+]
+
+- **Correlation** is a measurement the strength of a *linear* association or relationship between two variables
+
+- The **correlation coefficient (`r`)** is a numeric value between -1.0 and 1.0 that measures the strength of the relationship
 
 - Correlation is **non-resistant**, meaning it is sensitive to outliers (like the mean)
 
---
+???
+
+Similar to the mean, the correlation is sensitive to outliers. So, if there is an outlying value it could distort the correlation (usually by making it seem stronger than it is).
+
+---
+# Correlation
+
+- "two variables are related when changes in one of them are accompanied by changes on the other one"
+
+.bottom-note[
+(Cairo, 2016, p. 236)
+]
+
+- **Correlation** is a measurement the strength of a *linear* association or relationship between two variables
+
+- The **correlation coefficient (`r`)** is a numeric value between -1.0 and 1.0 that measures the strength of the relationship
+
+- Correlation is **non-resistant**, meaning it is sensitive to outliers (like the mean)
 
 - General Guidelines:
   - 0.1-0.3 modest correlation  
   - 0.3-0.5 moderate correlation  
   - 0.5-0.8 strong correlation  
   - 0.8-0.9 very strong correlation  
+  
+???
+
+There are general guidelines for weak versus strong correlation. Honestly, I feel that 0.1 - 0.3 is weak correlation. I don't think modest or moderate correlation begins until around 0.5, but these are the guidelines provided in the book.
 
 ---
 
@@ -102,38 +162,79 @@ style_duo_accent(
 
 - When the relationship is non-linear or when there are multiple groups, a curve can be computed to examine the relationship
 
+???
+
+The example provided in the book shows average SAT score versus participation in SAT testing and includes region of the United States. A linear trend is not sufficient to explain this data because there are different clusters in the scatterplot, and different regions have different participation rates.
+
 --
 
 - We've seen this in `R` using `geom_smooth()` and the `loess` method (which is slightly different than the LOWESS described in the book, but the premise is the same)
 
 
---
+---
+
+# Relationships Between Variables
+
+- When the relationship is non-linear or when there are multiple groups, a curve can be computed to examine the relationship
+
+- We've seen this in `R` using `geom_smooth()` and the `loess` method (which is slightly different than the LOWESS described in the book, but the premise is the same)
 
 - Scatter plot matrices (and heat maps) are useful visualizations for examining relationships between multiple variables at the same time 
 
 ???
+It's useful to look at relationships between multiple variables at the same time because it allows us to gain deeper insights and understanding of our data. If you ever want to take a deeper look at building models with data, this is a critical step. 
 
-Review how to read a scatter plot matrix using Figure 9. 14; heat maps are appropriate only for linear relationships (because they show the correlation coefficient)  
+---
+
+# Relationships Between Variables
+.center[
+```{r echo = FALSE}
+pairs(palmerpenguins::penguins[3:6])
+```
+]
+
+???
+Review how to read a scatter plot matrix using this simple version and then Figure 9.14; heat maps are appropriate only for linear relationships (because they show the correlation coefficient)  
 
 Recall that lurking variables could be an underlying cause of the relationship, but correlation can at least tell us there could be a relationship 
+
 
 ---
 # Correlation for Commnication
 
 - Which chart in this section was your favorite? Why? (Figures 9.16 - 9.22)
 
+???
+This section of the chapter provides a lot of examples of using correlation in data visualizations. Which one was most interesting or engaging to you?
+
 ---
 # Regression
 
 - **Regression**: a statistical relationship between an *explanatory* variable and a *response* variable
 
---
+???
+The second to last part of the chapter briefly covers regression. Regression is another word for creating an equation or model that will predict the value of one variable based on another variable. Recall that explanatory and response variables came up previously in Chapter 4 when we talked about hypotheses and experiments. A regression is a way to define the relationship between variables.
+
+---
+# Regression
+
+- **Regression**: a statistical relationship between an *explanatory* variable and a *response* variable
 
 - **Explanatory Variable**: an input or predictor variable (X)
 
 - **Response Variable**: the output or outcome variable (Y)
 
---
+???
+The will only be one response variable in a regression because there can only be one output. For example, perhaps we are trying to explain or predict the average SAT score for a state based on the participation rate in the test. The response variable is the average SAT score. There can be many explanatory variables; we are starting with the idea of a single explanatory variable and that's all you really need to focus on, but just be aware that there can be many.
+
+---
+# Regression
+
+- **Regression**: a statistical relationship between an *explanatory* variable and a *response* variable
+
+- **Explanatory Variable**: an input or predictor variable (X)
+
+- **Response Variable**: the output or outcome variable (Y)
 
 - Y = Intercept + Slope * X
 
@@ -149,7 +250,16 @@ Regression models can be used to predict values of Y based on values of X.
 
 (Cairo, 2016, p. 258-259)
 
---
+---
+# Regression
+
+- **Regression**: a statistical relationship between an *explanatory* variable and a *response* variable
+
+- **Explanatory Variable**: an input or predictor variable (X)
+
+- **Response Variable**: the output or outcome variable (Y)
+
+- Y = Intercept + Slope * X
 
 - **Coefficient of Determination (r<sup>2</sup>)**: "a measure of how much of the variation in a response variable (Y) depends on the explanatory variable (X)"
 
@@ -159,7 +269,7 @@ Regression models can be used to predict values of Y based on values of X.
 
 ???
 
-Page 259 provides a good example of the meaning of the correlation coefficient 
+Page 259 provides a good example of the meaning of the correlation coefficient. "It is a measure of how much of the variation in a response variable depends on the explanatory variable. You can think of it as a percentage."
 
 ---
 # From Correlation to Causation
