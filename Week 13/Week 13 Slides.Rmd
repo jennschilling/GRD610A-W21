@@ -200,7 +200,7 @@ Recall that lurking variables could be an underlying cause of the relationship, 
 
 
 ---
-# Correlation for Commnication
+# Correlation for Communication
 
 - Which chart in this section was your favorite? Why? (Figures 9.16 - 9.22)
 
