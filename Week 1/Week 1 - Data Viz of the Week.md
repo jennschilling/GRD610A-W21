@@ -13,11 +13,11 @@ The presenter will:
 
 Sources for data visualizations (feel free to use other sources as well):
 - [The 10 best data visualization blogs to follow (from the Tableau blog)](https://www.tableau.com/learn/articles/best-data-visualization-blogs)  
-- [Tableau Public - Viz of the Day Gallery](https://public.tableau.com/en-us/gallery/?tab=viz-of-the-day&type=viz-of-the-day)  
+- [Tableau Public - Viz of the Day Gallery](https://public.tableau.com/en-us/gallery/?tab=viz-of-the-day&type=viz-of-the-day)
 - [#TidyTuesday on Twitter](https://twitter.com/hashtag/TidyTuesday?src=hashtag_click&f=live)  
 - [Work by Accurat](https://www.accurat.it/work/)  
 - [Work by Periscopic](https://periscopic.com/#!/impacts)  
 - [The Pudding](https://pudding.cool/)  
 - [Reddit: Data is Beautiful](https://www.reddit.com/r/dataisbeautiful/)  
-
+- [DensityDesign Lab](https://densitydesign.org/)
 
