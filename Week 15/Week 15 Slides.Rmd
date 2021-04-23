@@ -187,6 +187,10 @@ countdown(minutes = 10, seconds = 0,
 ```
 ]
 
+???
+
+Survey is anonymous, and I will not be looking at it until after the semester is over and I've submitted final grades.
+
 ---
 
 class: center, middle
