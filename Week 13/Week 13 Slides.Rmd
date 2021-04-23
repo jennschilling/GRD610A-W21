@@ -335,6 +335,11 @@ In class on April 28, we will be sharing critiques of each others work.
 
 Presentation to the class: share your .Rmd file and be prepared to explain your data (what is it about, what does it tell you, what messages did you find in it), your visualizations (how did you create them, why did you create them, what design choices you made); share your infographic (what design choices did you make and why, what story or message does the infographic show)
 
+Resources for Choosing Charts:
+https://depictdatastudio.com/charts/
+https://www.data-to-viz.com/
+
+
 ---
 
 # Tasks to Complete
