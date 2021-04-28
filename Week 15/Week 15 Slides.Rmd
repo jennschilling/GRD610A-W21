@@ -80,6 +80,10 @@ style_duo_accent(
 
 - We can help our audience read a visualization by adding explanations
 
+???
+
+Trained vs. untrained eye
+
 --
 
 - Don't be afraid to use novel charts (and don't assume your audience will not understand them)
@@ -91,6 +95,11 @@ style_duo_accent(
 --
 
 - There are many opportunities and topics for data visualization
+
+???
+
+There are novel charts waiting to be created and many places data viz can be applied
+Where do you think you'll go next?
 
 ---
 # Discussion
