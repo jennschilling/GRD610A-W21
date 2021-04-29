@@ -1,0 +1,9 @@
+Hello! I’m Jenn Schilling and welcome to Data Visualization II and the Winter 2021 semester! I am excited to be your instructor for this course. 
+
+In addition to being your instructor for this course, I am a Senior Data Analyst at the University of Arizona. I work in the University Analytics & Institutional Research department where I create data visualizations, perform statistical analyses, and develop predictive models to support institutional goals and decision making. In my previous experiences, I have worked as an operations research engineer in the supply chain and a statistician in market research and advertising; supported college access by volunteering with AmeriCorps; and taught middle school. I’ve been using R for over 5 years and doing data visualization for a decade. 
+
+I live in Arizona, where I have been for the past 7 and a half years. Outside of work, I like to spend time sewing and knitting. I also like to write, walk in nature, listen to podcasts, and read.
+
+From this course, I hope you will gain familiarity with R and learn to develop data visualizations and infographics using R. I also hope you will gain experience in applying a workflow to go from a dataset to a visualization with ease. After completing this course, I hope you will feel comfortable using R in your professional work to develop effective and beautiful data visualizations.
+
+We will be using Blackboard for this course - it will be your source for class presentations, notes, important references, and assignments. Be sure to check the homepage for important information about the course and the learning modules under Course Content. Each week, a new learning module will be released. There are also two discussion boards that you can use to communicate with me and each other. I am looking forward to meeting you and working with you this semester!
