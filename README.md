@@ -1,6 +1,6 @@
 # Data Visualization II at the College for Creative Studies
 
-Course slides and lab notes for the Winter 2021 session of GRD610A at the College for Creative Students in Detrioit, MI.
+Course slides and lab notes for the Winter 2021 session of GRD610A taught by Jenn Schilling at the College for Creative Students in Detrioit, MI.
 
 Materials developed by Jenn Schilling.
 
